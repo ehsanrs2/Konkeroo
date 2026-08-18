@@ -1,0 +1,40 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "english-exam"
+version = "0.1.0"
+description = "Deterministic extraction pipeline for Iranian CE master's English exams"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "pdfplumber>=0.11,<0.12",
+]
+
+[project.scripts]
+english-exam = "english_exam.cli:entrypoint"
+
+[dependency-groups]
+dev = [
+  "pytest>=9,<10",
+  "ruff>=0.16,<0.17",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/english_exam"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+markers = [
+  "source_pdf: integration tests requiring local immutable source material",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+# This workspace filesystem exposes every file as executable (core.filemode=false).
+ignore = ["EXE002"]

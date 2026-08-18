@@ -2,6 +2,11 @@
 source/*
 !source/README.md
 
+# Full staged datasets are generated locally. Track only documentation/manifests.
+dataset/staged/*.json
+!dataset/staged/*.manifest.json
+!dataset/staged/README.md
+
 # Python caches, tooling, and local environments
 __pycache__/
 *.py[cod]

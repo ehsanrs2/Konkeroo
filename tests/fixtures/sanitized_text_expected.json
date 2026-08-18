@@ -1,0 +1,21 @@
+{
+  "raw_text": "Invented ---- text",
+  "normalized_text": null,
+  "corrected_text": null,
+  "provenance": [
+    {
+      "source_filename": "synthetic.pdf",
+      "page_number": 1,
+      "bbox": {
+        "x0": 10.0,
+        "y0": 20.0,
+        "x1": 110.0,
+        "y1": 32.0,
+        "units": "pt",
+        "origin": "top-left"
+      },
+      "raw_text": "Invented ---- text",
+      "extraction_method": "SYNTHETIC_TEST_LAYOUT"
+    }
+  ]
+}

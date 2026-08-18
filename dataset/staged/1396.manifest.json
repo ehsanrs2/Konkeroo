@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "source_filename": "96.pdf",
+  "source_sha256": "69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2",
+  "artifact_sha256": "a91015142d696ff556b8edb9441aa132653e9eb939c4d4990cef280fe16053f0",
+  "artifact_size_bytes": 338198,
+  "question_count": 30,
+  "section_question_ranges": {
+    "vocabulary": [1, 10],
+    "cloze": [11, 15],
+    "reading": [16, 30]
+  },
+  "reading_question_ranges": {
+    "reading-1": [16, 17, 18, 19, 20],
+    "reading-2": [21, 22, 23, 24, 25],
+    "reading-3": [26, 27, 28, 29, 30]
+  },
+  "warning_entities": ["q-01", "q-10", "q-15", "q-18"]
+}
