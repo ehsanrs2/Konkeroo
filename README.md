@@ -1,7 +1,15 @@
-# English Exam Dataset
+# Konkeroo — English Exam Dataset
 
 This project is building an adaptive English-learning system from Iranian
 Computer Engineering master's entrance exams.
+
+## Project handbook
+
+The [project handbook](docs/README.md) records our [product vision](docs/PRODUCT.md),
+[architecture](docs/ARCHITECTURE.md), [roadmap](docs/ROADMAP.md),
+[answer-key corpus audit](docs/ANSWER_KEY_CORPUS.md),
+[architecture decisions](docs/DECISIONS.md), [data governance](docs/DATA_GOVERNANCE.md),
+and [engineering workflow](docs/WORKFLOW.md). Read it before adding a new milestone.
 
 ## Current phase
 
@@ -16,10 +24,10 @@ validation, domain modeling, AI-assisted analysis, verified dataset releases,
 and application logic as distinct concerns. Exam structure is data-driven, and
 official, AI-generated, and final verified answers remain separate.
 
-Original exam papers and answer keys live under `source/` as immutable local
-input. These binary files are not currently committed to Git; a future
-`source/README.md` may document their local organization without tracking the
-materials themselves.
+Original exam papers and answer keys are immutable inputs under `source/`.
+The current public GitHub repository tracks their paths through Git LFS;
+redistribution rights and public-access policy require explicit review before
+further publication. See [data governance](docs/DATA_GOVERNANCE.md).
 
 Install the locked Python 3.12 environment:
 

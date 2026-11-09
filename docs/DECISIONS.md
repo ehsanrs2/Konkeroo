@@ -1,0 +1,61 @@
+# Architecture and product decision log
+
+Decisions are recorded with **status**. `Accepted` means a project constraint; `Observed` means true of the inspected repository/source; `Proposed` is not yet binding; `Open` requires a decision before relying on an assumption.
+
+## D-001 — Source fidelity and corrections
+**Status: Accepted.** Original PDFs/JPGs are immutable inputs. Keep raw text, normalized text, and corrected text distinct. Never silently fix bad OCR or reuse misleading geometry; corrections must be reviewed and attributable.
+
+**Why:** Auditable, reproducible datasets and later disagreement analysis. Applies to raw question markers as well as text.
+
+## D-002 — Geometry-first exam extraction
+**Status: Accepted; implemented for 1396.** Use `pdfplumber` and PDF character/word bounding boxes. Avoid flattened reading order when layout reorders cross-page content. Prefer its permissive license to a PyMuPDF AGPL/commercial dependency.
+
+**Why:** 1396 has distorted text-layer glyphs and Reading questions on pages before their next passage heading. Fixture mapping 16–20, 21–25, and 26–30 is 1396-only.
+
+## D-003 — Preserve distinct answer authorities
+**Status: Accepted.** Model official, AI-produced, and final verified answers independently. Support multiple accepted positions, deletion, special scoring notes, and confidence/status; do not treat an official *initial* key as inherently final.
+
+**Why:** Supports disputed, missing, or exceptional keys and a real review workflow.
+
+## D-004 — Answer-key imports are independent of exam staging
+**Status: Accepted; partially implemented.** Use explicit catalog IDs/checksums and a separate key pipeline. Import full keys with booklet/edition provenance. Reconcile English entries **only** after verified exam section metadata identifies the target questions.
+
+**Why:** Prevents false English-range assumptions and mixing candidate responses in personalized reports with official values. Implemented source catalog currently contains only 1395.
+
+## D-005 — Validation before publishing content
+**Status: Accepted.** Deterministic staged JSON is local/ignored; compact structure/hash manifests are tracked. Use synthetic public fixtures and skip-cleanly real-source integration tests; ambiguity/structural mismatch blocks verified release.
+
+**Why:** Reproducibility and copyright-conscious development. A successful parser is not itself a correctness guarantee.
+
+## D-006 — Corpus diversity, not a universal key parser
+**Status: Accepted.** The audited key corpus has paired grids, multi-booklet legacy layouts, and personalized candidate/key triplets, with native, broken-font, rendered, and JPEG media. Implement by representative fixture in reviewable increments; only generic invariants belong in shared modules.
+
+**Why:** Avoid accidental overfitting to 1396 or one table format.
+
+## D-007 — No fabricated official key for 1405
+**Status: Accepted.** No official key file was present in the audited corpus for 1405. Represent absent official source explicitly; a possible future AI-only learning mode must not be labeled official.
+
+## D-008 — Dataset before application
+**Status: Accepted.** Prioritize trustworthy extraction, corrections, validation and verified releases before Android or adaptive-engine deployment. AI must solve independently before seeing the key for verification experiments.
+
+**Target stack (Proposed):** Kotlin, Jetpack Compose and Room on Android; offline-first verified-content consumption. No app layer is implemented yet.
+
+## D-009 — Git collaboration and review
+**Status: Accepted for future work.** Use dedicated feature/docs branches, small commits, tests and Pull Requests into `main`. Update the roadmap/decisions with architectural changes. No force-push as normal workflow.
+
+**Why:** Maintains traceability and protects concurrent local work.
+
+## D-010 — Public Git LFS source publication
+**Status: Open — requires explicit owner and rights review.**
+
+**Previous intent:** Original source PDFs/JPGs should remain local, immutable, and untracked; full staged JSON should not be published.
+
+**Current observed repository:** The public GitHub `main` includes `.gitattributes` with `source/*.pdf` and `source/*.jpg` using Git LFS, and 29 tracked `source/` LFS pointer files introduced in `e81f20d` (`Add answer-key extraction pipeline and exam sources`). A pointer for `96.pdf` names SHA-256 `69bc…8ba2` and original size 4,494,678 bytes. These are not the PDF bytes in the Git tree, but may enable public retrieval of uploaded LFS objects.
+
+**Decision required:** Are those original exam and key files licensed/authorized for publication and redistribution from a public repository? Retain public LFS artifacts, move material to private access, or keep only source metadata and require local acquisition? Obtain an explicit rights/distribution decision.
+
+**Safety:** Merely deleting pointers in a later commit would not erase public Git/LFS history. Avoid expanding source publication or issuing dataset releases until this is resolved. Do not rewrite history or delete remote files without explicit authorization and a migration plan.
+
+## How to change a decision
+
+Propose a PR that updates this file, explains new evidence and alternatives, cites affected modules/tests, and links a targeted issue. Do not silently relabel `Open` decisions as `Accepted`.
