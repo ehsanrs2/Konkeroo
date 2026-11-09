@@ -71,6 +71,9 @@ jobs:
       - name: Ruff lint
         run: uv run ruff check .
 
+      - name: Diagnose Ruff format changes
+        run: uv run ruff format --diff src/english_exam/review_reconciliation.py tests/unit/test_review_reconciliation.py tests/integration/test_1396_curated_key_alignment.py || true
+
       - name: Ruff format
         run: uv run ruff format --check .
 
