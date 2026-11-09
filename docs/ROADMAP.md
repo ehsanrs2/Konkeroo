@@ -18,7 +18,8 @@ This is a *direction and execution order*, not a delivery-date commitment. Mark 
 | M3 | Exam-paper English-section import across remaining years | **Not started** | Verified year-specific section/range/passages; no global 25/30 assumption |
 | M4 | Human review, corrections, verified dataset and release gate | **In progress, editorial review only** | Auditable corrections, uncertainty resolution, schema/version governance |
 | M4a | 1396 Vocabulary Q1–10 source-backed editorial proposals | **Merged on main; independent approval pending** | Eleven source-linked edit proposals; raw stage unmodified |
-| M4b | 1396 Cloze passage and Q11–15 source editorial review | **Source inspected; in PR, independent approval pending** | Seven short correction proposals and one unresolved text-order defect |
+| M4b | 1396 Cloze passage and Q11–15 source editorial review | **Merged on main; independent approval pending** | Seven short correction proposals and one unresolved text-order defect |
+| M4c | 1396 Reading passages 1–3 and Q16–30 editorial review | **Source inspected; proposed in PR** | Short exact-source correction proposals, anomalous order, cross-page question mapping |
 | M5 | Independent AI answering, explanations, and conflict review | **Not started** | Separate official/AI/final; provenance and error analysis |
 | M6 | Vocabulary/skill enrichment, cloze/reading practice model | **Not started** | Context-aware word frequency/importance and reviewed skill tags |
 | M7 | Android MVP with offline verified dataset | **Not started** | Functional retrieval practice, accessibility, safe local persistence |
@@ -36,7 +37,8 @@ Dependencies may be interleaved: additional exam parsers (M3) are needed before 
 5. M2c audit-only alignment is merged. Run its source-present integration test locally and retain its provisional status until independent answer/edition review.
 6. Review the first **M4a** 1396 Vocabulary Q1–10 text correction proposals against page 2; accept/reject each through an explicit later review step, without changing raw staging.
 7. Review **M4b Cloze** against printed pages 2–3: seven short proposed edits and the unresolved displaced `to` text-order issue. Do not apply automatic replacements or call this independent verification.
-8. Review Reading passages in narrow source-based batches; then expand directly curated exam/key data across other years.
+8. Review **M4c Reading passages 1–3** as a source-linked, read-only editorial proposal set; independently verify anomalous layout/order and preserve printed peculiarities verbatim.
+9. Conduct explicit acceptance/rejection review of M4a–M4c and only then consider a separate verified text artifact. Expand exam/key data to additional years in focused batches.
 
 ## Definition of Done for every parser milestone
 

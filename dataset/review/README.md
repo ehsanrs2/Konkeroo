@@ -63,3 +63,17 @@ The compact [`1396-cloze-text-review.json`](1396-cloze-text-review.json) records
 - Source-independent tests check the compact artifact's source ID, page/field references, review status, unique proposal IDs and unresolved classification. A source-conditional test checks actual raw fragments and source SHA when the original PDF is available; it skips on CI without PDF media.
 
 M4a Vocabulary corrections have already been merged as **proposals**, not independently approved final corrections. Editorial approval and any verified dataset promotion remain separate future steps.
+
+## 1396 Reading printed-source review (M4c)
+
+[`1396-reading-text-review.json`](1396-reading-text-review.json) records **36 short source-linked editorial proposals** across the three Reading passages and questions 16–30, plus **5 unresolved nonlocal text-order/glyph anomalies** and **4 peculiarities visible in the printed source itself**. This artifact is an assistant's direct visual reading, **not** independently human-verified content or a final answer set.
+
+- Source: original `source/96.pdf`, SHA-256 `69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2`. Printed English Reading is on **PDF pages 3–5**.
+- Reading 1: passage on page 3, Q16–19 on page 3, **Q20 on page 4**. Reading 2: passage on page 4, Q21–24 on page 4, **Q25 on page 5**. Reading 3: passage and Q26–30 on page 5. Question-to-passage membership must not be derived from the question's physical page alone.
+- Proposed edits are small literal comparisons between the source's text layer and directly viewed printed text; examples include `IWO` to `two`, `self-contnine<l` to `self-contained`, and `rest their performance` to `test their performance`.
+- The nonlocal anomalies (e.g. displaced `as------.` in Q19, missing/reordered `of` near Q22, stray `11` or `10` around Reading 2/3) are **not automatically repairable by an isolated substring substitution**. They remain `NEEDS_SOURCE_ALIGNED_REVIEW`.
+- Printed oddities such as `format of the fixture`, `walk thorough the rooms`, Q23's `work`, and Q30's `fight training` are kept **exactly as printed**, even where a grammatical or contextual editor might prefer another word. Editorial improvements are not permission to silently rewrite the original examination.
+- Independent structural tests check identifiers, source hash, provisional review state, short and uniquely scoped proposals, page/passage links, and unresolved statuses. A source-present test checks literal text-layer evidence against the real hashed PDF; source-independent GitHub Actions intentionally excludes original LFS media.
+- No existing raw/normalized/corrected staging, original PDFs, official/AI/final answers, or generated explanations are modified. All proposals remain `PENDING_INDEPENDENT_REVIEW` until a distinct reviewer records an explicit disposition.
+
+**Next review gate:** independently compare every proposed reading with printed page 3/4/5, resolve misordered tokens using source-aligned evidence (not inferred grammar), and decide whether/where to construct a separate versioned verified learning-content artifact. M4a/M4b remain independent-proposal work, not already accepted corrections.

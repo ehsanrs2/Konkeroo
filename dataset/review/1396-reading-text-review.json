@@ -1,0 +1,565 @@
+{
+  "schema_version": "1.0",
+  "artifact_type": "SOURCE_LINKED_READING_TEXT_REVIEW",
+  "exam_id": "iran-ce-msc-1396",
+  "exam_source": {
+    "filename": "96.pdf",
+    "sha256": "69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2"
+  },
+  "booklet_code": "C",
+  "review_status": "PENDING_INDEPENDENT_REVIEW",
+  "review_method": "ASSISTANT_DIRECT_VISUAL_COMPARISON",
+  "independently_verified": false,
+  "passage_question_map": [
+    {
+      "passage_id": "reading-1",
+      "passage_pdf_page": 3,
+      "question_number_range": [
+        16,
+        20
+      ],
+      "question_pdf_pages": {
+        "16": 3,
+        "17": 3,
+        "18": 3,
+        "19": 3,
+        "20": 4
+      }
+    },
+    {
+      "passage_id": "reading-2",
+      "passage_pdf_page": 4,
+      "question_number_range": [
+        21,
+        25
+      ],
+      "question_pdf_pages": {
+        "21": 4,
+        "22": 4,
+        "23": 4,
+        "24": 4,
+        "25": 5
+      }
+    },
+    {
+      "passage_id": "reading-3",
+      "passage_pdf_page": 5,
+      "question_number_range": [
+        26,
+        30
+      ],
+      "question_pdf_pages": {
+        "26": 5,
+        "27": 5,
+        "28": 5,
+        "29": 5,
+        "30": 5
+      }
+    }
+  ],
+  "proposals": [
+    {
+      "id": "r1396-01",
+      "passage_id": "reading-1",
+      "target_entity_id": "reading-1",
+      "field": "passage_body",
+      "source_pdf_page": 3,
+      "expected_raw_fragment": "lo 1983",
+      "proposed_printed_fragment": "In 1983",
+      "reason": "TEXT_LAYER_GLYPH_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-02",
+      "passage_id": "reading-1",
+      "target_entity_id": "reading-1",
+      "field": "passage_body",
+      "source_pdf_page": 3,
+      "expected_raw_fragment": "IWO technical systems",
+      "proposed_printed_fragment": "two technical systems",
+      "reason": "TEXT_LAYER_GLYPH_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-03",
+      "passage_id": "reading-1",
+      "target_entity_id": "reading-1",
+      "field": "passage_body",
+      "source_pdf_page": 3,
+      "expected_raw_fragment": "rhere was",
+      "proposed_printed_fragment": "there was",
+      "reason": "TEXT_LAYER_GLYPH_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-04",
+      "passage_id": "reading-1",
+      "target_entity_id": "reading-1",
+      "field": "passage_body",
+      "source_pdf_page": 3,
+      "expected_raw_fragment": "bit of slippage. which",
+      "proposed_printed_fragment": "bit of slippage, which",
+      "reason": "PUNCTUATION_LAYER_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-05",
+      "passage_id": "reading-1",
+      "target_entity_id": "reading-1",
+      "field": "passage_body",
+      "source_pdf_page": 3,
+      "expected_raw_fragment": "Tims the fidelity",
+      "proposed_printed_fragment": "Thus the fidelity",
+      "reason": "TEXT_LAYER_GLYPH_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-06",
+      "passage_id": "reading-1",
+      "target_entity_id": "reading-1",
+      "field": "passage_body",
+      "source_pdf_page": 3,
+      "expected_raw_fragment": "die disc",
+      "proposed_printed_fragment": "the disc",
+      "reason": "TEXT_LAYER_GLYPH_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-07",
+      "passage_id": "reading-1",
+      "target_entity_id": "reading-1",
+      "field": "passage_body",
+      "source_pdf_page": 3,
+      "expected_raw_fragment": "indefinitely.T his",
+      "proposed_printed_fragment": "indefinitely. This",
+      "reason": "WORD_BREAK_LAYER_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-08",
+      "passage_id": "reading-1",
+      "target_entity_id": "q-16",
+      "field": "question_stem",
+      "source_pdf_page": 3,
+      "expected_raw_fragment": "WhAt is",
+      "proposed_printed_fragment": "What is",
+      "reason": "TEXT_LAYER_GLYPH_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-09",
+      "passage_id": "reading-1",
+      "target_entity_id": "q-16",
+      "field": "question_stem",
+      "source_pdf_page": 3,
+      "expected_raw_fragment": "11assage?",
+      "proposed_printed_fragment": "passage?",
+      "reason": "TEXT_LAYER_GLYPH_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-10",
+      "passage_id": "reading-1",
+      "target_entity_id": "q-17",
+      "field": "choice_text:1",
+      "source_pdf_page": 3,
+      "expected_raw_fragment": "nostalgia i11 rhe l990s",
+      "proposed_printed_fragment": "nostalgia in the 1990s",
+      "reason": "TEXT_LAYER_GLYPH_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-11",
+      "passage_id": "reading-1",
+      "target_entity_id": "q-18",
+      "field": "number_marker",
+      "source_pdf_page": 3,
+      "expected_raw_fragment": "IS.-",
+      "proposed_printed_fragment": "18-",
+      "reason": "TEXT_LAYER_GLYPH_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-12",
+      "passage_id": "reading-1",
+      "target_entity_id": "q-18",
+      "field": "question_stem",
+      "source_pdf_page": 3,
+      "expected_raw_fragment": "~OT mentioned",
+      "proposed_printed_fragment": "NOT mentioned",
+      "reason": "TEXT_LAYER_GLYPH_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-13",
+      "passage_id": "reading-2",
+      "target_entity_id": "reading-2",
+      "field": "passage_heading",
+      "source_pdf_page": 4,
+      "expected_raw_fragment": "PASSAGB2:",
+      "proposed_printed_fragment": "PASSAGE 2:",
+      "reason": "TEXT_LAYER_GLYPH_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-14",
+      "passage_id": "reading-2",
+      "target_entity_id": "reading-2",
+      "field": "passage_body",
+      "source_pdf_page": 4,
+      "expected_raw_fragment": "present This applies.",
+      "proposed_printed_fragment": "present. This applies,",
+      "reason": "PUNCTUATION_LAYER_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-15",
+      "passage_id": "reading-2",
+      "target_entity_id": "reading-2",
+      "field": "passage_body",
+      "source_pdf_page": 4,
+      "expected_raw_fragment": "whenever a. disk",
+      "proposed_printed_fragment": "whenever a disk",
+      "reason": "PUNCTUATION_LAYER_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-16",
+      "passage_id": "reading-2",
+      "target_entity_id": "reading-2",
+      "field": "passage_body",
+      "source_pdf_page": 4,
+      "expected_raw_fragment": "limes, has",
+      "proposed_printed_fragment": "times, has",
+      "reason": "TEXT_LAYER_GLYPH_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-17",
+      "passage_id": "reading-2",
+      "target_entity_id": "reading-2",
+      "field": "passage_body",
+      "source_pdf_page": 4,
+      "expected_raw_fragment": "TI1e concept",
+      "proposed_printed_fragment": "The concept",
+      "reason": "TEXT_LAYER_GLYPH_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-18",
+      "passage_id": "reading-2",
+      "target_entity_id": "reading-2",
+      "field": "passage_body",
+      "source_pdf_page": 4,
+      "expected_raw_fragment": "self-contnine<l",
+      "proposed_printed_fragment": "self-contained",
+      "reason": "TEXT_LAYER_GLYPH_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-19",
+      "passage_id": "reading-2",
+      "target_entity_id": "reading-2",
+      "field": "passage_body",
+      "source_pdf_page": 4,
+      "expected_raw_fragment": "1988, however.",
+      "proposed_printed_fragment": "1988, however,",
+      "reason": "PUNCTUATION_LAYER_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-20",
+      "passage_id": "reading-2",
+      "target_entity_id": "reading-2",
+      "field": "passage_body",
+      "source_pdf_page": 4,
+      "expected_raw_fragment": "vulnerabilities ill operating",
+      "proposed_printed_fragment": "vulnerabilities in operating",
+      "reason": "TEXT_LAYER_GLYPH_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-21",
+      "passage_id": "reading-2",
+      "target_entity_id": "q-21",
+      "field": "choice_text:4",
+      "source_pdf_page": 4,
+      "expected_raw_fragment": "TI1e spread",
+      "proposed_printed_fragment": "The spread",
+      "reason": "TEXT_LAYER_GLYPH_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-22",
+      "passage_id": "reading-2",
+      "target_entity_id": "q-22",
+      "field": "question_stem",
+      "source_pdf_page": 4,
+      "expected_raw_fragment": "According to lhe passage",
+      "proposed_printed_fragment": "According to the passage",
+      "reason": "TEXT_LAYER_GLYPH_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-23",
+      "passage_id": "reading-2",
+      "target_entity_id": "q-25",
+      "field": "question_stem",
+      "source_pdf_page": 5,
+      "expected_raw_fragment": "mosl probably",
+      "proposed_printed_fragment": "most probably",
+      "reason": "TEXT_LAYER_GLYPH_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-24",
+      "passage_id": "reading-3",
+      "target_entity_id": "reading-3",
+      "field": "passage_body",
+      "source_pdf_page": 5,
+      "expected_raw_fragment": "pictures. computer",
+      "proposed_printed_fragment": "pictures, computer",
+      "reason": "PUNCTUATION_LAYER_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-25",
+      "passage_id": "reading-3",
+      "target_entity_id": "reading-3",
+      "field": "passage_body",
+      "source_pdf_page": 5,
+      "expected_raw_fragment": "research. training",
+      "proposed_printed_fragment": "research, training",
+      "reason": "PUNCTUATION_LAYER_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-26",
+      "passage_id": "reading-3",
+      "target_entity_id": "reading-3",
+      "field": "passage_body",
+      "source_pdf_page": 5,
+      "expected_raw_fragment": "rest their performance",
+      "proposed_printed_fragment": "test their performance",
+      "reason": "TEXT_LAYER_GLYPH_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-27",
+      "passage_id": "reading-3",
+      "target_entity_id": "reading-3",
+      "field": "passage_body",
+      "source_pdf_page": 5,
+      "expected_raw_fragment": "computer graphics. where",
+      "proposed_printed_fragment": "computer graphics, where",
+      "reason": "PUNCTUATION_LAYER_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-28",
+      "passage_id": "reading-3",
+      "target_entity_id": "reading-3",
+      "field": "passage_body",
+      "source_pdf_page": 5,
+      "expected_raw_fragment": "graphs. charts",
+      "proposed_printed_fragment": "graphs, charts",
+      "reason": "PUNCTUATION_LAYER_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-29",
+      "passage_id": "reading-3",
+      "target_entity_id": "reading-3",
+      "field": "passage_body",
+      "source_pdf_page": 5,
+      "expected_raw_fragment": "financial, statistical.",
+      "proposed_printed_fragment": "financial, statistical,",
+      "reason": "PUNCTUATION_LAYER_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-30",
+      "passage_id": "reading-3",
+      "target_entity_id": "q-26",
+      "field": "question_stem",
+      "source_pdf_page": 5,
+      "expected_raw_fragment": "What docs",
+      "proposed_printed_fragment": "What does",
+      "reason": "TEXT_LAYER_GLYPH_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-31",
+      "passage_id": "reading-3",
+      "target_entity_id": "q-26",
+      "field": "choice_text:4",
+      "source_pdf_page": 5,
+      "expected_raw_fragment": "TI1e rapidly",
+      "proposed_printed_fragment": "The rapidly",
+      "reason": "TEXT_LAYER_GLYPH_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-32",
+      "passage_id": "reading-3",
+      "target_entity_id": "q-28",
+      "field": "question_stem",
+      "source_pdf_page": 5,
+      "expected_raw_fragment": "According lo",
+      "proposed_printed_fragment": "According to",
+      "reason": "TEXT_LAYER_GLYPH_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-33",
+      "passage_id": "reading-3",
+      "target_entity_id": "q-28",
+      "field": "question_stem",
+      "source_pdf_page": 5,
+      "expected_raw_fragment": "CAD 10",
+      "proposed_printed_fragment": "CAD to",
+      "reason": "TEXT_LAYER_GLYPH_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-34",
+      "passage_id": "reading-3",
+      "target_entity_id": "q-30",
+      "field": "question_stem",
+      "source_pdf_page": 5,
+      "expected_raw_fragment": "11nragrn11h",
+      "proposed_printed_fragment": "paragraph",
+      "reason": "TEXT_LAYER_GLYPH_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-35",
+      "passage_id": "reading-3",
+      "target_entity_id": "q-30",
+      "field": "question_stem",
+      "source_pdf_page": 5,
+      "expected_raw_fragment": "passag~",
+      "proposed_printed_fragment": "passage",
+      "reason": "TEXT_LAYER_GLYPH_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "r1396-36",
+      "passage_id": "reading-3",
+      "target_entity_id": "q-30",
+      "field": "question_stem",
+      "source_pdf_page": 5,
+      "expected_raw_fragment": "mosl likely",
+      "proposed_printed_fragment": "most likely",
+      "reason": "TEXT_LAYER_GLYPH_ERROR",
+      "review_status": "PENDING_INDEPENDENT_REVIEW"
+    }
+  ],
+  "unresolved_anomalies": [
+    {
+      "id": "r1396-order-q19",
+      "passage_id": "reading-1",
+      "source_pdf_page": 3,
+      "target_entity_id": "q-19",
+      "kind": "NONLOCAL_TEXT_ORDER",
+      "observed_raw_fragments": [
+        "as------.",
+        "19- The tone"
+      ],
+      "printed_context": "The tone of the passage could best be described as",
+      "status": "NEEDS_SOURCE_ALIGNED_REVIEW",
+      "proposed_replacement": null
+    },
+    {
+      "id": "r1396-order-q22",
+      "passage_id": "reading-2",
+      "source_pdf_page": 4,
+      "target_entity_id": "q-22",
+      "kind": "NONLOCAL_TEXT_ORDER",
+      "observed_raw_fragments": [
+        "or",
+        "22- According to lhe passage"
+      ],
+      "printed_context": "in the beginning of the virus era",
+      "status": "NEEDS_SOURCE_ALIGNED_REVIEW",
+      "proposed_replacement": null
+    },
+    {
+      "id": "r1396-order-p2-stray",
+      "passage_id": "reading-2",
+      "source_pdf_page": 4,
+      "target_entity_id": "reading-2",
+      "kind": "STRAY_OR_MISORDERED_GLYPH",
+      "observed_raw_fragments": [
+        "self-contnine<l, self-propagating",
+        "11",
+        "not require"
+      ],
+      "printed_context": "self-propagating program which did not require a host",
+      "status": "NEEDS_SOURCE_ALIGNED_REVIEW",
+      "proposed_replacement": null
+    },
+    {
+      "id": "r1396-order-p3-it",
+      "passage_id": "reading-3",
+      "source_pdf_page": 5,
+      "target_entity_id": "reading-3",
+      "kind": "NONLOCAL_TEXT_ORDER",
+      "observed_raw_fragments": [
+        "computer science.",
+        "11",
+        "is used routinely"
+      ],
+      "printed_context": "computer science. It is used routinely",
+      "status": "NEEDS_SOURCE_ALIGNED_REVIEW",
+      "proposed_replacement": null
+    },
+    {
+      "id": "r1396-order-p3-to",
+      "passage_id": "reading-3",
+      "source_pdf_page": 5,
+      "target_entity_id": "reading-3",
+      "kind": "NONLOCAL_TEXT_ORDER",
+      "observed_raw_fragments": [
+        "CAD techniques design",
+        "10",
+        "rest their performance"
+      ],
+      "printed_context": "CAD techniques to design vehicles and test their performance",
+      "status": "NEEDS_SOURCE_ALIGNED_REVIEW",
+      "proposed_replacement": null
+    }
+  ],
+  "printed_source_anomalies": [
+    {
+      "passage_id": "reading-1",
+      "source_pdf_page": 3,
+      "printed_fragment": "format of the fixture",
+      "note": "Printed source itself says fixture. Do not silently replace with future."
+    },
+    {
+      "passage_id": "reading-3",
+      "source_pdf_page": 5,
+      "printed_fragment": "walk thorough the rooms",
+      "note": "Printed source itself says thorough. Do not silently replace with through."
+    },
+    {
+      "passage_id": "reading-3",
+      "source_pdf_page": 5,
+      "printed_fragment": "fight training",
+      "note": "Printed option Q30(2) says fight training. Do not silently replace with flight training."
+    },
+    {
+      "passage_id": "reading-2",
+      "source_pdf_page": 4,
+      "printed_fragment": "The work \"self-contained\"",
+      "note": "Printed Q23 says work, not word. Preserve until explicit source-edition review."
+    }
+  ],
+  "notes": [
+    "Only short text-layer fragments and proposed printed readings are recorded, not complete copyrighted passages.",
+    "A printed oddity is not automatically a text-layer defect: keep printed-source anomalies unchanged.",
+    "Provisional suggestions must not overwrite raw stage or set corrected_text / verified answers.",
+    "Source page numbers are 1-based PDF pages; printed question rows Q20 and Q25 are on the following page."
+  ]
+}
