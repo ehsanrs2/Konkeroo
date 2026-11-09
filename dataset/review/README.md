@@ -50,3 +50,16 @@ A separate data artifact, [`1396-vocabulary-correction-proposals.json`](1396-voc
 - The source-present integration test checks actual field-level fragments; the public CI source-independent test cannot perform that check because it intentionally excludes `source/` files.
 
 **Review gate:** independently compare every proposal against printed page 2; record accept/reject/uncertainty with review evidence in a separate PR. Only accepted changes may later populate `corrected_text` in a versioned verified dataset. Check question-level option text and stem, not only listed OCR-like defects. Do not confuse this text editorial review with independent official-key verification.
+
+
+## 1396 Cloze source-text review (M4b)
+
+The compact [`1396-cloze-text-review.json`](1396-cloze-text-review.json) records **seven** directly visually supported editorial proposals for the printed Cloze section, plus **one unresolved nonlocal text-order anomaly**. The passage is on PDF page 2; its numbered choices (Q11–15) are on page 3.
+
+- Same immutable `source/96.pdf` checksum as M4a. Proposals refer only to the relevant short source fragments: a Part B heading defect, passage words and blank marker, Q13 option-four spelling, and Q15 question-number marker.
+- Actual printed pages were viewed directly. Source text-layer fragments were also inspected using the original PDF, **only to check evidence**, not to build a general-purpose extraction/OCR system. The extracted fragments occurred exactly once in their expected pages in this local inspection.
+- The printed phrase `ability to remember` has a **displaced `to`** token in the PDF text layer (appearing as `10` near the end of the passage). This cannot be safely represented as an isolated simple replacement without checking the full staged field; it is explicitly **NEEDS_SOURCE_ALIGNED_REVIEW**, not an auto-correctable proposal.
+- Status remains `PENDING_INDEPENDENT_REVIEW`: this assistant's visual reading is **not a separate human review**, and native text matches alone do not prove that a proposed reading is correct. Do not populate `corrected_text` or final verified answers on this evidence alone.
+- Source-independent tests check the compact artifact's source ID, page/field references, review status, unique proposal IDs and unresolved classification. A source-conditional test checks actual raw fragments and source SHA when the original PDF is available; it skips on CI without PDF media.
+
+M4a Vocabulary corrections have already been merged as **proposals**, not independently approved final corrections. Editorial approval and any verified dataset promotion remain separate future steps.
