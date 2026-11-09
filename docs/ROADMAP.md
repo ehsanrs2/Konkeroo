@@ -17,7 +17,8 @@ This is a *direction and execution order*, not a delivery-date commitment. Mark 
 | M2i | Corpus completeness + 1405 no-key status | **Not started** | Explicit coverage/unsupported/absent matrix |
 | M3 | Exam-paper English-section import across remaining years | **Not started** | Verified year-specific section/range/passages; no global 25/30 assumption |
 | M4 | Human review, corrections, verified dataset and release gate | **In progress, editorial review only** | Auditable corrections, uncertainty resolution, schema/version governance |
-| M4a | 1396 Vocabulary Q1–10 source-backed editorial proposals | **Proposed in PR; not independently accepted** | Exact-source previews and fail-closed validation; raw staging stays immutable |
+| M4a | 1396 Vocabulary Q1–10 source-backed editorial proposals | **Merged on main; independent approval pending** | Eleven source-linked edit proposals; raw stage unmodified |
+| M4b | 1396 Cloze passage and Q11–15 source editorial review | **Source inspected; in PR, independent approval pending** | Seven short correction proposals and one unresolved text-order defect |
 | M5 | Independent AI answering, explanations, and conflict review | **Not started** | Separate official/AI/final; provenance and error analysis |
 | M6 | Vocabulary/skill enrichment, cloze/reading practice model | **Not started** | Context-aware word frequency/importance and reviewed skill tags |
 | M7 | Android MVP with offline verified dataset | **Not started** | Functional retrieval practice, accessibility, safe local persistence |
@@ -34,7 +35,8 @@ Dependencies may be interleaved: additional exam parsers (M3) are needed before 
 4. Review M2b's curated data, independent cross-checks, source provenance, unit tests, and legal exposure. Merge only through a small PR.
 5. M2c audit-only alignment is merged. Run its source-present integration test locally and retain its provisional status until independent answer/edition review.
 6. Review the first **M4a** 1396 Vocabulary Q1–10 text correction proposals against page 2; accept/reject each through an explicit later review step, without changing raw staging.
-7. Expand directly curated exam/key data across other years in narrow representative increments.
+7. Review **M4b Cloze** against printed pages 2–3: seven short proposed edits and the unresolved displaced `to` text-order issue. Do not apply automatic replacements or call this independent verification.
+8. Review Reading passages in narrow source-based batches; then expand directly curated exam/key data across other years.
 
 ## Definition of Done for every parser milestone
 

@@ -1,0 +1,121 @@
+{
+  "schema_version": "1.0",
+  "artifact_type": "SOURCE_LINKED_CLOZE_TEXT_REVIEW",
+  "exam_id": "iran-ce-msc-1396",
+  "source": {
+    "filename": "96.pdf",
+    "sha256": "69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2"
+  },
+  "review_status": "PENDING_INDEPENDENT_REVIEW",
+  "method": "ASSISTANT_DIRECT_VISUAL_COMPARISON",
+  "independently_verified": false,
+  "scope": {
+    "section": "CLOZE",
+    "question_numbers": [
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "passage_id": "cloze-1",
+    "printed_passage_pdf_page": 2,
+    "question_choices_pdf_page": 3
+  },
+  "proposals": [
+    {
+      "id": "cloze-heading-passage",
+      "entity_id": "cloze",
+      "field": "section_heading",
+      "pdf_page": 2,
+      "expected_raw_fragment": "Pnssnge",
+      "proposed_replacement": "Passage",
+      "reason": "PRINTED_HEADING",
+      "proposal_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "cloze-human",
+      "entity_id": "cloze-1",
+      "field": "passage_body",
+      "pdf_page": 2,
+      "expected_raw_fragment": "Imm an",
+      "proposed_replacement": "human",
+      "reason": "TEXT_LAYER_GLYPH_ERROR",
+      "proposal_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "cloze-on",
+      "entity_id": "cloze-1",
+      "field": "passage_body",
+      "pdf_page": 2,
+      "expected_raw_fragment": "en the",
+      "proposed_replacement": "on the",
+      "reason": "TEXT_LAYER_GLYPH_ERROR",
+      "proposal_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "cloze-to-study",
+      "entity_id": "cloze-1",
+      "field": "passage_body",
+      "pdf_page": 2,
+      "expected_raw_fragment": "lo study",
+      "proposed_replacement": "to study",
+      "reason": "TEXT_LAYER_GLYPH_ERROR",
+      "proposal_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "cloze-14-marker",
+      "entity_id": "cloze-1",
+      "field": "passage_body",
+      "pdf_page": 2,
+      "expected_raw_fragment": "{14)",
+      "proposed_replacement": "(14)",
+      "reason": "PRINTED_BLANK_NUMBER",
+      "proposal_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "cloze-13-choice4",
+      "entity_id": "q-13",
+      "field": "choice_text:4",
+      "pdf_page": 3,
+      "expected_raw_fragment": "rakes",
+      "proposed_replacement": "takes",
+      "reason": "TEXT_LAYER_GLYPH_ERROR",
+      "proposal_status": "PENDING_INDEPENDENT_REVIEW"
+    },
+    {
+      "id": "cloze-15-marker",
+      "entity_id": "q-15",
+      "field": "number_marker",
+      "pdf_page": 3,
+      "expected_raw_fragment": "t 5-",
+      "proposed_replacement": "15-",
+      "reason": "PRINTED_QUESTION_NUMBER",
+      "proposal_status": "PENDING_INDEPENDENT_REVIEW"
+    }
+  ],
+  "unresolved_anomalies": [
+    {
+      "id": "cloze-ability-to-remember-displaced-token",
+      "entity_id": "cloze-1",
+      "pdf_page": 2,
+      "kind": "NONLOCAL_TEXT_ORDER",
+      "observed_raw_fragments": [
+        "ability",
+        "remember verbal",
+        "10",
+        "approaches."
+      ],
+      "printed_phrase": "ability to remember",
+      "description": "In the native text layer, a token resembling '10' occurs near the end of the passage instead of the printed 'to' before 'remember'. A single local replacement could duplicate or misplace text.",
+      "status": "NEEDS_SOURCE_ALIGNED_REVIEW",
+      "proposed_replacement": null
+    }
+  ],
+  "notes": [
+    "Printed page imagery is the evidence for proposed replacements; raw fragments were located in the actual PDF text layer.",
+    "Do not silently 'fix' the grammatical content of a choice that was printed as-is.",
+    "This is an assistant-reviewed proposal record, not an independent human verification.",
+    "No corrected_text or verified answer set is produced by this artifact."
+  ]
+}
