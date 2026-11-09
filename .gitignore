@@ -1,6 +1,4 @@
-# Original exam material is local and immutable. Keep only its documentation.
-source/*
-!source/README.md
+# Original exam material is immutable and versioned via Git LFS.
 
 # Full staged datasets are generated locally. Track only documentation/manifests.
 dataset/staged/*.json

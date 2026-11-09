@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "canonical_exam_id": "iran-ce-msc-1395",
+  "source_filename": "95_Key.pdf",
+  "source_sha256": "298efdeb70dc84b3bf92872f96bf2f15394f617e8c9e8d6cb9364e50789b3d9b",
+  "artifact_sha256": "a2a4bdf17add10404a86a276a1e157da968b3ca6b5826058f24ccb13205a3ed8",
+  "artifact_size_bytes": 195845,
+  "variant_ids": ["booklet-A"],
+  "entry_count": 121,
+  "question_range": [1, 121],
+  "group_starts": [1, 31, 61, 91, 121],
+  "group_lengths": [30, 30, 30, 30, 1],
+  "disposition_counts": {
+    "ANSWERED": 121
+  },
+  "validation_status": "PASSED"
+}

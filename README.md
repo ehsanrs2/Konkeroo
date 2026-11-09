@@ -21,6 +21,12 @@ input. These binary files are not currently committed to Git; a future
 `source/README.md` may document their local organization without tracking the
 materials themselves.
 
+Install the locked Python 3.12 environment:
+
+```bash
+uv sync --locked --dev
+```
+
 ## Milestone 1: 1396 English extraction
 
 The first importer deterministically extracts the English section from local
@@ -28,13 +34,7 @@ The first importer deterministically extracts the English section from local
 page-relative provenance; it does not read the answer key or correct OCR-like
 errors.
 
-Install the locked Python 3.12 environment:
-
-```bash
-uv sync --locked --dev
-```
-
-Generate the local staged artifact:
+Generate the local staged exam artifact:
 
 ```bash
 uv run english-exam extract \
@@ -43,11 +43,28 @@ uv run english-exam extract \
   --output dataset/staged/1396.json
 ```
 
-Use `--force` to replace an existing generated artifact. Full staged JSON is
-ignored by Git; the tracked manifest records its expected hash and structure.
+## 1395 native answer-key staging
 
-Run all tests, including the real-PDF integration test when local source
-material is present:
+The first answer-key importer independently stages the official initial key
+from local `source/95_Key.pdf`. It extracts its native paired grid using PDF
+geometry and does not infer which questions belong to English. It does not
+modify or reconcile any staged exam artifact.
+
+Generate the local staged key artifact:
+
+```bash
+uv run english-exam key extract \
+  --exam-id iran-ce-msc-1395 \
+  --source source/95_Key.pdf \
+  --output dataset/staged/1395-key.json
+```
+
+Use `--force` to replace an existing generated artifact. Full staged JSON is
+ignored by Git; tracked manifests record expected hashes and structural facts
+without publishing the extracted content.
+
+Run all tests, including real-PDF integration tests when local source material
+is present:
 
 ```bash
 uv run pytest
