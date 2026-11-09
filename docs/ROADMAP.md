@@ -7,8 +7,8 @@ This is a *direction and execution order*, not a delivery-date commitment. Mark 
 | M0 | Repo/bootstrap, safety rules, source preservation | **Implemented** | Versioned project and documented invariants |
 | M1 | 1396 English paper import | **Implemented on main** | 30 validated questions; page provenance and non-text manifest |
 | M2a | Answer-key foundation + 1395 native paired-grid import | **Implemented on main** | Separate staged key, 121 booklet-A entries, deterministic manifest |
-| M2b | 1396 direct-visual English key curation | **Source visually reviewed; pending human review/PR** | Source-linked Q1–30 official claims, explicit uncertainty, testable data file |
-| M2c | First exam/key reconciliation for verified 1396 English section | **Not started** | Validate manually curated official claims against the staged exam; preserve official/AI/final separation |
+| M2b | 1396 direct-visual English key curation | **Curated on main; independent review pending** | Source-linked Q1–30 official claims, explicit uncertainty, testable data file |
+| M2c | Provisional 1396 key-to-exam alignment | **Under implementation in PR** | Strict source, booklet, section, passage, choice and printed-question-page checks; no answer promotion |
 | M2d | Other native paired grids (1401, 1402, 1404) | **Not started** | Fixture-safe import and regression checks |
 | M2e | Broken-font paired grids (1397–1399) | **Not started** | Validated glyph map or cell OCR, no silent guessing |
 | M2f | Rendered paired keys (1392–1394; includes JPG) | **Not started** | Reviewed structural/visual goldens and confidence thresholds |
@@ -31,7 +31,7 @@ Dependencies may be interleaved: additional exam parsers (M3) are needed before 
 2. Close the open **source distribution / public Git LFS** decision before treating the repository as publication-ready.
 3. Complete **M2b** by independent review of the 1396 English source-linked visual transcription and its exact 30 question/choice matches; no OCR or generic key parser required for one-time data acquisition.
 4. Review M2b's curated data, independent cross-checks, source provenance, unit tests, and legal exposure. Merge only through a small PR.
-5. Implement M2c reconciliation as a **separate PR** after importer validation.
+5. Review M2c's **audit-only** data alignment PR independently; human verification and an edition check are still needed before any final answer release.
 6. Expand across audited families and remaining exam papers in narrow representative increments.
 
 ## Definition of Done for every parser milestone
