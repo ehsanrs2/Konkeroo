@@ -38,8 +38,7 @@ def test_passage_and_cross_page_question_links_are_not_inferred_from_adjacency()
     ]
     assert [item["passage_pdf_page"] for item in mapping] == [3, 4, 5]
     expected = {
-        number: (3 if number <= 19 else 4 if number <= 24 else 5)
-        for number in range(16, 31)
+        number: (3 if number <= 19 else 4 if number <= 24 else 5) for number in range(16, 31)
     }
     observed = {}
     for item in mapping:
@@ -97,9 +96,7 @@ def test_short_proposals_have_unique_ids_and_consistent_source_locators():
             assert 16 <= number <= 30
             actual_passage = 1 if number <= 20 else 2 if number <= 25 else 3
             assert row["passage_id"] == f"reading-{actual_passage}"
-            assert row["source_pdf_page"] == (
-                3 if number <= 19 else 4 if number <= 24 else 5
-            )
+            assert row["source_pdf_page"] == (3 if number <= 19 else 4 if number <= 24 else 5)
         else:
             assert row["target_entity_id"] == row["passage_id"]
             assert row["source_pdf_page"] == int(row["passage_id"][-1]) + 2
