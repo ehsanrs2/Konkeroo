@@ -25,7 +25,6 @@ from english_exam.domain import (
 )
 from english_exam.review_reconciliation import ExpectedKeyIdentity, align_curated_official_claims
 
-
 KEY = ExpectedKeyIdentity(
     filename="synthetic-key.pdf",
     sha256="b" * 64,
