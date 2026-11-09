@@ -23,10 +23,7 @@ from english_exam.domain import (
     StagedDataset,
     ValidationReport,
 )
-from english_exam.review_reconciliation import (
-    ExpectedKeyIdentity,
-    align_curated_official_claims,
-)
+from english_exam.review_reconciliation import ExpectedKeyIdentity, align_curated_official_claims
 
 
 KEY = ExpectedKeyIdentity(

@@ -164,7 +164,7 @@ def align_curated_official_claims(
     duplicates = [n for n, count in Counter(n for n in numbers if _int(n)).items() if count > 1]
     if duplicates:
         fail("CLAIM_DUPLICATE", f"duplicate curated question numbers: {sorted(duplicates)}")
-    if len(entries) != len(questions) or set(n for n in numbers if _int(n)) != set(questions):
+    if len(entries) != len(questions) or {n for n in numbers if _int(n)} != set(questions):
         fail("CLAIM_COVERAGE", "curated and staged question-number sets differ")
 
     linked: list[LinkedOfficialClaim] = []
