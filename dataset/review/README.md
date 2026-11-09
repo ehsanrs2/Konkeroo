@@ -31,3 +31,9 @@ This is a **source-linked, AI visually transcribed** mapping, not an OCR result,
 ## Next years
 
 Repeat the **direct source reading + review + structured recording** process with each available exam and key. Do not impose a universal 25/30-question range. If a source file is inaccessible or an answer is illegible, mark it unresolved instead of guessing. Recorded absence of a key (1405) is not an AI-generated official key.
+
+## Alignment semantics (M2c)
+
+The `question_pdf_page` value denotes the page containing the **numbered question and its answer choices**, as printed in the exam. In the Cloze section, the passage and blanks 11–15 appear on PDF page **2**, while their numbered choice rows appear on PDF page **3**. The correspondence is source-specific, not a rule for other years. Reading Q20 is printed on page 4 but belongs to passage 1; Q25 is printed on page 5 but belongs to passage 2.
+
+`english_exam.review_reconciliation.align_curated_official_claims` cross-checks the reviewed JSON against a separately validated staged exam. Callers must provide independently inspected expected key identity (filename, SHA-256, booklet, edition, key page and group). This function only returns **provisional, in-memory claim links** when every source and question relation agrees; it never changes `Question.answers`, generates final answers, or turns one AI transcription into an independent review. In a source-present environment the integration test additionally hashes `96.pdf` and `96_Key.pdf`.
