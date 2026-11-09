@@ -29,6 +29,7 @@ jobs:
             /src/
             /tests/
             /dataset/staged/
+            /dataset/review/
             /pyproject.toml
             /uv.lock
             /README.md

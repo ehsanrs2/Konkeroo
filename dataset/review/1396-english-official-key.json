@@ -1,0 +1,308 @@
+{
+  "schema_version": "1.0",
+  "artifact_type": "SOURCE_LINKED_VISUAL_KEY_TRANSCRIPTION",
+  "canonical_exam_id": "iran-ce-msc-1396",
+  "state": "PENDING_HUMAN_REVIEW",
+  "transcription_method": "AI_DIRECT_VISUAL_READING",
+  "exam_cross_check": "QUESTION_AND_OPTION_CONTEXT_CHECKED",
+  "independent_blind_ai_solution": false,
+  "verified_final_answer": false,
+  "notes": [
+    "Transcribed by visually reading the actual official key; no OCR/parser was used.",
+    "Booklet C printed on the official key matches the C designation in the exam PDF header.",
+    "This records official source claims only. It is not a final verified or independently solved answer set.",
+    "Question/page/section association is fixture-specific; the answer key table's leftmost pair covers Q1-30."
+  ],
+  "exam_source": {
+    "filename": "96.pdf",
+    "sha256": "69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2",
+    "english_pdf_pages": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  "key_source": {
+    "filename": "96_Key.pdf",
+    "sha256": "5d421dcddc780120b13a08753fd2559e7ec02a60200c7c88f4211d70429cba61",
+    "page_number": 1,
+    "edition": "INITIAL",
+    "booklet_code": "C",
+    "source_region_descriptor": "Leftmost question/answer column pair, data rows 1–30; visual table region",
+    "provenance_kind": "VISUAL",
+    "native_pdf_text": false
+  },
+  "entries": [
+    {
+      "question_number": 1,
+      "section": "VOCABULARY",
+      "question_pdf_page": 2,
+      "passage_id": null,
+      "official_answer_position": 1,
+      "key_table_group": 1,
+      "key_table_row": 1
+    },
+    {
+      "question_number": 2,
+      "section": "VOCABULARY",
+      "question_pdf_page": 2,
+      "passage_id": null,
+      "official_answer_position": 3,
+      "key_table_group": 1,
+      "key_table_row": 2
+    },
+    {
+      "question_number": 3,
+      "section": "VOCABULARY",
+      "question_pdf_page": 2,
+      "passage_id": null,
+      "official_answer_position": 4,
+      "key_table_group": 1,
+      "key_table_row": 3
+    },
+    {
+      "question_number": 4,
+      "section": "VOCABULARY",
+      "question_pdf_page": 2,
+      "passage_id": null,
+      "official_answer_position": 3,
+      "key_table_group": 1,
+      "key_table_row": 4
+    },
+    {
+      "question_number": 5,
+      "section": "VOCABULARY",
+      "question_pdf_page": 2,
+      "passage_id": null,
+      "official_answer_position": 1,
+      "key_table_group": 1,
+      "key_table_row": 5
+    },
+    {
+      "question_number": 6,
+      "section": "VOCABULARY",
+      "question_pdf_page": 2,
+      "passage_id": null,
+      "official_answer_position": 3,
+      "key_table_group": 1,
+      "key_table_row": 6
+    },
+    {
+      "question_number": 7,
+      "section": "VOCABULARY",
+      "question_pdf_page": 2,
+      "passage_id": null,
+      "official_answer_position": 2,
+      "key_table_group": 1,
+      "key_table_row": 7
+    },
+    {
+      "question_number": 8,
+      "section": "VOCABULARY",
+      "question_pdf_page": 2,
+      "passage_id": null,
+      "official_answer_position": 4,
+      "key_table_group": 1,
+      "key_table_row": 8
+    },
+    {
+      "question_number": 9,
+      "section": "VOCABULARY",
+      "question_pdf_page": 2,
+      "passage_id": null,
+      "official_answer_position": 2,
+      "key_table_group": 1,
+      "key_table_row": 9
+    },
+    {
+      "question_number": 10,
+      "section": "VOCABULARY",
+      "question_pdf_page": 2,
+      "passage_id": null,
+      "official_answer_position": 3,
+      "key_table_group": 1,
+      "key_table_row": 10
+    },
+    {
+      "question_number": 11,
+      "section": "CLOZE",
+      "question_pdf_page": 3,
+      "passage_id": "cloze-1",
+      "official_answer_position": 4,
+      "key_table_group": 1,
+      "key_table_row": 11
+    },
+    {
+      "question_number": 12,
+      "section": "CLOZE",
+      "question_pdf_page": 3,
+      "passage_id": "cloze-1",
+      "official_answer_position": 1,
+      "key_table_group": 1,
+      "key_table_row": 12
+    },
+    {
+      "question_number": 13,
+      "section": "CLOZE",
+      "question_pdf_page": 3,
+      "passage_id": "cloze-1",
+      "official_answer_position": 3,
+      "key_table_group": 1,
+      "key_table_row": 13
+    },
+    {
+      "question_number": 14,
+      "section": "CLOZE",
+      "question_pdf_page": 3,
+      "passage_id": "cloze-1",
+      "official_answer_position": 2,
+      "key_table_group": 1,
+      "key_table_row": 14
+    },
+    {
+      "question_number": 15,
+      "section": "CLOZE",
+      "question_pdf_page": 3,
+      "passage_id": "cloze-1",
+      "official_answer_position": 4,
+      "key_table_group": 1,
+      "key_table_row": 15
+    },
+    {
+      "question_number": 16,
+      "section": "READING",
+      "question_pdf_page": 3,
+      "passage_id": "reading-1",
+      "official_answer_position": 3,
+      "key_table_group": 1,
+      "key_table_row": 16
+    },
+    {
+      "question_number": 17,
+      "section": "READING",
+      "question_pdf_page": 3,
+      "passage_id": "reading-1",
+      "official_answer_position": 2,
+      "key_table_group": 1,
+      "key_table_row": 17
+    },
+    {
+      "question_number": 18,
+      "section": "READING",
+      "question_pdf_page": 3,
+      "passage_id": "reading-1",
+      "official_answer_position": 4,
+      "key_table_group": 1,
+      "key_table_row": 18
+    },
+    {
+      "question_number": 19,
+      "section": "READING",
+      "question_pdf_page": 3,
+      "passage_id": "reading-1",
+      "official_answer_position": 1,
+      "key_table_group": 1,
+      "key_table_row": 19
+    },
+    {
+      "question_number": 20,
+      "section": "READING",
+      "question_pdf_page": 4,
+      "passage_id": "reading-1",
+      "official_answer_position": 2,
+      "key_table_group": 1,
+      "key_table_row": 20
+    },
+    {
+      "question_number": 21,
+      "section": "READING",
+      "question_pdf_page": 4,
+      "passage_id": "reading-2",
+      "official_answer_position": 3,
+      "key_table_group": 1,
+      "key_table_row": 21
+    },
+    {
+      "question_number": 22,
+      "section": "READING",
+      "question_pdf_page": 4,
+      "passage_id": "reading-2",
+      "official_answer_position": 2,
+      "key_table_group": 1,
+      "key_table_row": 22
+    },
+    {
+      "question_number": 23,
+      "section": "READING",
+      "question_pdf_page": 4,
+      "passage_id": "reading-2",
+      "official_answer_position": 4,
+      "key_table_group": 1,
+      "key_table_row": 23
+    },
+    {
+      "question_number": 24,
+      "section": "READING",
+      "question_pdf_page": 4,
+      "passage_id": "reading-2",
+      "official_answer_position": 3,
+      "key_table_group": 1,
+      "key_table_row": 24
+    },
+    {
+      "question_number": 25,
+      "section": "READING",
+      "question_pdf_page": 5,
+      "passage_id": "reading-2",
+      "official_answer_position": 1,
+      "key_table_group": 1,
+      "key_table_row": 25
+    },
+    {
+      "question_number": 26,
+      "section": "READING",
+      "question_pdf_page": 5,
+      "passage_id": "reading-3",
+      "official_answer_position": 1,
+      "key_table_group": 1,
+      "key_table_row": 26
+    },
+    {
+      "question_number": 27,
+      "section": "READING",
+      "question_pdf_page": 5,
+      "passage_id": "reading-3",
+      "official_answer_position": 4,
+      "key_table_group": 1,
+      "key_table_row": 27
+    },
+    {
+      "question_number": 28,
+      "section": "READING",
+      "question_pdf_page": 5,
+      "passage_id": "reading-3",
+      "official_answer_position": 4,
+      "key_table_group": 1,
+      "key_table_row": 28
+    },
+    {
+      "question_number": 29,
+      "section": "READING",
+      "question_pdf_page": 5,
+      "passage_id": "reading-3",
+      "official_answer_position": 2,
+      "key_table_group": 1,
+      "key_table_row": 29
+    },
+    {
+      "question_number": 30,
+      "section": "READING",
+      "question_pdf_page": 5,
+      "passage_id": "reading-3",
+      "official_answer_position": 3,
+      "key_table_group": 1,
+      "key_table_row": 30
+    }
+  ]
+}
