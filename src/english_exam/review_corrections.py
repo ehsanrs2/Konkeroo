@@ -73,8 +73,7 @@ def preview_editorial_corrections(
         fail("exam identity mismatch")
     src = review.get("exam_source")
     if not isinstance(src, dict) or (
-        src.get("filename") != source.source_filename
-        or src.get("sha256") != source.sha256
+        src.get("filename") != source.source_filename or src.get("sha256") != source.sha256
     ):
         fail("source filename or SHA-256 mismatch")
     if review.get("review_state") != "AWAITING_INDEPENDENT_REVIEW" or (
@@ -101,8 +100,7 @@ def preview_editorial_corrections(
         fail("duplicate scope question numbers")
     scope_pages = scope.get("source_pdf_pages")
     if not isinstance(scope_pages, list) or any(
-        type(page) is not int or page not in source.english_pdf_pages
-        for page in scope_pages
+        type(page) is not int or page not in source.english_pdf_pages for page in scope_pages
     ):
         fail("invalid scope pages")
         scope_pages = []
@@ -198,6 +196,4 @@ def preview_editorial_corrections(
 
     if errors:
         return CorrectionPreviewReport("BLOCKED", (), tuple(errors))
-    return CorrectionPreviewReport(
-        "AWAITING_INDEPENDENT_REVIEW", tuple(previews), ()
-    )
+    return CorrectionPreviewReport("AWAITING_INDEPENDENT_REVIEW", tuple(previews), ())

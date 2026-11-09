@@ -154,9 +154,7 @@ def test_immutable_preview_does_not_edit_staged_data():
     assert not result.errors
     assert len(result.previews) == 3
     assert {
-        p.field: p.suggested_corrected_text
-        for p in result.previews
-        if p.question_id == "q-01"
+        p.field: p.suggested_corrected_text for p in result.previews if p.question_id == "q-01"
     } == {
         "stem": "You might read the book.",
         "number_marker": "1-",
