@@ -138,8 +138,11 @@ def test_wrong_disposition_for_task_kind_is_rejected():
     items = _audit(_package()).items
     for kind, dispositions in DISPOSITIONS.items():
         item = next(row for row in items if row.kind == kind)
-        forbidden = next(value for value in ("ACCEPTED", "RESOLVED", "ACKNOWLEDGED", "DISPUTED")
-                         if value not in dispositions)
+        forbidden = next(
+            value
+            for value in ("ACCEPTED", "RESOLVED", "ACKNOWLEDGED", "DISPUTED")
+            if value not in dispositions
+        )
         package = list(_package())
         package[4]["decisions"] = [_decision(item, forbidden)]
         assert _audit(package).status == "BLOCKED_INVALID_INPUT"

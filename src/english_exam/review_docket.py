@@ -73,6 +73,8 @@ def build_review_docket(
     ledger: Mapping[str, Any],
 ) -> ReviewDocket:
     """Derive item IDs from source artifacts; fail closed on any mismatch."""
+    if not all(isinstance(data, Mapping) for data in (vocabulary, cloze, reading, key, ledger)):
+        return ReviewDocket("BLOCKED_INVALID_INPUT", (), 0, 0, 0, ("invalid artifact type",))
     errors: list[str] = []
     items: list[ReviewItem] = []
 
@@ -235,7 +237,7 @@ def build_review_docket(
             continue
         item = by_id[task_id]
         disposition = decision.get("disposition")
-        if disposition not in DISPOSITIONS[item.kind]:
+        if not isinstance(disposition, str) or disposition not in DISPOSITIONS[item.kind]:
             errors.append(f"{task_id}: unsupported disposition")
             continue
         if decision.get("reviewer_role") != "INDEPENDENT_HUMAN":
