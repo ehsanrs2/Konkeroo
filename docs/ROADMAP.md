@@ -7,8 +7,8 @@ This is a *direction and execution order*, not a delivery-date commitment. Mark 
 | M0 | Repo/bootstrap, safety rules, source preservation | **Implemented** | Versioned project and documented invariants |
 | M1 | 1396 English paper import | **Implemented on main** | 30 validated questions; page provenance and non-text manifest |
 | M2a | Answer-key foundation + 1395 native paired-grid import | **Implemented on main** | Separate staged key, 121 booklet-A entries, deterministic manifest |
-| M2b | 1396 visual/vector key import | **Next candidate** | Region-level recognition, uncertainty gating, special annotation preserved |
-| M2c | First exam/key reconciliation for verified 1396 English section | **Not started** | Attach official entries only to 1396 English Q1–30; detect mismatch |
+| M2b | 1396 direct-visual English key curation | **Source visually reviewed; pending human review/PR** | Source-linked Q1–30 official claims, explicit uncertainty, testable data file |
+| M2c | First exam/key reconciliation for verified 1396 English section | **Not started** | Validate manually curated official claims against the staged exam; preserve official/AI/final separation |
 | M2d | Other native paired grids (1401, 1402, 1404) | **Not started** | Fixture-safe import and regression checks |
 | M2e | Broken-font paired grids (1397–1399) | **Not started** | Validated glyph map or cell OCR, no silent guessing |
 | M2f | Rendered paired keys (1392–1394; includes JPG) | **Not started** | Reviewed structural/visual goldens and confidence thresholds |
@@ -29,8 +29,8 @@ Dependencies may be interleaved: additional exam parsers (M3) are needed before 
 
 1. Review `main` status and the latest M2a implementation; verify tests in a reproducible environment, including clean CI without proprietary/local fixtures.
 2. Close the open **source distribution / public Git LFS** decision before treating the repository as publication-ready.
-3. Implement **M2b only** in a feature branch: the SHA-verified 1396 vector-key layout, region-level extraction/recognition, uncertainty and special annotation handling; no AI or other years.
-4. Review M2b content, manifests, regression tests, raw/visual provenance, and legal exposure. Merge only through a small PR.
+3. Complete **M2b** by independent review of the 1396 English source-linked visual transcription and its exact 30 question/choice matches; no OCR or generic key parser required for one-time data acquisition.
+4. Review M2b's curated data, independent cross-checks, source provenance, unit tests, and legal exposure. Merge only through a small PR.
 5. Implement M2c reconciliation as a **separate PR** after importer validation.
 6. Expand across audited families and remaining exam papers in narrow representative increments.
 

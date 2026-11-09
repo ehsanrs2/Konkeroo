@@ -56,6 +56,13 @@ Decisions are recorded with **status**. `Accepted` means a project constraint; `
 
 **Safety:** Merely deleting pointers in a later commit would not erase public Git/LFS history. Avoid expanding source publication or issuing dataset releases until this is resolved. Do not rewrite history or delete remote files without explicit authorization and a migration plan.
 
+## D-011 — Human/AI source review over building generic OCR pipelines
+**Status: Accepted direction for exam/key data acquisition; partial 1396 example pending review.** The value is a reliable English exam/answer dataset and a learning application, **not** a general-purpose PDF/OCR product. Direct visual reading of the actual exam paper and official key by the assistant, with explicit source hashes, page/table locations, booklet, edition, and review status, is an accepted method of acquiring data. Do not require a new reusable importer or OCR pipeline before curating a year's material.
+
+**Safeguards:** Separate source claim from the transcription/reviewer confidence; never treat an AI visual read as independently verified or a key-blind solution. Mark uncertain digits or mismatch cases for review. Keep original source PDFs immutable; record curated data separately, with year-specific structure and CI checks. Preserve earlier deterministic 1396 exam / 1395 key importers as existing tooling, but avoid spending new milestones solely on extraction engine generalization. AI-generated explanations and final verified answers remain separate stages.
+
+**Scope:** The current direct-visual 1396 task records **English Q1–30 only**, and uses the first pair of columns of the full initial key. Other years require individually confirmed English ranges and booklet matching. This decision revises the earlier M2b implementation strategy, not the provenance/validation obligations of D-001 through D-007.
+
 ## How to change a decision
 
 Propose a PR that updates this file, explains new evidence and alternatives, cites affected modules/tests, and links a targeted issue. Do not silently relabel `Open` decisions as `Accepted`.
