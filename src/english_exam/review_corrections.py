@@ -9,6 +9,7 @@ from __future__ import annotations
 from collections import Counter, defaultdict
 from collections.abc import Mapping
 from dataclasses import dataclass
+from itertools import pairwise
 from typing import Any
 
 from english_exam.domain import ExtractedText, StagedDataset
@@ -139,7 +140,10 @@ def preview_editorial_corrections(
         field = row["field"]
         before = row["expected_raw_fragment"]
         after = row["proposed_replacement"]
-        if not all(isinstance(s, str) and s.strip() for s in (proposal_id, qid, field, before, after, row["reason"])):
+        if not all(
+            isinstance(s, str) and s.strip()
+            for s in (proposal_id, qid, field, before, after, row["reason"])
+        ):
             fail(f"{proposal_id!r}: malformed proposal text")
             continue
         if before == after:
@@ -175,7 +179,7 @@ def preview_editorial_corrections(
     previews: list[FieldCorrectionPreview] = []
     for key, changes in sorted(edits.items()):
         ordered = sorted(changes)
-        for previous, following in zip(ordered, ordered[1:]):
+        for previous, following in pairwise(ordered):
             if previous[1] > following[0]:
                 fail(f"{key}: overlapping editorial corrections")
         original = field_values[key].raw_text

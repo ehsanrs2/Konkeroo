@@ -66,7 +66,11 @@ def _exam() -> StagedDataset:
             stem=_text("Another fictional question."),
             blank=None,
             choices=tuple(
-                Choice(position=n, raw_marker=_text("!)" if n == 1 else f"{n})"), text=_text("fictional"))
+                Choice(
+                    position=n,
+                    raw_marker=_text("!)" if n == 1 else f"{n})"),
+                    text=_text("fictional"),
+                )
                 for n in range(1, 5)
             ),
         ),
@@ -149,7 +153,11 @@ def test_immutable_preview_does_not_edit_staged_data():
     assert result.status == "AWAITING_INDEPENDENT_REVIEW"
     assert not result.errors
     assert len(result.previews) == 3
-    assert {p.field: p.suggested_corrected_text for p in result.previews if p.question_id == "q-01"} == {
+    assert {
+        p.field: p.suggested_corrected_text
+        for p in result.previews
+        if p.question_id == "q-01"
+    } == {
         "stem": "You might read the book.",
         "number_marker": "1-",
     }
