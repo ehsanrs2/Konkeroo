@@ -10,6 +10,7 @@ This directory is the canonical home for product intent, architecture, decisions
 | [Answer-key corpus audit](ANSWER_KEY_CORPUS.md) | Source-format families, exceptions, and safe importer sequencing |
 | [Decision log](DECISIONS.md) | Accepted decisions, alternatives, and unresolved choices |
 | [Data governance](DATA_GOVERNANCE.md) | Provenance, publishing policy, Git LFS exposure, and release safety |
+| [Review protocol](REVIEW_PROTOCOL.md) | Independent textual/key review workflow, evidence and release blocker |
 | [Development workflow](WORKFLOW.md) | Branch/PR process, quality gates, roles, and handoffs |
 
 ## Snapshot — 2026-11-09

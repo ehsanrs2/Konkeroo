@@ -1,0 +1,79 @@
+# Independent review and release gate — 1396 English
+
+**Status:** operational review protocol proposed in M4d. This is a human-review work queue, **not** an approval, a verified dataset, or a general PDF extraction pipeline.
+
+## Inputs
+
+| Source-linked file | Content and status |
+| --- | --- |
+| `dataset/review/1396-vocabulary-correction-proposals.json` | 11 editorial correction proposals; independent review pending |
+| `dataset/review/1396-cloze-text-review.json` | 7 proposals + 1 unresolved token-order anomaly |
+| `dataset/review/1396-reading-text-review.json` | 36 proposals + 5 unresolved anomalies + 4 source-printed oddities to acknowledge |
+| `dataset/review/1396-english-official-key.json` | 30 provisional official-key claims, booklet **C**, edition **INITIAL** |
+| `dataset/review/1396-review-ledger.json` | **No decisions initially**; explicitly blocks publication |
+
+Exam `source/96.pdf` SHA-256: `69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2`.
+
+Key `source/96_Key.pdf` SHA-256: `5d421dcddc780120b13a08753fd2559e7ec02a60200c7c88f4211d70429cba61`.
+
+The review docket contains **94 distinct items**: 54 editorial edits, 6 unresolved source-order anomalies, 4 unusual *printed* phrases, and 30 official-key positions. Source-printed oddities are not automatically errors; an acknowledgment does not authorize their correction.
+
+## Generate the audit
+
+Run from the repository root, after installing the locked project dependencies:
+
+```bash
+uv run python -m english_exam.review_docket --review-dir dataset/review
+```
+
+The expected initial result is `BLOCKED_PENDING_REVIEW`, **94 pending and 0 reviewed**. The command returns exit status 0 for a *validly structured but pending* dossier; it returns nonzero for invalid or unreadable inputs. Exit status 0 does **not** mean content is verified or publishable.
+
+The docket derives IDs from the existing artifacts rather than copying question/answer sequences. Example task IDs:
+
+- `edit:vocabulary:q01-might` — inspect a text-layer correction on original exam page 2
+- `edit:cloze:cloze-human` — inspect the Cloze passage on page 2
+- `edit:reading:r1396-02` — inspect the Reading passage on page 3
+- `anomaly:cloze:cloze-ability-to-remember-displaced-token` — resolve a nonlocal text-order defect
+- `key:q01` — independently compare the initial official key's Q1 claim with the actual **key page 1**, not the exam page
+- `printed:reading:<digest>` — inspect an unusual source-printed phrase; the stable short digest is derived from PDF page and exact printed fragment
+
+To see every ID, inspect the returned `ReviewDocket.items` programmatically; its IDs and page locators are deterministic.
+
+## Independent review procedure
+
+1. A **different human reviewer** obtains the original hash-matched PDF(s) and inspects the *printed source* at the referenced page, independently of the assistant's suggested correction.
+2. For `edit` tasks: choose **ACCEPTED**, **REJECTED**, or **NEEDS_FOLLOWUP**. Rejecting a proposal does not guarantee the uncorrected raw text is usable; record an alternative correction as a separate reviewed change if needed.
+3. For `anomaly` tasks: choose **RESOLVED** only with source-aligned evidence of the correct text/order; otherwise **NEEDS_FOLLOWUP**. A naive local substitution of misplaced `10`/`11`/glyph tokens is not sufficient.
+4. For `printed` tasks: choose **ACKNOWLEDGED** when the unusual word or spelling is genuinely printed, or **DISPUTED** when the observation cannot be confirmed. Do not silently rewrite an oddity as good English.
+5. For `key` tasks: choose **TRANSCRIPTION_CONFIRMED** or **DISPUTED** by **re-reading the original official booklet-C key** and identifying the claimed position. This is a check of faithful transcription, **not** an independent key-blind AI solve or proof that an initial key is final/correct.
+6. For each recorded decision, add one object to `decisions` in `1396-review-ledger.json`, with `task_id`, `disposition`, `reviewer_role: INDEPENDENT_HUMAN`, a nonempty `reviewer_id`, an evidence note, the exact original `evidence_source_sha256`, and 1-based `evidence_pdf_page`.
+7. Use a focused PR containing the ledger update and any newly justified evidence. A reviewer identity/role field is **self-attested metadata** and cannot itself prove independence; require human oversight of the PR.
+8. Re-run all tests and the docket audit. Keep original PDFs, raw staged text, AI answers, and proposed replacements unchanged until an explicit later versioned verified-content step.
+
+**Illustrative schema only — NOT a real review decision:**
+
+```json
+{
+  "task_id": "edit:vocabulary:q01-might",
+  "disposition": "ACCEPTED",
+  "reviewer_role": "INDEPENDENT_HUMAN",
+  "reviewer_id": "example-independent-reviewer",
+  "evidence_note": "EXAMPLE ONLY: checked the printed word on source PDF page 2.",
+  "evidence_source_sha256": "69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2",
+  "evidence_pdf_page": 2
+}
+```
+
+Do not commit this example as an actual decision.
+
+## Release boundary
+
+`BLOCKED_INVALID_INPUT`: one or more identities, counts, formats, review attestations, or source references are invalid; no valid docket is returned.
+
+`BLOCKED_PENDING_REVIEW`: at least one item has no recorded decision, or a rejected/disputed/follow-up decision remains unresolved. **Current expected state.**
+
+`REVIEWED_NOT_PUBLISHED`: all item decisions were structurally recorded without blockers. **This still does not authorize release.** It does not attest that the reviewer really was independent; it does not settle the INITIAL-vs-final key question; and it does not populate `Question.answers.final_verified`.
+
+A future *separate* release gate must verify the original exams and source-rights decision, review the complete corrected question/choice/passage rendering, resolve all text-order anomalies, check whether a later final key supersedes the initial key, and version a new reviewed dataset. No inference or automatic authority promotion is allowed.
+
+Vocabulary, Cloze, Reading and answer-key proposals remain **source claims**, not final learner-facing correctness assertions.

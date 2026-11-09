@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0",
+  "artifact_type": "INDEPENDENT_REVIEW_LEDGER",
+  "exam_id": "iran-ce-msc-1396",
+  "exam_source_sha256": "69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2",
+  "official_key_source_sha256": "5d421dcddc780120b13a08753fd2559e7ec02a60200c7c88f4211d70429cba61",
+  "independently_verified": false,
+  "publication_status": "BLOCKED",
+  "decisions": []
+}
