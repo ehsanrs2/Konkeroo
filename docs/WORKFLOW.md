@@ -20,6 +20,21 @@ GitHub `main` is the reviewed baseline. Work in small branches named by goal, e.
 8. Create PR with scope, tests, known limitations, and doc/decision updates. Require explicit review before merging.
 9. Verify resulting `main` and update [Roadmap](ROADMAP.md) state, relevant decision records, and artifacts only when evidence supports it.
 
+## GitHub Actions quality gate
+
+The `Python checks` workflow runs on pull requests and `main` updates with
+Python 3.12, the locked `uv` environment, pytest, Ruff, and a whitespace
+check. It uses a non-cone sparse checkout **excluding `source/`** and
+disables Git LFS downloads so original PDFs/JPGs are not pulled into public CI.
+Tests requiring actual local source media are expected to skip cleanly; the
+source-independent tests must pass. The workflow fails if source media is
+present in the checkout or full staged JSON is tracked.
+
+A green source-independent CI run **does not** replace local real-PDF
+integration testing or constitute approval to redistribute source material.
+For parser milestones, record results of both CI and local source-present
+verification in the PR.
+
 ## PR review checklist
 
 - Does the implementation respect [Architecture](ARCHITECTURE.md) and recorded decisions?

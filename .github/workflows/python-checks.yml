@@ -1,0 +1,77 @@
+name: Python checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: python-checks-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    name: Python 3.12 / source-independent
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout code without source media
+        uses: actions/checkout@v4
+        with:
+          # Avoid pulling copyrighted/source-dependent Git LFS payloads.
+          # Non-cone sparse checkout deliberately excludes source/.
+          sparse-checkout: |
+            /.github/
+            /src/
+            /tests/
+            /dataset/staged/
+            /pyproject.toml
+            /uv.lock
+            /README.md
+          sparse-checkout-cone-mode: false
+          lfs: false
+          persist-credentials: false
+
+      - name: Ensure local-only source files were not checked out
+        shell: bash
+        run: |
+          if [ -e source ]; then
+            echo "::error::source/ must not be checked out by source-independent CI"
+            exit 1
+          fi
+          if git ls-files -- 'dataset/staged/*.json' | grep -vE '^dataset/staged/[^/]+\.manifest\.json$'; then
+            echo "::error::full staged JSON must not be tracked"
+            exit 1
+          fi
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
+      - name: Install locked development dependencies
+        run: uv sync --locked --dev
+
+      - name: Verify dependency lock
+        run: uv lock --check
+
+      - name: Run source-independent and skip-clean integration tests
+        run: uv run pytest -q -ra
+
+      - name: Ruff lint
+        run: uv run ruff check .
+
+      - name: Ruff format
+        run: uv run ruff format --check .
+
+      - name: Whitespace check
+        run: git diff --check
