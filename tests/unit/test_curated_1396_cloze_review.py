@@ -64,7 +64,7 @@ def test_each_short_edit_has_a_unique_field_and_page_locator():
     )
     assert all(row["pdf_page"] == (3 if row["entity_id"].startswith("q-") else 2) for row in edits)
     assert {row["entity_id"] for row in edits} == {"cloze", "cloze-1", "q-13", "q-15"}
-    assert len(set((row["entity_id"], row["field"], row["expected_raw_fragment"]) for row in edits)) == len(edits)
+    assert len({(row["entity_id"], row["field"], row["expected_raw_fragment"]) for row in edits}) == len(edits)
     assert not any("corrected_text" in row or "final_verified" in row for row in edits)
 
 
