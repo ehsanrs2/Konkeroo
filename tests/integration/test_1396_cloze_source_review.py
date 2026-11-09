@@ -27,9 +27,7 @@ def test_source_present_cloze_review_fragments_and_sha():
     with pdfplumber.open(PDF) as document:
         assert len(document.pages) == 40
         page_text = {
-            page_number: document.pages[page_number - 1].extract_text(
-                x_tolerance=2, y_tolerance=2
-            )
+            page_number: document.pages[page_number - 1].extract_text(x_tolerance=2, y_tolerance=2)
             for page_number in (2, 3)
         }
 

@@ -64,21 +64,26 @@ def test_each_short_edit_has_a_unique_field_and_page_locator():
     )
     assert all(row["pdf_page"] == (3 if row["entity_id"].startswith("q-") else 2) for row in edits)
     assert {row["entity_id"] for row in edits} == {"cloze", "cloze-1", "q-13", "q-15"}
-    assert len({(row["entity_id"], row["field"], row["expected_raw_fragment"]) for row in edits}) == len(edits)
+    assert len(
+        {(row["entity_id"], row["field"], row["expected_raw_fragment"]) for row in edits}
+    ) == len(edits)
     assert not any("corrected_text" in row or "final_verified" in row for row in edits)
 
 
 def test_visual_proposals_only_record_the_relevant_source_fragments():
     by_id = {row["id"]: row for row in _review()["proposals"]}
-    assert (by_id["cloze-human"]["expected_raw_fragment"], by_id["cloze-human"]["proposed_replacement"]) == (
-        "Imm an", "human"
-    )
-    assert (by_id["cloze-13-choice4"]["expected_raw_fragment"], by_id["cloze-13-choice4"]["proposed_replacement"]) == (
-        "rakes", "takes"
-    )
-    assert (by_id["cloze-15-marker"]["expected_raw_fragment"], by_id["cloze-15-marker"]["proposed_replacement"]) == (
-        "t 5-", "15-"
-    )
+    assert (
+        by_id["cloze-human"]["expected_raw_fragment"],
+        by_id["cloze-human"]["proposed_replacement"],
+    ) == ("Imm an", "human")
+    assert (
+        by_id["cloze-13-choice4"]["expected_raw_fragment"],
+        by_id["cloze-13-choice4"]["proposed_replacement"],
+    ) == ("rakes", "takes")
+    assert (
+        by_id["cloze-15-marker"]["expected_raw_fragment"],
+        by_id["cloze-15-marker"]["proposed_replacement"],
+    ) == ("t 5-", "15-")
 
 
 def test_displaced_word_is_marked_unresolved_not_autocorrected():
