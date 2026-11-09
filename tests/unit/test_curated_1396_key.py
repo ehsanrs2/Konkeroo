@@ -54,7 +54,12 @@ def test_section_and_passage_relationships_remain_fixture_specific():
     entries = _data()["entries"]
     for entry in entries:
         number = entry["question_number"]
-        section = ("VOCABULARY" if number <= 10 else "CLOZE" if number <= 15 else "READING")
+        if number <= 10:
+            section = "VOCABULARY"
+        elif number <= 15:
+            section = "CLOZE"
+        else:
+            section = "READING"
         if number <= 10:
             passage = None
         elif number <= 15:
@@ -65,7 +70,14 @@ def test_section_and_passage_relationships_remain_fixture_specific():
             passage = "reading-2"
         else:
             passage = "reading-3"
-        expected_page = 2 if number <= 10 else 3 if number <= 19 else 4 if number <= 24 else 5
+        if number <= 10:
+            expected_page = 2
+        elif number <= 19:
+            expected_page = 3
+        elif number <= 24:
+            expected_page = 4
+        else:
+            expected_page = 5
         assert entry["section"] == section
         assert entry["passage_id"] == passage
         assert entry["question_pdf_page"] == expected_page
