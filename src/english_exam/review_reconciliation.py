@@ -142,7 +142,11 @@ def align_curated_official_claims(
         fail("CLAIM_EXAM_DUPLICATE", "staged exam has duplicate question numbers")
     for question, _, _ in questions.values():
         if any((question.answers.official, question.answers.ai, question.answers.final_verified)):
-            fail("CLAIM_EXAM_HAS_ANSWERS", "raw staged questions must remain answer-free", question.id)
+            fail(
+                "CLAIM_EXAM_HAS_ANSWERS",
+                "raw staged questions must remain answer-free",
+                question.id,
+            )
 
     raw_entries = curated.get("entries")
     if not isinstance(raw_entries, list):
@@ -191,18 +195,26 @@ def align_curated_official_claims(
         option = row.get("official_answer_position")
         valid_positions = {choice.position for choice in question.choices}
         if not _int(option) or option not in valid_positions:
-            fail("CLAIM_INVALID_CHOICE", "official position is not a choice of the question", entity_id)
+            fail(
+                "CLAIM_INVALID_CHOICE",
+                "official position is not a choice of the question",
+                entity_id,
+            )
             continue
         group = row.get("key_table_group")
         table_row = row.get("key_table_row")
-        if not _int(group) or group != expected_key.table_group or (
-            not _int(table_row) or table_row <= 0
+        if (
+            not _int(group)
+            or group != expected_key.table_group
+            or (not _int(table_row) or table_row <= 0)
         ):
             fail("CLAIM_KEY_CELL", "invalid key table group or row", entity_id)
             continue
         expected_row = number - expected_key.first_group_question_number + 1
         if table_row != expected_row:
-            fail("CLAIM_KEY_ROW_MAPPING", "key table row does not match question mapping", entity_id)
+            fail(
+                "CLAIM_KEY_ROW_MAPPING", "key table row does not match question mapping", entity_id
+            )
         region = (group, table_row)
         if region in seen_regions:
             fail("CLAIM_KEY_CELL_DUPLICATE", "same key cell assigned to two questions", entity_id)
