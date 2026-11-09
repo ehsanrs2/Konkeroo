@@ -55,12 +55,16 @@ def test_section_and_passage_relationships_remain_fixture_specific():
     for entry in entries:
         number = entry["question_number"]
         section = ("VOCABULARY" if number <= 10 else "CLOZE" if number <= 15 else "READING")
-        passage = (
-            None if number <= 10 else
-            "cloze-1" if number <= 15 else
-            "reading-1" if number <= 20 else
-            "reading-2" if number <= 25 else "reading-3"
-        )
+        if number <= 10:
+            passage = None
+        elif number <= 15:
+            passage = "cloze-1"
+        elif number <= 20:
+            passage = "reading-1"
+        elif number <= 25:
+            passage = "reading-2"
+        else:
+            passage = "reading-3"
         expected_page = 2 if number <= 10 else 3 if number <= 19 else 4 if number <= 24 else 5
         assert entry["section"] == section
         assert entry["passage_id"] == passage
@@ -69,6 +73,6 @@ def test_section_and_passage_relationships_remain_fixture_specific():
 
 def test_selected_boundary_values_match_visual_review():
     by_number = {row["question_number"]: row for row in _data()["entries"]}
-    for number, position in {1: 1, 10: 3, 11: 4, 15: 4, 16: 3, 20: 2,
-                             21: 3, 25: 1, 26: 1, 30: 3}.items():
+    expected = {1: 1, 10: 3, 11: 4, 15: 4, 16: 3, 20: 2, 21: 3, 25: 1, 26: 1, 30: 3}
+    for number, position in expected.items():
         assert by_number[number]["official_answer_position"] == position
