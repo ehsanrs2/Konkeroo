@@ -1,0 +1,131 @@
+{
+  "schema_version": "1.0",
+  "artifact_type": "EDITORIAL_CORRECTION_PROPOSALS",
+  "exam_id": "iran-ce-msc-1396",
+  "exam_source": {
+    "filename": "96.pdf",
+    "sha256": "69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2"
+  },
+  "review_state": "AWAITING_INDEPENDENT_REVIEW",
+  "review_method": "ASSISTANT_DIRECT_VISUAL_COMPARISON",
+  "scope": {
+    "section": "VOCABULARY",
+    "question_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "source_pdf_pages": [
+      2
+    ]
+  },
+  "review_notice": "Source-backed proposals only. Do not overwrite raw_text or promote corrected_text without independent review.",
+  "proposals": [
+    {
+      "id": "q01-number",
+      "question_id": "q-01",
+      "field": "number_marker",
+      "expected_raw_fragment": "I·",
+      "proposed_replacement": "1-",
+      "source_pdf_page": 2,
+      "reason": "PRINTED_NUMBER_MARKER"
+    },
+    {
+      "id": "q01-might",
+      "question_id": "q-01",
+      "field": "stem",
+      "expected_raw_fragment": "mighl",
+      "proposed_replacement": "might",
+      "source_pdf_page": 2,
+      "reason": "MISRECOGNIZED_LETTER"
+    },
+    {
+      "id": "q01-about",
+      "question_id": "q-01",
+      "field": "stem",
+      "expected_raw_fragment": "Rbour",
+      "proposed_replacement": "about",
+      "source_pdf_page": 2,
+      "reason": "MISRECOGNIZED_WORD"
+    },
+    {
+      "id": "q01-punctuation",
+      "question_id": "q-01",
+      "field": "stem",
+      "expected_raw_fragment": "disease. so",
+      "proposed_replacement": "disease, so",
+      "source_pdf_page": 2,
+      "reason": "PRINTED_PUNCTUATION"
+    },
+    {
+      "id": "q01-out",
+      "question_id": "q-01",
+      "field": "stem",
+      "expected_raw_fragment": "find our",
+      "proposed_replacement": "find out",
+      "source_pdf_page": 2,
+      "reason": "MISRECOGNIZED_LETTER"
+    },
+    {
+      "id": "q03-to",
+      "question_id": "q-03",
+      "field": "stem",
+      "expected_raw_fragment": "ro settle",
+      "proposed_replacement": "to settle",
+      "source_pdf_page": 2,
+      "reason": "MISRECOGNIZED_LETTER"
+    },
+    {
+      "id": "q04-continues",
+      "question_id": "q-04",
+      "field": "stem",
+      "expected_raw_fragment": "contiuues",
+      "proposed_replacement": "continues",
+      "source_pdf_page": 2,
+      "reason": "MISRECOGNIZED_LETTER"
+    },
+    {
+      "id": "q05-not",
+      "question_id": "q-05",
+      "field": "stem",
+      "expected_raw_fragment": "did nol",
+      "proposed_replacement": "did not",
+      "source_pdf_page": 2,
+      "reason": "MISRECOGNIZED_LETTER"
+    },
+    {
+      "id": "q05-to",
+      "question_id": "q-05",
+      "field": "stem",
+      "expected_raw_fragment": "try 10 control",
+      "proposed_replacement": "try to control",
+      "source_pdf_page": 2,
+      "reason": "MISRECOGNIZED_OR_MISORDERED_TEXT_LAYER"
+    },
+    {
+      "id": "q09-choice-one",
+      "question_id": "q-09",
+      "field": "choice_marker:1",
+      "expected_raw_fragment": "!)",
+      "proposed_replacement": "1)",
+      "source_pdf_page": 2,
+      "reason": "PRINTED_CHOICE_MARKER"
+    },
+    {
+      "id": "q10-number",
+      "question_id": "q-10",
+      "field": "number_marker",
+      "expected_raw_fragment": "10..",
+      "proposed_replacement": "10-",
+      "source_pdf_page": 2,
+      "reason": "PRINTED_NUMBER_MARKER"
+    }
+  ]
+}

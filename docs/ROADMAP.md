@@ -8,7 +8,7 @@ This is a *direction and execution order*, not a delivery-date commitment. Mark 
 | M1 | 1396 English paper import | **Implemented on main** | 30 validated questions; page provenance and non-text manifest |
 | M2a | Answer-key foundation + 1395 native paired-grid import | **Implemented on main** | Separate staged key, 121 booklet-A entries, deterministic manifest |
 | M2b | 1396 direct-visual English key curation | **Curated on main; independent review pending** | Source-linked Q1–30 official claims, explicit uncertainty, testable data file |
-| M2c | Provisional 1396 key-to-exam alignment | **Under implementation in PR** | Strict source, booklet, section, passage, choice and printed-question-page checks; no answer promotion |
+| M2c | Provisional 1396 key-to-exam alignment | **Merged on main; real-source integration pending** | Strict source, booklet, section, passage, choice and printed-question-page checks; no answer promotion |
 | M2d | Other native paired grids (1401, 1402, 1404) | **Not started** | Fixture-safe import and regression checks |
 | M2e | Broken-font paired grids (1397–1399) | **Not started** | Validated glyph map or cell OCR, no silent guessing |
 | M2f | Rendered paired keys (1392–1394; includes JPG) | **Not started** | Reviewed structural/visual goldens and confidence thresholds |
@@ -16,7 +16,8 @@ This is a *direction and execution order*, not a delivery-date commitment. Mark 
 | M2h | Personalized report keys (1403 native, 1400 raster) | **Not started** | Key vs candidate columns separated; deletion/positive-effect preserved |
 | M2i | Corpus completeness + 1405 no-key status | **Not started** | Explicit coverage/unsupported/absent matrix |
 | M3 | Exam-paper English-section import across remaining years | **Not started** | Verified year-specific section/range/passages; no global 25/30 assumption |
-| M4 | Human review, corrections, verified dataset and release gate | **Not started** | Auditable corrections, uncertainty resolution, schema/version governance |
+| M4 | Human review, corrections, verified dataset and release gate | **In progress, editorial review only** | Auditable corrections, uncertainty resolution, schema/version governance |
+| M4a | 1396 Vocabulary Q1–10 source-backed editorial proposals | **Proposed in PR; not independently accepted** | Exact-source previews and fail-closed validation; raw staging stays immutable |
 | M5 | Independent AI answering, explanations, and conflict review | **Not started** | Separate official/AI/final; provenance and error analysis |
 | M6 | Vocabulary/skill enrichment, cloze/reading practice model | **Not started** | Context-aware word frequency/importance and reviewed skill tags |
 | M7 | Android MVP with offline verified dataset | **Not started** | Functional retrieval practice, accessibility, safe local persistence |
@@ -31,8 +32,9 @@ Dependencies may be interleaved: additional exam parsers (M3) are needed before 
 2. Close the open **source distribution / public Git LFS** decision before treating the repository as publication-ready.
 3. Complete **M2b** by independent review of the 1396 English source-linked visual transcription and its exact 30 question/choice matches; no OCR or generic key parser required for one-time data acquisition.
 4. Review M2b's curated data, independent cross-checks, source provenance, unit tests, and legal exposure. Merge only through a small PR.
-5. Review M2c's **audit-only** data alignment PR independently; human verification and an edition check are still needed before any final answer release.
-6. Expand across audited families and remaining exam papers in narrow representative increments.
+5. M2c audit-only alignment is merged. Run its source-present integration test locally and retain its provisional status until independent answer/edition review.
+6. Review the first **M4a** 1396 Vocabulary Q1–10 text correction proposals against page 2; accept/reject each through an explicit later review step, without changing raw staging.
+7. Expand directly curated exam/key data across other years in narrow representative increments.
 
 ## Definition of Done for every parser milestone
 

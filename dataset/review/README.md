@@ -37,3 +37,16 @@ Repeat the **direct source reading + review + structured recording** process wit
 The `question_pdf_page` value denotes the page containing the **numbered question and its answer choices**, as printed in the exam. In the Cloze section, the passage and blanks 11–15 appear on PDF page **2**, while their numbered choice rows appear on PDF page **3**. The correspondence is source-specific, not a rule for other years. Reading Q20 is printed on page 4 but belongs to passage 1; Q25 is printed on page 5 but belongs to passage 2.
 
 `english_exam.review_reconciliation.align_curated_official_claims` cross-checks the reviewed JSON against a separately validated staged exam. Callers must provide independently inspected expected key identity (filename, SHA-256, booklet, edition, key page and group). This function only returns **provisional, in-memory claim links** when every source and question relation agrees; it never changes `Question.answers`, generates final answers, or turns one AI transcription into an independent review. In a source-present environment the integration test additionally hashes `96.pdf` and `96_Key.pdf`.
+
+## 1396 Vocabulary source-text correction proposals (M4a)
+
+A separate data artifact, [`1396-vocabulary-correction-proposals.json`](1396-vocabulary-correction-proposals.json), proposes **11 small, visually supported edits** across Q1, Q3, Q4, Q5, Q9, and Q10. Q2, Q6, Q7, and Q8 have no proposed edits in this initial pass; **absence of a proposal does not certify an entire question is error-free**.
+
+- Source: `source/96.pdf`, SHA-256 `69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2`, original PDF page 2, booklet C.
+- Review: the assistant directly inspected the rendered source page and compared it with the native text layer. No OCR tool or general parser was newly developed for this editorial task.
+- Examples: misrecognized letters (`mighl` -> `might`), a misplaced/ambiguous PDF text-layer token (`try 10 control` -> `try to control`), and printed number/choice markers. Both raw and proposed fragments are recorded, not a wholesale reconstruction of the source text.
+- The artifact is **AWAITING_INDEPENDENT_REVIEW**, not a verified correction set. A successful code-level preview shows only exact substring alignment with the staged model; it does not independently establish that a visually read replacement is correct.
+- `preview_editorial_corrections` is read-only, source-SHA-bound and fail-closed. It returns proposed full-field previews in memory, with no modification of `raw_text`, `normalized_text`, `corrected_text`, or question answers.
+- The source-present integration test checks actual field-level fragments; the public CI source-independent test cannot perform that check because it intentionally excludes `source/` files.
+
+**Review gate:** independently compare every proposal against printed page 2; record accept/reject/uncertainty with review evidence in a separate PR. Only accepted changes may later populate `corrected_text` in a versioned verified dataset. Check question-level option text and stem, not only listed OCR-like defects. Do not confuse this text editorial review with independent official-key verification.
