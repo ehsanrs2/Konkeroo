@@ -10,9 +10,9 @@ import pytest
 from english_exam.review_docket import (
     DISPOSITIONS,
     KEY_SHA,
+    _git_blob_sha1,
     audit_review_directory,
     build_review_docket,
-    _git_blob_sha1,
 )
 
 REVIEW_DIR = Path(__file__).parents[2] / "dataset" / "review"
