@@ -213,7 +213,5 @@ def test_old_review_decision_cannot_be_replayed_after_repinning_changed_artifact
 
 def test_git_revision_pin_matches_repository_json_representation():
     package = _package()
-    for group, artifact in zip(
-        ("vocabulary", "cloze", "reading", "key"), package[:4], strict=True
-    ):
+    for group, artifact in zip(("vocabulary", "cloze", "reading", "key"), package[:4], strict=True):
         assert _git_blob_sha1(artifact) == package[4]["artifact_git_blob_sha1"][group]

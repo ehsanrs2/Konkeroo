@@ -136,9 +136,7 @@ def build_review_docket(
         if source_key.get(field) != expected:
             errors.append(f"key: mismatched {field}")
 
-    def append(
-        task_id: str, kind: str, page: Any, group: str, source_sha: str = EXAM_SHA
-    ) -> None:
+    def append(task_id: str, kind: str, page: Any, group: str, source_sha: str = EXAM_SHA) -> None:
         if type(page) is not int or page <= 0 or page > (1 if kind == "key" else 5):
             errors.append(f"{task_id}: invalid source PDF page")
             return
