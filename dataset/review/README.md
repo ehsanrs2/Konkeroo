@@ -77,3 +77,9 @@ M4a Vocabulary corrections have already been merged as **proposals**, not indepe
 - No existing raw/normalized/corrected staging, original PDFs, official/AI/final answers, or generated explanations are modified. All proposals remain `PENDING_INDEPENDENT_REVIEW` until a distinct reviewer records an explicit disposition.
 
 **Next review gate:** independently compare every proposed reading with printed page 3/4/5, resolve misordered tokens using source-aligned evidence (not inferred grammar), and decide whether/where to construct a separate versioned verified learning-content artifact. M4a/M4b remain independent-proposal work, not already accepted corrections.
+
+## M4d — Independent review dossier and learner-content gate
+
+All source-linked 1396 review files and the provisional initial official key now feed a **single auditable docket**. There are **94** review tasks: 54 edit proposals, 6 unresolved token-order anomalies, 4 source-printed oddities, and 30 key-position checks. The new [`1396-review-ledger.json`](1396-review-ledger.json) starts with **zero** review decisions. As a result, release remains **BLOCKED_PENDING_REVIEW**; merging the source-data PRs does not make the questions or answers verified.
+
+Run `uv run python -m english_exam.review_docket --review-dir dataset/review` to inspect status without reading any PDF, publishing passages, or changing existing data. See [Independent review protocol](../../docs/REVIEW_PROTOCOL.md) for reviewer dispositions, evidence requirements, source hashes, key initial-edition limitations, and release boundaries. The command's exit status 0 validates the dossier's structure, **not** readiness for learners.
