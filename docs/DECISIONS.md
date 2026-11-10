@@ -63,6 +63,11 @@ Decisions are recorded with **status**. `Accepted` means a project constraint; `
 
 **Scope:** The current direct-visual 1396 task records **English Q1–30 only**, and uses the first pair of columns of the full initial key. Other years require individually confirmed English ranges and booklet matching. This decision revises the earlier M2b implementation strategy, not the provenance/validation obligations of D-001 through D-007.
 
+## D-012 — Bind reviewer evidence to the actual curated artifact revision
+**Status: Proposed in M4e PR; not yet merged.** A reviewer decision must identify both immutable original source (PDF SHA-256 and page) and the **exact curated proposal or key artifact revision** examined (Git blob SHA-1). Source identity alone is insufficient because a suggested replacement or answer position may change without changing the original PDF or the task ID.
+
+**Why:** Prevent stale approvals being replayed against altered edits/answers. Changing a source-linked artifact requires repinning the ledger and explicit re-review of affected decisions. A Git blob digest identifies the JSON revision, not a human reviewer or legal permission. Source-independent CI validates the pins; genuine independent human approval remains a separate task.
+
 ## How to change a decision
 
 Propose a PR that updates this file, explains new evidence and alternatives, cites affected modules/tests, and links a targeted issue. Do not silently relabel `Open` decisions as `Accepted`.

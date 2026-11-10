@@ -6,5 +6,11 @@
   "official_key_source_sha256": "5d421dcddc780120b13a08753fd2559e7ec02a60200c7c88f4211d70429cba61",
   "independently_verified": false,
   "publication_status": "BLOCKED",
-  "decisions": []
+  "decisions": [],
+  "artifact_git_blob_sha1": {
+    "vocabulary": "d86e605924af939d03e4605896f6c42f5ec019ab",
+    "cloze": "5530e4484dbc274ee23fa37f5b24d34c25f8301c",
+    "reading": "2f8f9b3c323b2b7173fcf7d8cf237e44804621f1",
+    "key": "816ed02acebd38d8105424eccc07b91cc1c22736"
+  }
 }
