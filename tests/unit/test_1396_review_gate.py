@@ -10,6 +10,7 @@ import pytest
 from english_exam.review_docket import (
     DISPOSITIONS,
     KEY_SHA,
+    _git_blob_sha1,
     audit_review_directory,
     build_review_docket,
 )
@@ -48,6 +49,7 @@ def _decision(item, disposition=None):
         "evidence_note": "Synthetic evidence for testing the decision validator only.",
         "evidence_source_sha256": item.source_sha256,
         "evidence_pdf_page": item.source_pdf_page,
+        "reviewed_artifact_blob_sha1": item.artifact_git_blob_sha1,
     }
 
 
@@ -67,6 +69,7 @@ def test_merged_review_package_derives_all_94_pending_tasks():
     }
     assert len({item.task_id for item in result.items}) == 94
     assert all(item.disposition == "PENDING" for item in result.items)
+    assert all(len(item.artifact_git_blob_sha1) == 40 for item in result.items)
     assert all(item.source_sha256 == KEY_SHA for item in result.items if item.kind == "key")
 
 
@@ -84,6 +87,8 @@ def test_merged_review_package_derives_all_94_pending_tasks():
         (4, lambda d: d.update(publication_status="VERIFIED")),
         (4, lambda d: d.update(independently_verified=True)),
         (4, lambda d: d.update(official_key_source_sha256="bad")),
+        (4, lambda d: d["artifact_git_blob_sha1"].update(key="0" * 40)),
+        (4, lambda d: d.pop("artifact_git_blob_sha1")),
     ],
 )
 def test_structural_or_source_mismatch_blocks_all_review_tasks(index, change):
@@ -115,6 +120,8 @@ def test_unknown_duplicate_or_invalid_decision_blocks_all():
         lambda d: d.update(evidence_note=""),
         lambda d: d.update(evidence_source_sha256="wrong"),
         lambda d: d.update(evidence_pdf_page=90),
+        lambda d: d.update(reviewed_artifact_blob_sha1="0" * 40),
+        lambda d: d.pop("reviewed_artifact_blob_sha1"),
         lambda d: d.update(disposition="VERIFIED"),
         lambda d: d.update(extra="not in schema"),
     ):
@@ -172,3 +179,39 @@ def test_disputed_or_followup_decisions_continue_to_block_publication():
     assert result.status == "BLOCKED_PENDING_REVIEW"
     assert result.disputed_or_followup_count == 1
     assert result.pending_count == 0
+
+
+@pytest.mark.parametrize(
+    ("index", "mutate"),
+    [
+        (0, lambda d: d["proposals"][1].update(proposed_replacement="wrong")),
+        (1, lambda d: d["proposals"][0].update(proposed_replacement="Not passage")),
+        (2, lambda d: d["proposals"][1].update(proposed_printed_fragment="three systems")),
+        (3, lambda d: d["entries"][0].update(official_answer_position=2)),
+    ],
+)
+def test_valid_looking_proposal_or_official_key_change_invalidates_revision_pin(index, mutate):
+    package = list(_package())
+    mutate(package[index])
+    result = _audit(package)
+    assert result.status == "BLOCKED_INVALID_INPUT"
+    assert not result.items
+    assert any("artifact revision changed" in error for error in result.errors)
+
+
+def test_old_review_decision_cannot_be_replayed_after_repinning_changed_artifact():
+    package = list(_package())
+    item = _audit(package).items[0]
+    package[4]["decisions"] = [_decision(item)]
+    package[0]["proposals"][1]["proposed_replacement"] = "wrong"
+    package[4]["artifact_git_blob_sha1"]["vocabulary"] = _git_blob_sha1(package[0])
+    result = _audit(package)
+    assert result.status == "BLOCKED_INVALID_INPUT"
+    assert not result.items
+    assert any("stale artifact revision" in error for error in result.errors)
+
+
+def test_git_revision_pin_matches_repository_json_representation():
+    package = _package()
+    for group, artifact in zip(("vocabulary", "cloze", "reading", "key"), package[:4], strict=True):
+        assert _git_blob_sha1(artifact) == package[4]["artifact_git_blob_sha1"][group]

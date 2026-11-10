@@ -2,7 +2,7 @@
 
 This is a *direction and execution order*, not a delivery-date commitment. Mark an item done only when its code, tests, review, and artifacts have been checked. For current code, GitHub `main` is the baseline; test-pass claims require test evidence.
 
-| ID | Workstream | Status as of 2026-11-09 | Exit gate |
+| ID | Workstream | Status as of 2026-11-10 | Exit gate |
 | --- | --- | --- | --- |
 | M0 | Repo/bootstrap, safety rules, source preservation | **Implemented** | Versioned project and documented invariants |
 | M1 | 1396 English paper import | **Implemented on main** | 30 validated questions; page provenance and non-text manifest |
@@ -20,7 +20,8 @@ This is a *direction and execution order*, not a delivery-date commitment. Mark 
 | M4a | 1396 Vocabulary Q1–10 source-backed editorial proposals | **Merged on main; independent approval pending** | Eleven source-linked edit proposals; raw stage unmodified |
 | M4b | 1396 Cloze passage and Q11–15 source editorial review | **Merged on main; independent approval pending** | Seven short correction proposals and one unresolved text-order defect |
 | M4c | 1396 Reading passages 1–3 and Q16–30 editorial review | **Merged on main; independent approval pending** | 36 text proposals, 5 anomalies, 4 source-printed oddities |
-| M4d | 1396 independent-review docket and educational release gate | **In PR; no review decisions recorded** | 94 source-linked tasks, explicit evidence requirements and blocked release |
+| M4d | 1396 independent-review docket and educational release gate | **Merged on main; no review decisions recorded** | 94 source-linked tasks, explicit evidence requirements and blocked release |
+| M4e | Bind human review evidence to exact artifact revisions | **Under implementation in PR** | Git blob pins, invalidation of stale reviewer decisions; first Vocabulary review handoff |
 | M5 | Independent AI answering, explanations, and conflict review | **Not started** | Separate official/AI/final; provenance and error analysis |
 | M6 | Vocabulary/skill enrichment, cloze/reading practice model | **Not started** | Context-aware word frequency/importance and reviewed skill tags |
 | M7 | Android MVP with offline verified dataset | **Not started** | Functional retrieval practice, accessibility, safe local persistence |
@@ -39,8 +40,8 @@ Dependencies may be interleaved: additional exam parsers (M3) are needed before 
 6. Review the first **M4a** 1396 Vocabulary Q1–10 text correction proposals against page 2; accept/reject each through an explicit later review step, without changing raw staging.
 7. Review **M4b Cloze** against printed pages 2–3: seven short proposed edits and the unresolved displaced `to` text-order issue. Do not apply automatic replacements or call this independent verification.
 8. Review **M4c Reading passages 1–3** as a source-linked, read-only editorial proposal set; independently verify anomalous layout/order and preserve printed peculiarities verbatim.
-9. Establish M4d's **94-item independent-review docket** and evidence-bearing decision ledger; every item starts pending, even after source-curation PRs are merged.
-10. A separate independent reviewer should compare the original PDF and key, record dispositions and resolve order defects. Only then plan a versioned educational-content candidate; do not auto-promote final answers.
+9. M4d is merged: the **94-item independent-review docket** is live; all items remain pending. M4e pins source-linked artifact revisions before accepting any independent review decisions.
+10. Hand off the first **11 Vocabulary proposal tasks** (M4e), then a separate independent human reviewer should inspect the remaining Cloze, Reading and key batches, record evidence and resolve text-order defects. Do not auto-promote final answers.
 11. Expand exam/key data to additional years through small data-first review batches.
 
 ## Definition of Done for every parser milestone

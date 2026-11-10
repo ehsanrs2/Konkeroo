@@ -39,6 +39,14 @@ The docket derives IDs from the existing artifacts rather than copying question/
 
 To see every ID, inspect the returned `ReviewDocket.items` programmatically; its IDs and page locators are deterministic.
 
+## Review artifact revision integrity
+
+The ledger pins the **exact Git blob SHA-1** for each of the four curated review JSON artifacts (Vocabulary, Cloze, Reading and initial key). This revision ID identifies the **proposed data**, while `evidence_source_sha256` identifies the **original PDF**. Both are required.
+
+The validator reconstructs the checked-in JSON's UTF-8, two-space indentation, insertion-order serialization and final newline, and checks its Git blob identity. It rejects any unnoticed edit, including changes to plausible replacement text or valid key positions. Every human decision must also name the exact artifact revision inspected via `reviewed_artifact_blob_sha1`. If a source-artifact revision changes, old decisions referencing the old revision are invalid even when their task ID still exists. Require re-review of changed material, never copy approvals automatically.
+
+Start with the [1396 Vocabulary review batch](review_batches/1396-vocabulary.md) containing the 11 source-linked editing tasks on printed PDF page 2.
+
 ## Independent review procedure
 
 1. A **different human reviewer** obtains the original hash-matched PDF(s) and inspects the *printed source* at the referenced page, independently of the assistant's suggested correction.
@@ -46,7 +54,7 @@ To see every ID, inspect the returned `ReviewDocket.items` programmatically; its
 3. For `anomaly` tasks: choose **RESOLVED** only with source-aligned evidence of the correct text/order; otherwise **NEEDS_FOLLOWUP**. A naive local substitution of misplaced `10`/`11`/glyph tokens is not sufficient.
 4. For `printed` tasks: choose **ACKNOWLEDGED** when the unusual word or spelling is genuinely printed, or **DISPUTED** when the observation cannot be confirmed. Do not silently rewrite an oddity as good English.
 5. For `key` tasks: choose **TRANSCRIPTION_CONFIRMED** or **DISPUTED** by **re-reading the original official booklet-C key** and identifying the claimed position. This is a check of faithful transcription, **not** an independent key-blind AI solve or proof that an initial key is final/correct.
-6. For each recorded decision, add one object to `decisions` in `1396-review-ledger.json`, with `task_id`, `disposition`, `reviewer_role: INDEPENDENT_HUMAN`, a nonempty `reviewer_id`, an evidence note, the exact original `evidence_source_sha256`, and 1-based `evidence_pdf_page`.
+6. For each recorded decision, add one object to `decisions` in `1396-review-ledger.json`, with `task_id`, `disposition`, `reviewer_role: INDEPENDENT_HUMAN`, a nonempty `reviewer_id`, an evidence note, the exact original `evidence_source_sha256`, 1-based `evidence_pdf_page`, and `reviewed_artifact_blob_sha1` matching the reviewed source artifact revision.
 7. Use a focused PR containing the ledger update and any newly justified evidence. A reviewer identity/role field is **self-attested metadata** and cannot itself prove independence; require human oversight of the PR.
 8. Re-run all tests and the docket audit. Keep original PDFs, raw staged text, AI answers, and proposed replacements unchanged until an explicit later versioned verified-content step.
 
@@ -60,7 +68,8 @@ To see every ID, inspect the returned `ReviewDocket.items` programmatically; its
   "reviewer_id": "example-independent-reviewer",
   "evidence_note": "EXAMPLE ONLY: checked the printed word on source PDF page 2.",
   "evidence_source_sha256": "69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2",
-  "evidence_pdf_page": 2
+  "evidence_pdf_page": 2,
+  "reviewed_artifact_blob_sha1": "d86e605924af939d03e4605896f6c42f5ec019ab"
 }
 ```
 

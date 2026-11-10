@@ -11,7 +11,7 @@ import json
 from collections import Counter
 from collections.abc import Mapping
 from dataclasses import dataclass
-from hashlib import sha256
+from hashlib import sha1, sha256
 from pathlib import Path
 from typing import Any
 
@@ -40,6 +40,7 @@ class ReviewItem:
     kind: str
     source_sha256: str
     source_pdf_page: int
+    artifact_git_blob_sha1: str
     disposition: str = "PENDING"
 
 
@@ -55,6 +56,16 @@ class ReviewDocket:
 
 def _dict(value: Any) -> Mapping[str, Any]:
     return value if isinstance(value, Mapping) else {}
+
+
+def _git_blob_sha1(data: Mapping[str, Any]) -> str:
+    """Git blob identity for the exact repository JSON formatting.
+
+    Review artifacts use UTF-8, two-space JSON indentation, preserved key
+    insertion order, and a final newline. Any content edit changes the pin.
+    """
+    payload = (json.dumps(data, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+    return sha1(f"blob {len(payload)}".encode() + bytes((0,)) + payload).hexdigest()
 
 
 def _rows(data: Mapping[str, Any], field: str, errors: list[str]) -> list[Mapping[str, Any]]:
@@ -77,6 +88,15 @@ def build_review_docket(
         return ReviewDocket("BLOCKED_INVALID_INPUT", (), 0, 0, 0, ("invalid artifact type",))
     errors: list[str] = []
     items: list[ReviewItem] = []
+    artifacts = {"vocabulary": vocabulary, "cloze": cloze, "reading": reading, "key": key}
+    recorded_pins = ledger.get("artifact_git_blob_sha1")
+    if not isinstance(recorded_pins, Mapping) or set(recorded_pins) != set(artifacts):
+        errors.append("ledger: missing or invalid artifact revision pins")
+        recorded_pins = {}
+    current_pins = {name: _git_blob_sha1(data) for name, data in artifacts.items()}
+    for name, current_pin in current_pins.items():
+        if recorded_pins.get(name) != current_pin:
+            errors.append(f"{name}: curated review artifact revision changed")
 
     configs = (
         ("vocabulary", vocabulary, "EDITORIAL_CORRECTION_PROPOSALS", "AWAITING_INDEPENDENT_REVIEW"),
@@ -116,11 +136,11 @@ def build_review_docket(
         if source_key.get(field) != expected:
             errors.append(f"key: mismatched {field}")
 
-    def append(task_id: str, kind: str, page: Any, source_sha: str = EXAM_SHA) -> None:
+    def append(task_id: str, kind: str, page: Any, group: str, source_sha: str = EXAM_SHA) -> None:
         if type(page) is not int or page <= 0 or page > (1 if kind == "key" else 5):
             errors.append(f"{task_id}: invalid source PDF page")
             return
-        items.append(ReviewItem(task_id, kind, source_sha, page))
+        items.append(ReviewItem(task_id, kind, source_sha, page, current_pins[group]))
 
     for group, data, count in (
         ("vocabulary", vocabulary, 11),
@@ -155,7 +175,7 @@ def build_review_docket(
                 passage = row.get("passage_id")
                 if passage not in ("reading-1", "reading-2", "reading-3"):
                     errors.append(f"{group}/{row_id}: invalid passage ID")
-            append(f"edit:{group}:{row_id}", "edit", page)
+            append(f"edit:{group}:{row_id}", "edit", page, group)
 
     for group, data, count in (("cloze", cloze, 1), ("reading", reading, 5)):
         rows = _rows(data, "unresolved_anomalies", errors)
@@ -171,7 +191,7 @@ def build_review_docket(
             if row.get("proposed_replacement") is not None:
                 errors.append(f"{group}/{row_id}: guessed nonlocal replacement")
             page = row.get("pdf_page", row.get("source_pdf_page"))
-            append(f"anomaly:{group}:{row_id}", "anomaly", page)
+            append(f"anomaly:{group}:{row_id}", "anomaly", page, group)
 
     printed = _rows(reading, "printed_source_anomalies", errors)
     if len(printed) != 4:
@@ -183,7 +203,7 @@ def build_review_docket(
             errors.append("reading: invalid printed oddity")
             continue
         fingerprint = sha256(f"{page}\0{fragment}".encode()).hexdigest()[:16]
-        append(f"printed:reading:{fingerprint}", "printed", page)
+        append(f"printed:reading:{fingerprint}", "printed", page, "reading")
 
     key_entries = _rows(key, "entries", errors)
     numbers = [row.get("question_number") for row in key_entries]
@@ -204,7 +224,7 @@ def build_review_docket(
         expected_page = 2 if number <= 10 else 3 if number <= 19 else 4 if number <= 24 else 5
         if row.get("question_pdf_page") != expected_page:
             errors.append(f"key: unexpected exam question page Q{number}")
-        append(f"key:q{number:02d}", "key", 1, KEY_SHA)
+        append(f"key:q{number:02d}", "key", 1, "key", KEY_SHA)
 
     seen = Counter(item.task_id for item in items)
     if any(count != 1 for count in seen.values()):
@@ -240,6 +260,8 @@ def build_review_docket(
         if not isinstance(disposition, str) or disposition not in DISPOSITIONS[item.kind]:
             errors.append(f"{task_id}: unsupported disposition")
             continue
+        if decision.get("reviewed_artifact_blob_sha1") != item.artifact_git_blob_sha1:
+            errors.append(f"{task_id}: reviewer decision has stale artifact revision")
         if decision.get("reviewer_role") != "INDEPENDENT_HUMAN":
             errors.append(f"{task_id}: independent human attestation required")
         reviewer_id = decision.get("reviewer_id")
@@ -260,6 +282,7 @@ def build_review_docket(
             "evidence_note",
             "evidence_source_sha256",
             "evidence_pdf_page",
+            "reviewed_artifact_blob_sha1",
         }:
             errors.append(f"{task_id}: unexpected or missing decision fields")
         reviewed[task_id] = disposition
@@ -272,6 +295,7 @@ def build_review_docket(
             kind=item.kind,
             source_sha256=item.source_sha256,
             source_pdf_page=item.source_pdf_page,
+            artifact_git_blob_sha1=item.artifact_git_blob_sha1,
             disposition=reviewed.get(item.task_id, "PENDING"),
         )
         for item in items
