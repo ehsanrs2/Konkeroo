@@ -53,12 +53,12 @@ def _decision(item, disposition=None):
     }
 
 
-def test_merged_review_package_derives_all_94_pending_tasks():
+def test_merged_review_package_derives_11_reviewed_and_83_pending_tasks():
     result = audit_review_directory(REVIEW_DIR)
     assert result.status == "BLOCKED_PENDING_REVIEW"
     assert not result.errors
-    assert result.reviewed_count == 0
-    assert result.pending_count == 94
+    assert result.reviewed_count == 11
+    assert result.pending_count == 83
     assert result.disputed_or_followup_count == 0
     assert len(result.items) == 94
     assert Counter(item.kind for item in result.items) == {
@@ -68,7 +68,12 @@ def test_merged_review_package_derives_all_94_pending_tasks():
         "key": 30,
     }
     assert len({item.task_id for item in result.items}) == 94
-    assert all(item.disposition == "PENDING" for item in result.items)
+    assert sum(item.disposition == "ACCEPTED" for item in result.items) == 11
+    assert all(
+        item.disposition == "PENDING"
+        for item in result.items
+        if not item.task_id.startswith("edit:vocabulary:")
+    )
     assert all(len(item.artifact_git_blob_sha1) == 40 for item in result.items)
     assert all(item.source_sha256 == KEY_SHA for item in result.items if item.kind == "key")
 
@@ -215,3 +220,25 @@ def test_git_revision_pin_matches_repository_json_representation():
     package = _package()
     for group, artifact in zip(("vocabulary", "cloze", "reading", "key"), package[:4], strict=True):
         assert _git_blob_sha1(artifact) == package[4]["artifact_git_blob_sha1"][group]
+
+
+def test_recorded_human_review_only_covers_11_original_vocabulary_proposals():
+    package = _package()
+    vocabulary, _, _, _, ledger = package
+    decisions = ledger["decisions"]
+    expected_task_ids = [f"edit:vocabulary:{p['id']}" for p in vocabulary["proposals"]]
+    assert [decision["task_id"] for decision in decisions] == expected_task_ids
+    assert len(decisions) == 11
+    for decision in decisions:
+        assert decision["disposition"] == "ACCEPTED"
+        assert decision["reviewer_role"] == "INDEPENDENT_HUMAN"
+        assert decision["reviewer_id"] == "ehsanrs2"
+        assert decision["evidence_pdf_page"] == 2
+        assert decision["evidence_source_sha256"] == ledger["exam_source_sha256"]
+        assert (
+            decision["reviewed_artifact_blob_sha1"]
+            == ledger["artifact_git_blob_sha1"]["vocabulary"]
+        )
+        assert "Human reviewer report" in decision["evidence_note"]
+    assert ledger["publication_status"] == "BLOCKED"
+    assert ledger["independently_verified"] is False

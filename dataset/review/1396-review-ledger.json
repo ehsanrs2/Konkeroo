@@ -6,7 +6,118 @@
   "official_key_source_sha256": "5d421dcddc780120b13a08753fd2559e7ec02a60200c7c88f4211d70429cba61",
   "independently_verified": false,
   "publication_status": "BLOCKED",
-  "decisions": [],
+  "decisions": [
+    {
+      "task_id": "edit:vocabulary:q01-number",
+      "disposition": "ACCEPTED",
+      "reviewer_role": "INDEPENDENT_HUMAN",
+      "reviewer_id": "ehsanrs2",
+      "evidence_note": "Human reviewer report for printed 96.pdf, PDF page 2, q-01, number_marker: \"1-\" (PDF text layer: \"I·\"; proposed reading: \"1-\").",
+      "evidence_source_sha256": "69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2",
+      "evidence_pdf_page": 2,
+      "reviewed_artifact_blob_sha1": "d86e605924af939d03e4605896f6c42f5ec019ab"
+    },
+    {
+      "task_id": "edit:vocabulary:q01-might",
+      "disposition": "ACCEPTED",
+      "reviewer_role": "INDEPENDENT_HUMAN",
+      "reviewer_id": "ehsanrs2",
+      "evidence_note": "Human reviewer report for printed 96.pdf, PDF page 2, q-01, stem: \"might\" (PDF text layer: \"mighl\"; proposed reading: \"might\").",
+      "evidence_source_sha256": "69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2",
+      "evidence_pdf_page": 2,
+      "reviewed_artifact_blob_sha1": "d86e605924af939d03e4605896f6c42f5ec019ab"
+    },
+    {
+      "task_id": "edit:vocabulary:q01-about",
+      "disposition": "ACCEPTED",
+      "reviewer_role": "INDEPENDENT_HUMAN",
+      "reviewer_id": "ehsanrs2",
+      "evidence_note": "Human reviewer report for printed 96.pdf, PDF page 2, q-01, stem: \"about\" (PDF text layer: \"Rbour\"; proposed reading: \"about\").",
+      "evidence_source_sha256": "69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2",
+      "evidence_pdf_page": 2,
+      "reviewed_artifact_blob_sha1": "d86e605924af939d03e4605896f6c42f5ec019ab"
+    },
+    {
+      "task_id": "edit:vocabulary:q01-punctuation",
+      "disposition": "ACCEPTED",
+      "reviewer_role": "INDEPENDENT_HUMAN",
+      "reviewer_id": "ehsanrs2",
+      "evidence_note": "Human reviewer report for printed 96.pdf, PDF page 2, q-01, stem: \"disease, so درسته و وریگول صحیح است\" (PDF text layer: \"disease. so\"; proposed reading: \"disease, so\").",
+      "evidence_source_sha256": "69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2",
+      "evidence_pdf_page": 2,
+      "reviewed_artifact_blob_sha1": "d86e605924af939d03e4605896f6c42f5ec019ab"
+    },
+    {
+      "task_id": "edit:vocabulary:q01-out",
+      "disposition": "ACCEPTED",
+      "reviewer_role": "INDEPENDENT_HUMAN",
+      "reviewer_id": "ehsanrs2",
+      "evidence_note": "Human reviewer report for printed 96.pdf, PDF page 2, q-01, stem: \"find out\" (PDF text layer: \"find our\"; proposed reading: \"find out\").",
+      "evidence_source_sha256": "69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2",
+      "evidence_pdf_page": 2,
+      "reviewed_artifact_blob_sha1": "d86e605924af939d03e4605896f6c42f5ec019ab"
+    },
+    {
+      "task_id": "edit:vocabulary:q03-to",
+      "disposition": "ACCEPTED",
+      "reviewer_role": "INDEPENDENT_HUMAN",
+      "reviewer_id": "ehsanrs2",
+      "evidence_note": "Human reviewer report for printed 96.pdf, PDF page 2, q-03, stem: \"to settle\" (PDF text layer: \"ro settle\"; proposed reading: \"to settle\").",
+      "evidence_source_sha256": "69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2",
+      "evidence_pdf_page": 2,
+      "reviewed_artifact_blob_sha1": "d86e605924af939d03e4605896f6c42f5ec019ab"
+    },
+    {
+      "task_id": "edit:vocabulary:q04-continues",
+      "disposition": "ACCEPTED",
+      "reviewer_role": "INDEPENDENT_HUMAN",
+      "reviewer_id": "ehsanrs2",
+      "evidence_note": "Human reviewer report for printed 96.pdf, PDF page 2, q-04, stem: \"continues\" (PDF text layer: \"contiuues\"; proposed reading: \"continues\").",
+      "evidence_source_sha256": "69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2",
+      "evidence_pdf_page": 2,
+      "reviewed_artifact_blob_sha1": "d86e605924af939d03e4605896f6c42f5ec019ab"
+    },
+    {
+      "task_id": "edit:vocabulary:q05-not",
+      "disposition": "ACCEPTED",
+      "reviewer_role": "INDEPENDENT_HUMAN",
+      "reviewer_id": "ehsanrs2",
+      "evidence_note": "Human reviewer report for printed 96.pdf, PDF page 2, q-05, stem: \"did not\" (PDF text layer: \"did nol\"; proposed reading: \"did not\").",
+      "evidence_source_sha256": "69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2",
+      "evidence_pdf_page": 2,
+      "reviewed_artifact_blob_sha1": "d86e605924af939d03e4605896f6c42f5ec019ab"
+    },
+    {
+      "task_id": "edit:vocabulary:q05-to",
+      "disposition": "ACCEPTED",
+      "reviewer_role": "INDEPENDENT_HUMAN",
+      "reviewer_id": "ehsanrs2",
+      "evidence_note": "Human reviewer report for printed 96.pdf, PDF page 2, q-05, stem: \"try to control\" (PDF text layer: \"try 10 control\"; proposed reading: \"try to control\").",
+      "evidence_source_sha256": "69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2",
+      "evidence_pdf_page": 2,
+      "reviewed_artifact_blob_sha1": "d86e605924af939d03e4605896f6c42f5ec019ab"
+    },
+    {
+      "task_id": "edit:vocabulary:q09-choice-one",
+      "disposition": "ACCEPTED",
+      "reviewer_role": "INDEPENDENT_HUMAN",
+      "reviewer_id": "ehsanrs2",
+      "evidence_note": "Human reviewer report for printed 96.pdf, PDF page 2, q-09, choice_marker:1: \"1)\" (PDF text layer: \"!)\"; proposed reading: \"1)\").",
+      "evidence_source_sha256": "69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2",
+      "evidence_pdf_page": 2,
+      "reviewed_artifact_blob_sha1": "d86e605924af939d03e4605896f6c42f5ec019ab"
+    },
+    {
+      "task_id": "edit:vocabulary:q10-number",
+      "disposition": "ACCEPTED",
+      "reviewer_role": "INDEPENDENT_HUMAN",
+      "reviewer_id": "ehsanrs2",
+      "evidence_note": "Human reviewer report for printed 96.pdf, PDF page 2, q-10, number_marker: \"10-\" (PDF text layer: \"10..\"; proposed reading: \"10-\").",
+      "evidence_source_sha256": "69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2",
+      "evidence_pdf_page": 2,
+      "reviewed_artifact_blob_sha1": "d86e605924af939d03e4605896f6c42f5ec019ab"
+    }
+  ],
   "artifact_git_blob_sha1": {
     "vocabulary": "d86e605924af939d03e4605896f6c42f5ec019ab",
     "cloze": "5530e4484dbc274ee23fa37f5b24d34c25f8301c",
