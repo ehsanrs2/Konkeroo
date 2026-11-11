@@ -53,12 +53,12 @@ def _decision(item, disposition=None):
     }
 
 
-def test_merged_review_package_derives_11_reviewed_and_83_pending_tasks():
+def test_merged_review_package_derives_18_reviewed_and_76_pending_tasks():
     result = audit_review_directory(REVIEW_DIR)
     assert result.status == "BLOCKED_PENDING_REVIEW"
     assert not result.errors
-    assert result.reviewed_count == 11
-    assert result.pending_count == 83
+    assert result.reviewed_count == 18
+    assert result.pending_count == 76
     assert result.disputed_or_followup_count == 0
     assert len(result.items) == 94
     assert Counter(item.kind for item in result.items) == {
@@ -68,11 +68,11 @@ def test_merged_review_package_derives_11_reviewed_and_83_pending_tasks():
         "key": 30,
     }
     assert len({item.task_id for item in result.items}) == 94
-    assert sum(item.disposition == "ACCEPTED" for item in result.items) == 11
+    assert sum(item.disposition == "ACCEPTED" for item in result.items) == 18
     assert all(
         item.disposition == "PENDING"
         for item in result.items
-        if not item.task_id.startswith("edit:vocabulary:")
+        if not item.task_id.startswith(("edit:vocabulary:", "edit:cloze:"))
     )
     assert all(len(item.artifact_git_blob_sha1) == 40 for item in result.items)
     assert all(item.source_sha256 == KEY_SHA for item in result.items if item.kind == "key")
@@ -225,7 +225,11 @@ def test_git_revision_pin_matches_repository_json_representation():
 def test_recorded_human_review_only_covers_11_original_vocabulary_proposals():
     package = _package()
     vocabulary, _, _, _, ledger = package
-    decisions = ledger["decisions"]
+    decisions = [
+        decision
+        for decision in ledger["decisions"]
+        if decision["task_id"].startswith("edit:vocabulary:")
+    ]
     expected_task_ids = [f"edit:vocabulary:{p['id']}" for p in vocabulary["proposals"]]
     assert [decision["task_id"] for decision in decisions] == expected_task_ids
     assert len(decisions) == 11
@@ -242,3 +246,48 @@ def test_recorded_human_review_only_covers_11_original_vocabulary_proposals():
         assert "Human reviewer report" in decision["evidence_note"]
     assert ledger["publication_status"] == "BLOCKED"
     assert ledger["independently_verified"] is False
+
+
+def test_seven_owner_confirmed_cloze_edits_preserve_pending_nonlocal_anomaly():
+    package = _package()
+    _, cloze, _, _, ledger = package
+    decisions = [
+        decision
+        for decision in ledger["decisions"]
+        if decision["task_id"].startswith("edit:cloze:")
+    ]
+    assert len(decisions) == 7
+    assert [d["task_id"] for d in decisions] == [
+        f"edit:cloze:{proposal['id']}" for proposal in cloze["proposals"]
+    ]
+    for proposal, decision in zip(cloze["proposals"], decisions, strict=True):
+        assert decision["disposition"] == "ACCEPTED"
+        assert decision["reviewer_role"] == "INDEPENDENT_HUMAN"
+        assert decision["reviewer_id"] == "ehsanrs2"
+        assert decision["evidence_pdf_page"] == proposal["pdf_page"]
+        assert decision["evidence_source_sha256"] == ledger["exam_source_sha256"]
+        assert decision["reviewed_artifact_blob_sha1"] == ledger["artifact_git_blob_sha1"]["cloze"]
+        assert "group-level human attestation" in decision["evidence_note"]
+        assert "No separate per-item quote" in decision["evidence_note"]
+
+    anomaly = "anomaly:cloze:cloze-ability-to-remember-displaced-token"
+    assert not any(d["task_id"] == anomaly for d in ledger["decisions"])
+    docket = _audit(package)
+    assert not docket.errors
+    assert next(item for item in docket.items if item.task_id == anomaly).disposition == "PENDING"
+    assert docket.reviewed_count == 18
+    assert docket.pending_count == 76
+    assert ledger["publication_status"] == "BLOCKED"
+    assert ledger["independently_verified"] is False
+
+
+def test_revised_cloze_evidence_cannot_validate_against_wrong_artifact_revision():
+    package = list(_package())
+    decision = next(
+        item for item in package[4]["decisions"] if item["task_id"].startswith("edit:cloze:")
+    )
+    decision["reviewed_artifact_blob_sha1"] = "0" * 40
+    docket = _audit(package)
+    assert docket.status == "BLOCKED_INVALID_INPUT"
+    assert docket.items == ()
+    assert any("stale artifact revision" in error for error in docket.errors)
