@@ -54,8 +54,7 @@ def preview_1396_cloze_to_remember(staged: StagedDataset) -> ClozeTokenPreview:
         if body.corrected_text is not None or body.normalized_text is not None:
             errors.append("passage already transformed")
         if not any(
-            item.page_number == 2 and item.source_filename == "96.pdf"
-            for item in body.provenance
+            item.page_number == 2 and item.source_filename == "96.pdf" for item in body.provenance
         ):
             errors.append("missing page-2 source provenance")
         raw = body.raw_text

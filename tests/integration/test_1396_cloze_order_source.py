@@ -46,9 +46,7 @@ def test_original_pdf_baseline_order_and_read_only_candidate():
         page = pdf.pages[1]
         words = page.extract_words(x_tolerance=2, y_tolerance=2, use_text_flow=False)
         glyph = next(
-            w
-            for w in words
-            if w["text"] == "10" and 700 < w["top"] < 725 and w["x0"] < 95
+            w for w in words if w["text"] == "10" and 700 < w["top"] < 725 and w["x0"] < 95
         )
         remember = next(w for w in words if w["text"] == "remember")
         approaches = next(w for w in words if w["text"] == "approaches.")
