@@ -10,6 +10,7 @@ import re
 from dataclasses import dataclass
 
 from english_exam.cloze_full_preview import FullClozePreview
+from english_exam.cloze_order_review import ANOMALY_ID
 
 # The original PDF renders five gaps; its text layer encodes the leaders using
 # mixed dot-and-dash glyphs. Restrict display normalization to exact identities
@@ -44,7 +45,7 @@ def format_1396_cloze_blanks_for_review(preview: FullClozePreview) -> ClozeBlank
         preview.status != "PENDING_FULL_FIELD_HUMAN_REVIEW"
         or preview.proposed_full_text is None
         or preview.errors
-        or not preview.unresolved_anomaly
+        or preview.technical_candidate_anomaly_id != ANOMALY_ID
     ):
         return ClozeBlankDisplay("BLOCKED", None, (), ("unreviewed or invalid full preview",))
 

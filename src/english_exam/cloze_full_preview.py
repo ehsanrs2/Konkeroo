@@ -1,8 +1,8 @@
 """Read-only unified Cloze passage preview for 1396 owner-reviewed edits.
 
-Joins four independently attested *passage-body* edits to the still-pending
-source-aligned '10' -> 'to' technical candidate. Does not promote answers,
-change raw text, or record the anomaly as resolved.
+Joins four owner-attested *passage-body* edits to a source-aligned '10' -> 'to'
+preview, recognizing the owner's separately recorded anomaly disposition.
+Never promotes answers, changes raw text, or publishes verified corrections.
 """
 
 from __future__ import annotations
@@ -48,9 +48,9 @@ def preview_1396_reviewed_cloze_passage(
 ) -> FullClozePreview:
     """Produce one full-field preview without editing stage/review/ledger inputs.
 
-    A source-linked, human-attested short edit is not equivalent to independent
-    inspection of the *whole* corrected Cloze passage. The to/10 candidate is
-    also deliberately NOT an accepted ledger decision.
+    The owner can resolve a specific reviewed anomaly in the ledger, while
+    this function still returns only a candidate corrected passage; it never
+    publishes or rewrites a staged field.
     """
     errors: list[str] = []
     candidate = preview_1396_cloze_to_remember(staged)
@@ -106,8 +106,22 @@ def preview_1396_reviewed_cloze_passage(
     if any(count > 1 for count in Counter(all_ids).values()):
         errors.append("duplicate ledger task decisions")
     decisions_by_id = {d.get("task_id"): d for d in decisions}
-    if f"anomaly:cloze:{ANOMALY_ID}" in decisions_by_id:
-        errors.append("displaced-token anomaly is not allowed to be pre-resolved")
+    anomaly = decisions_by_id.get(f"anomaly:cloze:{ANOMALY_ID}")
+    anomaly_resolved = False
+    if anomaly is not None:
+        if not isinstance(anomaly, Mapping) or (
+            anomaly.get("disposition") not in ("RESOLVED", "NEEDS_FOLLOWUP")
+            or anomaly.get("reviewer_role") != "INDEPENDENT_HUMAN"
+            or anomaly.get("reviewer_id") != "ehsanrs2"
+            or anomaly.get("evidence_pdf_page") != 2
+            or anomaly.get("evidence_source_sha256") != EXAM_SHA
+            or anomaly.get("reviewed_artifact_blob_sha1") != CLOZE_BLOB_SHA1
+            or not isinstance(anomaly.get("evidence_note"), str)
+            or len(anomaly["evidence_note"].strip()) < 12
+        ):
+            errors.append("invalid or unsupported anomaly reviewer disposition")
+        else:
+            anomaly_resolved = anomaly["disposition"] == "RESOLVED"
 
     for row in rows:
         task_id = f"edit:cloze:{row['id']}"
@@ -149,6 +163,6 @@ def preview_1396_reviewed_cloze_passage(
         proposed_full_text=result,
         accepted_passage_edit_ids=tuple(f"edit:cloze:{row['id']}" for row in rows),
         technical_candidate_anomaly_id=ANOMALY_ID,
-        unresolved_anomaly=True,
+        unresolved_anomaly=not anomaly_resolved,
         errors=(),
     )

@@ -7,10 +7,10 @@
 | Source-linked file | Content and status |
 | --- | --- |
 | `dataset/review/1396-vocabulary-correction-proposals.json` | 11 proposals; owner-reported human review decisions recorded in merged PR #19 |
-| `dataset/review/1396-cloze-text-review.json` | 7 proposals + 1 unresolved token-order anomaly |
+| `dataset/review/1396-cloze-text-review.json` | 7 original proposals + 1 historically unresolved anomaly; the later human resolution is recorded separately in the ledger |
 | `dataset/review/1396-reading-text-review.json` | 36 proposals + 5 unresolved anomalies + 4 source-printed oddities to acknowledge |
 | `dataset/review/1396-english-official-key.json` | 30 provisional official-key claims, booklet **C**, edition **INITIAL** |
-| `dataset/review/1396-review-ledger.json` | **11 Vocabulary decisions recorded; 83 pending**; publication still blocked |
+| `dataset/review/1396-review-ledger.json` | **19 recorded decisions (11 Vocabulary + 8 Cloze); 75 pending** after resolution PR merges; publication blocked |
 
 Exam `source/96.pdf` SHA-256: `69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2`.
 
@@ -26,7 +26,7 @@ Run from the repository root, after installing the locked project dependencies:
 uv run python -m english_exam.review_docket --review-dir dataset/review
 ```
 
-The current expected result is `BLOCKED_PENDING_REVIEW`, **83 pending and 11 reviewed** (all 94 tasks remain in the docket). The command returns exit status 0 for a *validly structured but pending* dossier; it returns nonzero for invalid or unreadable inputs. Exit status 0 does **not** mean content is verified or publishable.
+The current expected result is `BLOCKED_PENDING_REVIEW`, **75 pending and 19 reviewed** (all 94 tasks remain in the docket). The command returns exit status 0 for a *validly structured but pending* dossier; it returns nonzero for invalid or unreadable inputs. Exit status 0 does **not** mean content is verified or publishable.
 
 The docket derives IDs from the existing artifacts rather than copying question/answer sequences. Example task IDs:
 
@@ -45,7 +45,7 @@ The ledger pins the **exact Git blob SHA-1** for each of the four curated review
 
 The validator reconstructs the checked-in JSON's UTF-8, two-space indentation, insertion-order serialization and final newline, and checks its Git blob identity. It rejects any unnoticed edit, including changes to plausible replacement text or valid key positions. Every human decision must also name the exact artifact revision inspected via `reviewed_artifact_blob_sha1`. If a source-artifact revision changes, old decisions referencing the old revision are invalid even when their task ID still exists. Require re-review of changed material, never copy approvals automatically.
 
-The [1396 Vocabulary review batch](review_batches/1396-vocabulary.md) has 11 owner-reported decisions recorded in PR #19. The next review is [1396 Cloze on printed PDF pages 2–3](review_batches/1396-cloze.md) ([Issue #20](https://github.com/ehsanrs2/Konkeroo/issues/20)), with seven edits and one unresolved ordering anomaly.
+The [1396 Vocabulary review batch](review_batches/1396-vocabulary.md) has 11 owner-reported decisions recorded in PR #19. The next review is [1396 Cloze on printed PDF pages 2–3](review_batches/1396-cloze.md) ([Issue #20](https://github.com/ehsanrs2/Konkeroo/issues/20)), with seven accepted edits and one owner-resolved glyph-order anomaly; the original source-linked proposal remains historically unresolved and pinned.
 
 ## Required context in all future human-review handoffs
 

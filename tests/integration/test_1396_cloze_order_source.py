@@ -60,7 +60,7 @@ def test_original_pdf_baseline_order_and_read_only_candidate():
     assert sha256(SOURCE.read_bytes()).hexdigest() == EXAM_SHA
 
 
-def test_real_pdf_unified_preview_preserves_stage_and_pending_anomaly():
+def test_real_pdf_unified_preview_preserves_stage_and_resolved_anomaly():
     if not SOURCE.is_file():
         pytest.skip("original source/96.pdf not present in source-independent CI")
     assert sha256(SOURCE.read_bytes()).hexdigest() == EXAM_SHA
@@ -71,7 +71,7 @@ def test_real_pdf_unified_preview_preserves_stage_and_pending_anomaly():
     raw = staged.exam.sections[1].passages[0].body.raw_text
     report = preview_1396_reviewed_cloze_passage(staged, review, ledger)
     assert report.status == "PENDING_FULL_FIELD_HUMAN_REVIEW"
-    assert report.unresolved_anomaly
+    assert not report.unresolved_anomaly
     assert len(report.accepted_passage_edit_ids) == 4
     assert report.proposed_full_text is not None
     assert "Imm an" not in report.proposed_full_text
@@ -96,8 +96,9 @@ def test_real_pdf_unified_preview_preserves_stage_and_pending_anomaly():
     assert staged.exam.sections[1].passages[0].body.raw_text == raw
     assert staged.exam.sections[1].passages[0].body.corrected_text is None
     assert ledger["publication_status"] == "BLOCKED"
-    assert not any(
+    assert any(
         d["task_id"] == "anomaly:cloze:cloze-ability-to-remember-displaced-token"
+        and d["disposition"] == "RESOLVED"
         for d in ledger["decisions"]
     )
     assert sha256(SOURCE.read_bytes()).hexdigest() == EXAM_SHA
