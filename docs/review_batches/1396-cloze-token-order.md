@@ -46,6 +46,44 @@ The newline in this preview represents the **physical line break in the passage*
 
 Tests include source-independent negative cases (missing/duplicated/out-of-order tokens, wrong SHA, wrong provenance, already transformed text) and a source-conditional check of the real PDF, the **actual `extract_staged_1396` pipeline**, and glyph geometry. In CI, that integration check **skips** when LFS source media is absent; a human/maintainer must run it locally against the hashed original source before accepting the repair.
 
+## Why the first full-field output still contains OCR-like artifacts
+
+The owner ran the original single-token preview and returned `PROPOSED_PENDING_TECHNICAL_REVIEW` with the expected `to remember` in place. The **same output still includes** `Imm an`, `en the`, `lo study`, and `{14)`, because that preview deliberately fixes **only** the eighth to/10 problem. Those four short corrections were separately attested by the owner in merged PR #23; Q13 option 4, Q15 numbering and the section heading are **outside** this passage-body field.
+
+A new read-only `preview_1396_reviewed_cloze_passage` composes the four **accepted passage-body** edits with the **still-pending** `to/10` technical candidate. It fails closed unless source SHA, the pinned curated review JSON, the actual owner-attested ledger decisions, unique raw fragments and the original staged passage are all consistent. It returns `PENDING_FULL_FIELD_HUMAN_REVIEW`; no raw text, `corrected_text`, reviewer ledger or answer key is changed.
+
+From the repository root with original PDF present:
+
+```bash
+uv run --dev python - <<'PY'
+import json
+from pathlib import Path
+
+from english_exam.cloze_full_preview import preview_1396_reviewed_cloze_passage
+from english_exam.pipeline import extract_staged_1396
+
+directory = Path("dataset/review")
+review = json.loads((directory / "1396-cloze-text-review.json").read_text(encoding="utf-8"))
+ledger = json.loads((directory / "1396-review-ledger.json").read_text(encoding="utf-8"))
+staged = extract_staged_1396(Path("source/96.pdf"))
+result = preview_1396_reviewed_cloze_passage(staged, review, ledger)
+print("Status:", result.status)
+print("Errors:", result.errors)
+assert result.proposed_full_text is not None, result.errors
+print(result.proposed_full_text)
+PY
+```
+
+Compare this entire *candidate* passage against page 2 of the original. Placeholder-like blank markings (e.g. `-·-··`) are **not** silently normalized by this procedure; blanks and layout should be separately checked in a later full-exam release review. The `cloze-heading-passage`, `cloze-13-choice4`, and `cloze-15-marker` approvals remain in the ledger but are **not** part of this passage-body-only output.
+
+Run the source-present check:
+
+```bash
+uv run --dev python -m pytest -q tests/integration/test_1396_cloze_order_source.py
+```
+
+The integration test verifies both the one-token candidate and the combined read-only preview against actual source. A passing test establishes *mechanical consistency*, **not** independent approval of the whole corrected passage or a right to publish the source.
+
 ## Still required before closing Issue #20
 
 1. Run the actual source-present integration check and preserve its logs, including the unchanged original PDF SHA.

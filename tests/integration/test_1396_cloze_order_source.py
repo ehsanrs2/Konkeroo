@@ -4,12 +4,14 @@ The test is source-conditional and skips in GitHub CI without LFS media.
 It does not approve or publish the suggested corrected text.
 """
 
+import json
 from hashlib import sha256
 from pathlib import Path
 
 import pdfplumber
 import pytest
 
+from english_exam.cloze_full_preview import preview_1396_reviewed_cloze_passage
 from english_exam.cloze_order_review import (
     EXAM_SHA,
     RAW_ANCHOR,
@@ -54,4 +56,35 @@ def test_original_pdf_baseline_order_and_read_only_candidate():
         assert abs(glyph["bottom"] - remember["bottom"]) < 3
         assert abs(glyph["bottom"] - approaches["bottom"]) > 10
         assert "\n10\napproaches." in page.extract_text(x_tolerance=2, y_tolerance=2)
+    assert sha256(SOURCE.read_bytes()).hexdigest() == EXAM_SHA
+
+
+def test_real_pdf_unified_preview_preserves_stage_and_pending_anomaly():
+    if not SOURCE.is_file():
+        pytest.skip("original source/96.pdf not present in source-independent CI")
+    assert sha256(SOURCE.read_bytes()).hexdigest() == EXAM_SHA
+    directory = SOURCE.parent.parent / "dataset" / "review"
+    review = json.loads((directory / "1396-cloze-text-review.json").read_text(encoding="utf-8"))
+    ledger = json.loads((directory / "1396-review-ledger.json").read_text(encoding="utf-8"))
+    staged = extract_staged_1396(SOURCE)
+    raw = staged.exam.sections[1].passages[0].body.raw_text
+    report = preview_1396_reviewed_cloze_passage(staged, review, ledger)
+    assert report.status == "PENDING_FULL_FIELD_HUMAN_REVIEW"
+    assert report.unresolved_anomaly
+    assert len(report.accepted_passage_edit_ids) == 4
+    assert report.proposed_full_text is not None
+    assert "Imm an" not in report.proposed_full_text
+    assert "en the" not in report.proposed_full_text
+    assert "lo study" not in report.proposed_full_text
+    assert "{14)" not in report.proposed_full_text
+    assert "10 remember" not in report.proposed_full_text
+    assert report.proposed_full_text.count("to remember verbal") == 1
+    assert report.proposed_full_text.count("approaches.") == 1
+    assert staged.exam.sections[1].passages[0].body.raw_text == raw
+    assert staged.exam.sections[1].passages[0].body.corrected_text is None
+    assert ledger["publication_status"] == "BLOCKED"
+    assert not any(
+        d["task_id"] == "anomaly:cloze:cloze-ability-to-remember-displaced-token"
+        for d in ledger["decisions"]
+    )
     assert sha256(SOURCE.read_bytes()).hexdigest() == EXAM_SHA
