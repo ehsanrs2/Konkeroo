@@ -266,10 +266,7 @@ def test_seven_owner_confirmed_cloze_edits_preserve_pending_nonlocal_anomaly():
         assert decision["reviewer_id"] == "ehsanrs2"
         assert decision["evidence_pdf_page"] == proposal["pdf_page"]
         assert decision["evidence_source_sha256"] == ledger["exam_source_sha256"]
-        assert (
-            decision["reviewed_artifact_blob_sha1"]
-            == ledger["artifact_git_blob_sha1"]["cloze"]
-        )
+        assert decision["reviewed_artifact_blob_sha1"] == ledger["artifact_git_blob_sha1"]["cloze"]
         assert "group-level human attestation" in decision["evidence_note"]
         assert "No separate per-item quote" in decision["evidence_note"]
 
