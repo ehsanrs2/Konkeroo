@@ -11,6 +11,7 @@ from pathlib import Path
 import pdfplumber
 import pytest
 
+from english_exam.cloze_blank_display import format_1396_cloze_blanks_for_review
 from english_exam.cloze_full_preview import preview_1396_reviewed_cloze_passage
 from english_exam.cloze_order_review import (
     EXAM_SHA,
@@ -79,6 +80,18 @@ def test_real_pdf_unified_preview_preserves_stage_and_pending_anomaly():
     assert "{14)" not in report.proposed_full_text
     assert "10 remember" not in report.proposed_full_text
     assert report.proposed_full_text.count("to remember verbal") == 1
+    display = format_1396_cloze_blanks_for_review(report)
+    assert display.status == "PENDING_BLANK_DISPLAY_REVIEW"
+    assert display.errors == ()
+    assert display.blank_numbers == (11, 12, 13, 14, 15)
+    assert display.text is not None
+    assert display.text.count("____") == 5
+    assert "(11) ____ a book" in display.text
+    assert "(12) ____: Plato" in display.text
+    assert "(13) ____ on the impression" in display.text
+    assert "(14) ____ systematic" in display.text
+    assert "(15) ____ more recent" in display.text
+    assert "to remember verbal and visual materials" in display.text
     assert report.proposed_full_text.count("approaches.") == 1
     assert staged.exam.sections[1].passages[0].body.raw_text == raw
     assert staged.exam.sections[1].passages[0].body.corrected_text is None
