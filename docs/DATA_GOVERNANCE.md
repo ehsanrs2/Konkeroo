@@ -28,6 +28,12 @@ The Git LFS state is different from the original local-only intention. Track it 
 - **Open action:** assess whether publicly tracked Git LFS exam PDFs/JPGs should remain accessible. If not, removing them from working tree alone is insufficient: Git history, cached copies, LFS storage and external forks need a coordinated response.
 - Do not disclose private learner progress, raw telemetry or credentials; Android analytics/consent/retention policy is to be decided before any collection.
 
+## Assistant-only provisional development lane (owner opted out of routine human review)
+
+From 2026-11-11, the owner opted out of mandatory **per-item independent human checks for provisional correction development**. See [assistant-only provisional workflow](ASSISTANT_ONLY_PROVISIONAL.md) for exactly how source-bound assistant proposals, deterministic validation and unresolved anomalies are handled.
+
+This changes **who must check each editing task before development can continue**; it does **not** silently grant source correctness, independent verification, the right to distribute copyrighted source material or the authority to publish a verified dataset. The 19 genuine prior human decisions remain in the review ledger; its 75 unreviewed tasks are not retroactively marked as approved. The public/source-rights and final-answer-key release gates below remain intact.
+
 ## Regeneration and release checklist
 
 For a candidate dataset release (future):

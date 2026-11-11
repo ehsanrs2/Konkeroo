@@ -1,6 +1,6 @@
-# Independent review and release gate — 1396 English
+# Source review provenance and release gate — 1396 English
 
-**Status:** operational review protocol proposed in M4d. This is a human-review work queue, **not** an approval, a verified dataset, or a general PDF extraction pipeline.
+**Current workflow (owner decision, 2026-11-11):** mandatory per-item human checking is removed **for provisional development**. Follow [the assistant-only provisional correction protocol](ASSISTANT_ONLY_PROVISIONAL.md). The independent-review docket and the 19 actual historical human decisions remain intact as an optional audit/release gate; **75 tasks remain pending independent review** and publication remains **BLOCKED**. This document must not be interpreted as proof that assistant corrections have been independently validated.
 
 ## Inputs
 
@@ -45,11 +45,11 @@ The ledger pins the **exact Git blob SHA-1** for each of the four curated review
 
 The validator reconstructs the checked-in JSON's UTF-8, two-space indentation, insertion-order serialization and final newline, and checks its Git blob identity. It rejects any unnoticed edit, including changes to plausible replacement text or valid key positions. Every human decision must also name the exact artifact revision inspected via `reviewed_artifact_blob_sha1`. If a source-artifact revision changes, old decisions referencing the old revision are invalid even when their task ID still exists. Require re-review of changed material, never copy approvals automatically.
 
-The [1396 Vocabulary review batch](review_batches/1396-vocabulary.md) has 11 owner-reported decisions in PR #19; the [Cloze human review batch](review_batches/1396-cloze.md) has 8 decisions after merged PR #27 (including the owner-resolved to/10 anomaly; [Issue #20](https://github.com/ehsanrs2/Konkeroo/issues/20) closed). The next review is [1396 Reading Passage 1](review_batches/1396-reading-1.md) ([Issue #28](https://github.com/ehsanrs2/Konkeroo/issues/28)): 12 edits, one Q19 ordering anomaly, and one peculiar printed phrase on PDF page 3. Context excerpts are navigation aids, not approvals. The original curated Cloze proposal remains historically unresolved and revision-pinned.
+The [1396 Vocabulary review batch](review_batches/1396-vocabulary.md) has 11 owner-reported decisions in PR #19; the [Cloze human review batch](review_batches/1396-cloze.md) has 8 decisions after merged PR #27 (including the owner-resolved to/10 anomaly; [Issue #20](https://github.com/ehsanrs2/Konkeroo/issues/20) closed). Next assistant-only provisional work is [1396 Reading Passage 1](review_batches/1396-reading-1.md) ([Issue #28](https://github.com/ehsanrs2/Konkeroo/issues/28)): 12 proposed edits, one Q19 ordering anomaly, and one peculiar printed phrase on PDF page 3. The source-context handoff is retained as a locator; requesting 14 individual human decisions is **not required**. Source snippets and automated checks are not independent human approval. The original curated Cloze proposal remains historically unresolved and revision-pinned.
 
-## Required context in all future human-review handoffs
+## Source context for provisional corrections and optional human-review handoffs
 
-Every text correction or nonlocal anomaly presented for human review should include:
+Every text correction or nonlocal anomaly included in a provisional assistant-source review (or optional human audit) should include:
 
 1. **Source locator:** exam and booklet, exact original-file SHA-256, 1-based **PDF page**, section, and question/choice number or passage paragraph.
 2. **Raw fragment and proposed printed reading:** always separated, so the reviewer is not misled by text-layer damage.
@@ -60,9 +60,9 @@ Every text correction or nonlocal anomaly presented for human review should incl
 
 The [1396 Cloze review batch](review_batches/1396-cloze.md) implements this pattern for seven proposed edits and one displaced-token anomaly. Future Reading and answer-key handoffs should follow the same principle (for answer grids, specify booklet, key page, table group/row rather than surrounding words).
 
-## Independent review procedure
+## Optional independent human-review procedure (historical gate)
 
-1. A **different human reviewer** obtains the original hash-matched PDF(s) and inspects the *printed source* at the referenced page, independently of the assistant's suggested correction.
+1. **Only when an independent human review is explicitly requested:** a different human reviewer obtains the original hash-matched PDF(s) and inspects the *printed source* at the referenced page, independently of the assistant's suggested correction. Do not require this step for assistant-only provisional work.
 2. For `edit` tasks: choose **ACCEPTED**, **REJECTED**, or **NEEDS_FOLLOWUP**. Rejecting a proposal does not guarantee the uncorrected raw text is usable; record an alternative correction as a separate reviewed change if needed.
 3. For `anomaly` tasks: choose **RESOLVED** only with source-aligned evidence of the correct text/order; otherwise **NEEDS_FOLLOWUP**. A naive local substitution of misplaced `10`/`11`/glyph tokens is not sufficient.
 4. For `printed` tasks: choose **ACKNOWLEDGED** when the unusual word or spelling is genuinely printed, or **DISPUTED** when the observation cannot be confirmed. Do not silently rewrite an oddity as good English.
@@ -88,7 +88,7 @@ The [1396 Cloze review batch](review_batches/1396-cloze.md) implements this patt
 
 Do not commit this example as an actual decision.
 
-## Release boundary
+## Release boundary (unchanged by opting out of routine human checks)
 
 `BLOCKED_INVALID_INPUT`: one or more identities, counts, formats, review attestations, or source references are invalid; no valid docket is returned.
 

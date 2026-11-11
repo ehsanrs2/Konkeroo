@@ -1,6 +1,6 @@
-# 1396 Reading Passage 1 — independent human review (Q16–19)
+# 1396 Reading Passage 1 — source-context packet (Q16–19)
 
-**Review status: 14 of 14 tasks pending in this batch.** This page is a location-aware *handoff*, **not** independent approval of proposed fixes. The 1396 decision ledger has **19 reviewed / 75 pending** across 94 tasks, publication **BLOCKED**.
+**Workflow change (owner decision, 2026-11-11):** this source-context packet is no longer a mandatory human-review handoff. It is a locator for an **assistant-only, mechanically guarded provisional preview** (see [policy](../ASSISTANT_ONLY_PROVISIONAL.md)). The 14 Reading tasks remain **unreviewed by a human**, not automatically accepted or resolved. The historical docket has **19 recorded human decisions / 75 pending**, publication **BLOCKED**.
 
 - **Original printed exam:** `source/96.pdf`, booklet **C**, SHA-256 `69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2`.
 - **Page locator:** original PDF **page 3** (the header on the scanned page says Persian page 3). Passage 1 begins below the **PART C: Reading Comprehension** box; Q16–19 are near the bottom.
@@ -44,9 +44,9 @@ Only these twelve edits belong to Reading Passage 1. The seven earlier Cloze cor
 - The original actually says **fixture**. It may look as though **future** would be more natural English, but there is **no authority to replace what was printed**.
 - Choose **`ACKNOWLEDGED`** if your independent check confirms the original printed words; **`DISPUTED`** if your evidence says otherwise. Recording an acknowledgment never authorizes editorial substitution.
 
-## Submit your review
+## Optional independent review (not required for provisional work)
 
-Compare all 14 items against **page 3 of the original PDF**, then send 14 lines in [Issue #28](https://github.com/ehsanrs2/Konkeroo/issues/28) or the project chat, using this format:
+If an independent human audit is explicitly requested later, compare the 14 items against **page 3 of the original PDF** and use the following format. **Do not request these 14 decisions for current assistant-only provisional development:**
 
 ```text
 edit:reading:r1396-01: ACCEPTED / REJECTED / NEEDS_FOLLOWUP — page 3, observed: ...
@@ -58,4 +58,4 @@ printed:reading:1269c830ea440b51: ACKNOWLEDGED / DISPUTED — page 3, observed: 
 
 A single owner's batch-level confirmation can be recorded **only as a clearly labeled group-level owner report**, not fabricated per-row quotes. Later decisions must preserve `INDEPENDENT_HUMAN`, `ehsanrs2`, source PDF SHA-256, `evidence_pdf_page: 3`, and this exact Reading review Git blob SHA-1. Proposals and anomaly records stay **pinned and unchanged**; decisions go into a separate ledger PR only after real observations.
 
-After this batch: Passage 2 (PDF page 4 and its Q25 bridge to page 5), then Passage 3 (page 5), then the initial official-key claims. None implies verified publication.
+After the source-aligned **provisional** Passage 1 implementation: Passage 2 (PDF page 4 and Q25 page-5 bridge), then Passage 3 (page 5). The initial official key remains explicitly unverified. None of these stages implies independently verified or public educational content.
