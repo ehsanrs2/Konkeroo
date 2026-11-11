@@ -116,6 +116,76 @@
       "evidence_source_sha256": "69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2",
       "evidence_pdf_page": 2,
       "reviewed_artifact_blob_sha1": "d86e605924af939d03e4605896f6c42f5ec019ab"
+    },
+    {
+      "task_id": "edit:cloze:cloze-heading-passage",
+      "disposition": "ACCEPTED",
+      "reviewer_role": "INDEPENDENT_HUMAN",
+      "reviewer_id": "ehsanrs2",
+      "evidence_note": "Owner's group-level human attestation: after reviewing all presented Cloze corrections in the printed source, the owner confirmed them correct. For cloze (section_heading) on PDF page 2, proposal \"Passage\" is accepted against text-layer fragment \"Pnssnge\". No separate per-item quote or evidence image was provided.",
+      "evidence_source_sha256": "69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2",
+      "evidence_pdf_page": 2,
+      "reviewed_artifact_blob_sha1": "5530e4484dbc274ee23fa37f5b24d34c25f8301c"
+    },
+    {
+      "task_id": "edit:cloze:cloze-human",
+      "disposition": "ACCEPTED",
+      "reviewer_role": "INDEPENDENT_HUMAN",
+      "reviewer_id": "ehsanrs2",
+      "evidence_note": "Owner's group-level human attestation: after reviewing all presented Cloze corrections in the printed source, the owner confirmed them correct. For cloze-1 (passage_body) on PDF page 2, proposal \"human\" is accepted against text-layer fragment \"Imm an\". No separate per-item quote or evidence image was provided.",
+      "evidence_source_sha256": "69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2",
+      "evidence_pdf_page": 2,
+      "reviewed_artifact_blob_sha1": "5530e4484dbc274ee23fa37f5b24d34c25f8301c"
+    },
+    {
+      "task_id": "edit:cloze:cloze-on",
+      "disposition": "ACCEPTED",
+      "reviewer_role": "INDEPENDENT_HUMAN",
+      "reviewer_id": "ehsanrs2",
+      "evidence_note": "Owner's group-level human attestation: after reviewing all presented Cloze corrections in the printed source, the owner confirmed them correct. For cloze-1 (passage_body) on PDF page 2, proposal \"on the\" is accepted against text-layer fragment \"en the\". No separate per-item quote or evidence image was provided.",
+      "evidence_source_sha256": "69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2",
+      "evidence_pdf_page": 2,
+      "reviewed_artifact_blob_sha1": "5530e4484dbc274ee23fa37f5b24d34c25f8301c"
+    },
+    {
+      "task_id": "edit:cloze:cloze-to-study",
+      "disposition": "ACCEPTED",
+      "reviewer_role": "INDEPENDENT_HUMAN",
+      "reviewer_id": "ehsanrs2",
+      "evidence_note": "Owner's group-level human attestation: after reviewing all presented Cloze corrections in the printed source, the owner confirmed them correct. For cloze-1 (passage_body) on PDF page 2, proposal \"to study\" is accepted against text-layer fragment \"lo study\". No separate per-item quote or evidence image was provided.",
+      "evidence_source_sha256": "69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2",
+      "evidence_pdf_page": 2,
+      "reviewed_artifact_blob_sha1": "5530e4484dbc274ee23fa37f5b24d34c25f8301c"
+    },
+    {
+      "task_id": "edit:cloze:cloze-14-marker",
+      "disposition": "ACCEPTED",
+      "reviewer_role": "INDEPENDENT_HUMAN",
+      "reviewer_id": "ehsanrs2",
+      "evidence_note": "Owner's group-level human attestation: after reviewing all presented Cloze corrections in the printed source, the owner confirmed them correct. For cloze-1 (passage_body) on PDF page 2, proposal \"(14)\" is accepted against text-layer fragment \"{14)\". No separate per-item quote or evidence image was provided.",
+      "evidence_source_sha256": "69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2",
+      "evidence_pdf_page": 2,
+      "reviewed_artifact_blob_sha1": "5530e4484dbc274ee23fa37f5b24d34c25f8301c"
+    },
+    {
+      "task_id": "edit:cloze:cloze-13-choice4",
+      "disposition": "ACCEPTED",
+      "reviewer_role": "INDEPENDENT_HUMAN",
+      "reviewer_id": "ehsanrs2",
+      "evidence_note": "Owner's group-level human attestation: after reviewing all presented Cloze corrections in the printed source, the owner confirmed them correct. For q-13 (choice_text:4) on PDF page 3, proposal \"takes\" is accepted against text-layer fragment \"rakes\". No separate per-item quote or evidence image was provided.",
+      "evidence_source_sha256": "69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2",
+      "evidence_pdf_page": 3,
+      "reviewed_artifact_blob_sha1": "5530e4484dbc274ee23fa37f5b24d34c25f8301c"
+    },
+    {
+      "task_id": "edit:cloze:cloze-15-marker",
+      "disposition": "ACCEPTED",
+      "reviewer_role": "INDEPENDENT_HUMAN",
+      "reviewer_id": "ehsanrs2",
+      "evidence_note": "Owner's group-level human attestation: after reviewing all presented Cloze corrections in the printed source, the owner confirmed them correct. For q-15 (number_marker) on PDF page 3, proposal \"15-\" is accepted against text-layer fragment \"t 5-\". No separate per-item quote or evidence image was provided.",
+      "evidence_source_sha256": "69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2",
+      "evidence_pdf_page": 3,
+      "reviewed_artifact_blob_sha1": "5530e4484dbc274ee23fa37f5b24d34c25f8301c"
     }
   ],
   "artifact_git_blob_sha1": {
