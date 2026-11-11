@@ -83,8 +83,10 @@ def preview_1396_reviewed_cloze_passage(
 
     all_rows = curated_review.get("proposals")
     rows: list[Mapping[str, Any]] = []
-    if not isinstance(all_rows, list) or len(all_rows) != 7 or any(
-        not isinstance(row, Mapping) for row in all_rows
+    if (
+        not isinstance(all_rows, list)
+        or len(all_rows) != 7
+        or any(not isinstance(row, Mapping) for row in all_rows)
     ):
         errors.append("expected seven source-linked Cloze edit proposals")
     else:
@@ -118,10 +120,7 @@ def preview_1396_reviewed_cloze_passage(
             or decision.get("evidence_pdf_page") != 2
         ):
             errors.append(f"{task_id}: missing valid attested source-linked decision")
-        if (
-            row.get("pdf_page") != 2
-            or row.get("proposal_status") != "PENDING_INDEPENDENT_REVIEW"
-        ):
+        if row.get("pdf_page") != 2 or row.get("proposal_status") != "PENDING_INDEPENDENT_REVIEW":
             errors.append(f"{task_id}: unsupported printed page or proposal status")
 
     if errors or candidate.proposed_full_text is None:

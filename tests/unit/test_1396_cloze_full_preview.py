@@ -21,12 +21,8 @@ RAW = (
 
 
 def _package():
-    review = json.loads(
-        (REVIEW_DIR / "1396-cloze-text-review.json").read_text(encoding="utf-8")
-    )
-    ledger = json.loads(
-        (REVIEW_DIR / "1396-review-ledger.json").read_text(encoding="utf-8")
-    )
+    review = json.loads((REVIEW_DIR / "1396-cloze-text-review.json").read_text(encoding="utf-8"))
+    ledger = json.loads((REVIEW_DIR / "1396-review-ledger.json").read_text(encoding="utf-8"))
     return review, ledger
 
 
@@ -42,7 +38,9 @@ def _staged(raw=RAW):
         source_document=SimpleNamespace(
             source_filename="96.pdf", sha256=EXAM_SHA, english_pdf_pages=(2, 3, 4, 5)
         ),
-        sections=(SimpleNamespace(id="cloze", passages=(SimpleNamespace(id="cloze-1", body=body),)),),
+        sections=(
+            SimpleNamespace(id="cloze", passages=(SimpleNamespace(id="cloze-1", body=body),)),
+        ),
     )
     return SimpleNamespace(exam=exam, validation=SimpleNamespace(status="PASSED", errors=()))
 
