@@ -121,8 +121,10 @@ def preview_1396_reading1(
         errors.append("stale Reading artifact pin or unblocked/verified ledger")
 
     proposals = reading_review.get("proposals")
-    if not isinstance(proposals, list) or len(proposals) != 36 or any(
-        not isinstance(p, Mapping) for p in proposals
+    if (
+        not isinstance(proposals, list)
+        or len(proposals) != 36
+        or any(not isinstance(p, Mapping) for p in proposals)
     ):
         errors.append("original Reading proposals missing or changed")
         rows: list[Mapping[str, Any]] = []
@@ -131,12 +133,16 @@ def preview_1396_reading1(
         if tuple(p.get("id") for p in rows) != EXPECTED_EDIT_IDS:
             errors.append("Reading-1 edit identities/count/order changed")
     anomalies = reading_review.get("unresolved_anomalies")
-    if not isinstance(anomalies, list) or len(anomalies) != 5 or not any(
-        a.get("id") == "r1396-order-q19"
-        and a.get("status") == "NEEDS_SOURCE_ALIGNED_REVIEW"
-        and a.get("proposed_replacement") is None
-        for a in anomalies
-        if isinstance(a, Mapping)
+    if (
+        not isinstance(anomalies, list)
+        or len(anomalies) != 5
+        or not any(
+            a.get("id") == "r1396-order-q19"
+            and a.get("status") == "NEEDS_SOURCE_ALIGNED_REVIEW"
+            and a.get("proposed_replacement") is None
+            for a in anomalies
+            if isinstance(a, Mapping)
+        )
     ):
         errors.append("Q19 original ordering anomaly record has changed")
 
@@ -165,7 +171,8 @@ def preview_1396_reading1(
             field_id not in fields
             or p.get("source_pdf_page") != 3
             or p.get("review_status") != "PENDING_INDEPENDENT_REVIEW"
-            or p.get("reason") not in (
+            or p.get("reason")
+            not in (
                 "TEXT_LAYER_GLYPH_ERROR",
                 "PUNCTUATION_LAYER_ERROR",
                 "WORD_BREAK_LAYER_ERROR",
