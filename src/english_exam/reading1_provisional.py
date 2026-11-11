@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from collections.abc import Mapping
 from dataclasses import dataclass
+from itertools import pairwise
 from typing import Any
 
 from english_exam.domain import ExtractedText, StagedDataset
@@ -195,7 +196,7 @@ def preview_1396_reading1(
             offset = raw.index(before)
             spans.append((offset, offset + len(before), after, str(p["id"])))
         spans.sort()
-        if any(previous[1] > following[0] for previous, following in zip(spans, spans[1:])):
+        if any(previous[1] > following[0] for previous, following in pairwise(spans)):
             errors.append(f"{field_id}: overlapping source edit spans")
             continue
         candidate = raw
