@@ -218,8 +218,7 @@ def preview_1396_reading2(
             field_id not in EXPECTED_PAGES
             or row.get("source_pdf_page") != EXPECTED_PAGES.get(field_id)
             or row.get("review_status") != "PENDING_INDEPENDENT_REVIEW"
-            or row.get("reason")
-            not in ("TEXT_LAYER_GLYPH_ERROR", "PUNCTUATION_LAYER_ERROR")
+            or row.get("reason") not in ("TEXT_LAYER_GLYPH_ERROR", "PUNCTUATION_LAYER_ERROR")
         ):
             errors.append(f"{row.get('id')}: unsupported field/page/reason")
         groups.setdefault(field_id, []).append(row)

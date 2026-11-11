@@ -76,13 +76,9 @@ def test_reading2_original_pages_4_5_edits_and_nonlocal_glyph_geometry():
         # Plain text moves 'or' before Q22, but geometrically it is printed
         # immediately after 'beginning' and before the damaged 'lhe'.
         displaced = next(w for w in words if w["text"] == "or" and 535 < w["top"] < 555)
-        beginning = next(
-            w for w in words if w["text"] == "beginning" and 535 < w["top"] < 555
-        )
+        beginning = next(w for w in words if w["text"] == "beginning" and 535 < w["top"] < 555)
         article = next(
-            w
-            for w in words
-            if w["text"] == "lhe" and 535 < w["top"] < 555 and w["x0"] > 295
+            w for w in words if w["text"] == "lhe" and 535 < w["top"] < 555 and w["x0"] > 295
         )
         assert beginning["x1"] < displaced["x0"] < displaced["x1"] < article["x0"]
         assert abs(displaced["bottom"] - beginning["bottom"]) < 3

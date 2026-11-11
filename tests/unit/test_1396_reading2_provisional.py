@@ -83,9 +83,7 @@ def _stage():
 
 
 def _package():
-    reading = json.loads(
-        (DIR / "1396-reading-text-review.json").read_text(encoding="utf-8")
-    )
+    reading = json.loads((DIR / "1396-reading-text-review.json").read_text(encoding="utf-8"))
     ledger = json.loads((DIR / "1396-review-ledger.json").read_text(encoding="utf-8"))
     return reading, ledger
 
