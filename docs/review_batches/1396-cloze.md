@@ -27,7 +27,7 @@ On **PDF page 2, near the last lines of the Cloze passage**, the printed text co
 
 > laboratory tests of our ability **to remember** verbal and visual materials
 
-The text layer does **not** preserve that word order: `to` is absent at the expected place and a token resembling `10` occurs farther down, near `approaches.`. This printed context locates the anomaly; it **does not** establish how the displaced token must be removed or repositioned in a corrected structured field. If you cannot identify the complete correction, report `NEEDS_FOLLOWUP`.
+**Updated technical diagnosis:** the *plain pdfplumber text output* shows an isolated `10` near `approaches.`, but the glyph actually sits immediately before `remember` on the same visual PDF line. Konkeroo's baseline-aware stage extractor already groups these in order as `10 remember`. Thus the guarded candidate is a single **source-aligned glyph correction** (`10 remember` → `to remember`), **without moving or deleting a token**. See [source geometry and read-only preview](1396-cloze-token-order.md). This is **not a `RESOLVED` decision**: the real-source integration gate, full-field review and explicit disposition are still pending.
 
 ## Seven short proposed edits
 
@@ -46,8 +46,8 @@ Choose `ACCEPTED`, `REJECTED` or `NEEDS_FOLLOWUP` for **each**. Record the exact
 ## One nonlocal ordering anomaly
 
 - Task ID: `anomaly:cloze:cloze-ability-to-remember-displaced-token`
-- Source PDF **page 2**: printed phrase was visually read as `ability to remember`; native text layer has a `10`-like token displaced near the end of the passage.
-- Choose **`RESOLVED` only if** you can document the entire correct source-aligned ordering and what should happen to the misplaced token. Otherwise choose **`NEEDS_FOLLOWUP`**, report the printed phrase you observed and why the full repair is still uncertain. Do **not** blindly insert `to` and leave a duplicate elsewhere.
+- Source PDF **page 2**: the owner confirmed the printed phrase `ability to remember verbal and visual materials` and no extra printed `10` near `approaches`. Only the **plain text extraction order** looks displaced; Konkeroo's stage groups `10 remember` correctly (see linked diagnostic).
+- **Do not mark `RESOLVED` yet**: even with the printed phrase confirmed, the proposed one-token staged preview has not completed the real-source/full-field acceptance gate. Retain the existing pending review entry and see the [technical diagnostic](1396-cloze-token-order.md).
 
 ## How to report results
 
@@ -55,6 +55,6 @@ Review both original PDF pages and send eight lines to [Issue #20](https://githu
 
 The assistant will then **transcribe the human reviewer's actual responses**, not generate approvals, into a **separate PR** updating only the ledger and matching tests. Each decision must include reviewer attribution `ehsanrs2`, `INDEPENDENT_HUMAN`, exact source SHA-256, 1-based source page and the pinned reviewed artifact revision `5530e4484dbc274ee23fa37f5b24d34c25f8301c`.
 
-Current overall docket after merged [PR #19](https://github.com/ehsanrs2/Konkeroo/pull/19): **11 reviewed, 83 pending**. The release remains `BLOCKED`. Even after all eight Cloze decisions have been recorded, the other 75 tasks will still have no decisions. A `NEEDS_FOLLOWUP` anomaly remains an unresolved release blocker.
+Current overall docket after merged [PR #23](https://github.com/ehsanrs2/Konkeroo/pull/23): **18 reviewed, 76 pending**. The release remains `BLOCKED`. Even after all eight Cloze decisions have been recorded, the other 75 tasks will still have no decisions. A `NEEDS_FOLLOWUP` anomaly remains an unresolved release blocker.
 
 Do not alter original PDFs, raw staged text, the curated proposals or final/official answer authority during review. See [review protocol](../REVIEW_PROTOCOL.md).
