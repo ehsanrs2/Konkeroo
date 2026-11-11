@@ -16,10 +16,10 @@ This is a *direction and execution order*, not a delivery-date commitment. Mark 
 | M2h | Personalized report keys (1403 native, 1400 raster) | **Not started** | Key vs candidate columns separated; deletion/positive-effect preserved |
 | M2i | Corpus completeness + 1405 no-key status | **Not started** | Explicit coverage/unsupported/absent matrix |
 | M3 | Exam-paper English-section import across remaining years | **Not started** | Verified year-specific section/range/passages; no global 25/30 assumption |
-| M4 | Human review, corrections, verified dataset and release gate | **In progress, editorial review only** | Auditable corrections, uncertainty resolution, schema/version governance |
+| M4 | Provisional assistant corrections, optional independent review and release gate | **In progress; owner opted out of routine per-item human checks (2026-11-11)** | Source-anchored provisional text, explicit uncertainty, separate release gate |
 | M4a | 1396 Vocabulary Q1–10 source-backed editorial proposals | **11 human ACCEPTED decisions recorded (PR #19)** | Owner-reported findings; raw stage unmodified, no final dataset promotion |
 | M4b | 1396 Cloze passage and Q11–15 source editorial review | **Merged on main; independent approval pending** | Seven short correction proposals and one unresolved text-order defect |
-| M4c | 1396 Reading passages 1–3 and Q16–30 editorial review | **Merged on main; independent approval pending** | 36 text proposals, 5 anomalies, 4 source-printed oddities |
+| M4c | 1396 Reading passages 1–3 and Q16–30 assistant-source provisional review | **Proposals merged; assistant-only source-aligned preview next** | 36 short proposals, 5 anomalies, 4 printed oddities; no fabricated human attestations |
 | M4d | 1396 independent-review docket and educational release gate | **Merged; 19 reviewed, 75 pending; release blocked** | 94 source-linked tasks and evidence-bearing decisions |
 | M4e | Bind human review evidence to exact artifact revisions | **Merged in PR #17** | Git blob revision pins, stale-approval rejection, Vocabulary handoff |
 | M4f | Independent Cloze human review (1396 Q11–15) | **8/8 Cloze decisions recorded; PR #27 merged** | 7 edits + 1 token-order anomaly, original PDF pages 2–3 |
@@ -42,7 +42,7 @@ Dependencies may be interleaved: additional exam parsers (M3) are needed before 
 7. Review **M4b Cloze** against printed pages 2–3: seven short proposed edits and the unresolved displaced `to` text-order issue. Do not apply automatic replacements or call this independent verification.
 8. Review **M4c Reading passages 1–3** as a source-linked, read-only editorial proposal set; independently verify anomalous layout/order and preserve printed peculiarities verbatim.
 9. M4d/M4e and Cloze decision PR #27 are merged: 94 tasks have pinned source revisions, 19 owner-reported decisions are recorded (11 Vocabulary + 8 Cloze) and 75 tasks remain pending; publication stays blocked.
-10. Cloze human-review [Issue #20](https://github.com/ehsanrs2/Konkeroo/issues/20) is complete. Start [Reading Passage 1 independent review](review_batches/1396-reading-1.md), [Issue #28](https://github.com/ehsanrs2/Konkeroo/issues/28): 12 short edits + Q19 order anomaly + one source-printed oddity on original PDF page 3. Split remaining Reading passages into later batches; initial-key review remains pending. Do not auto-promote final answers.
+10. Cloze [Issue #20](https://github.com/ehsanrs2/Konkeroo/issues/20) is complete. The owner opted out of per-item human reviews for *provisional development* on 2026-11-11. Implement the [assistant-only provisional policy](ASSISTANT_ONLY_PROVISIONAL.md) for [Reading Passage 1](review_batches/1396-reading-1.md), [Issue #28](https://github.com/ehsanrs2/Konkeroo/issues/28): 12 source-anchored edits, Q19 order diagnosis and preserving printed `fixture`. Proceed across the remaining Reading passages only with technical source evidence; keep the initial key explicitly unverified. Do not fill the human ledger with assistant-made decisions, promote final answers, or unblock publication.
 11. Expand exam/key data to additional years through small data-first review batches.
 
 ## Definition of Done for every parser milestone
