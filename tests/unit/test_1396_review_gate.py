@@ -279,8 +279,7 @@ def test_seven_owner_confirmed_cloze_edits_and_resolved_nonlocal_anomaly():
     assert owner_resolution["evidence_pdf_page"] == 2
     assert owner_resolution["evidence_source_sha256"] == ledger["exam_source_sha256"]
     assert (
-        owner_resolution["reviewed_artifact_blob_sha1"]
-        == ledger["artifact_git_blob_sha1"]["cloze"]
+        owner_resolution["reviewed_artifact_blob_sha1"] == ledger["artifact_git_blob_sha1"]["cloze"]
     )
     assert "Owner explicitly declared" in owner_resolution["evidence_note"]
     assert "10 remember" in owner_resolution["evidence_note"]
