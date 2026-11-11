@@ -53,12 +53,12 @@ def _decision(item, disposition=None):
     }
 
 
-def test_merged_review_package_derives_18_reviewed_and_76_pending_tasks():
+def test_merged_review_package_derives_19_reviewed_and_75_pending_tasks():
     result = audit_review_directory(REVIEW_DIR)
     assert result.status == "BLOCKED_PENDING_REVIEW"
     assert not result.errors
-    assert result.reviewed_count == 18
-    assert result.pending_count == 76
+    assert result.reviewed_count == 19
+    assert result.pending_count == 75
     assert result.disputed_or_followup_count == 0
     assert len(result.items) == 94
     assert Counter(item.kind for item in result.items) == {
@@ -73,6 +73,7 @@ def test_merged_review_package_derives_18_reviewed_and_76_pending_tasks():
         item.disposition == "PENDING"
         for item in result.items
         if not item.task_id.startswith(("edit:vocabulary:", "edit:cloze:"))
+        and item.task_id != "anomaly:cloze:cloze-ability-to-remember-displaced-token"
     )
     assert all(len(item.artifact_git_blob_sha1) == 40 for item in result.items)
     assert all(item.source_sha256 == KEY_SHA for item in result.items if item.kind == "key")
@@ -248,7 +249,7 @@ def test_recorded_human_review_only_covers_11_original_vocabulary_proposals():
     assert ledger["independently_verified"] is False
 
 
-def test_seven_owner_confirmed_cloze_edits_preserve_pending_nonlocal_anomaly():
+def test_seven_owner_confirmed_cloze_edits_and_resolved_nonlocal_anomaly():
     package = _package()
     _, cloze, _, _, ledger = package
     decisions = [
@@ -271,12 +272,24 @@ def test_seven_owner_confirmed_cloze_edits_preserve_pending_nonlocal_anomaly():
         assert "No separate per-item quote" in decision["evidence_note"]
 
     anomaly = "anomaly:cloze:cloze-ability-to-remember-displaced-token"
-    assert not any(d["task_id"] == anomaly for d in ledger["decisions"])
+    owner_resolution = next(d for d in ledger["decisions"] if d["task_id"] == anomaly)
+    assert owner_resolution["disposition"] == "RESOLVED"
+    assert owner_resolution["reviewer_role"] == "INDEPENDENT_HUMAN"
+    assert owner_resolution["reviewer_id"] == "ehsanrs2"
+    assert owner_resolution["evidence_pdf_page"] == 2
+    assert owner_resolution["evidence_source_sha256"] == ledger["exam_source_sha256"]
+    assert (
+        owner_resolution["reviewed_artifact_blob_sha1"]
+        == ledger["artifact_git_blob_sha1"]["cloze"]
+    )
+    assert "Owner explicitly declared" in owner_resolution["evidence_note"]
+    assert "10 remember" in owner_resolution["evidence_note"]
+    assert "to remember" in owner_resolution["evidence_note"]
     docket = _audit(package)
     assert not docket.errors
-    assert next(item for item in docket.items if item.task_id == anomaly).disposition == "PENDING"
-    assert docket.reviewed_count == 18
-    assert docket.pending_count == 76
+    assert next(item for item in docket.items if item.task_id == anomaly).disposition == "RESOLVED"
+    assert docket.reviewed_count == 19
+    assert docket.pending_count == 75
     assert ledger["publication_status"] == "BLOCKED"
     assert ledger["independently_verified"] is False
 
@@ -291,3 +304,21 @@ def test_revised_cloze_evidence_cannot_validate_against_wrong_artifact_revision(
     assert docket.status == "BLOCKED_INVALID_INPUT"
     assert docket.items == ()
     assert any("stale artifact revision" in error for error in docket.errors)
+
+
+def test_source_bound_anomaly_resolution_rejects_stale_or_invalid_evidence():
+    anomaly = "anomaly:cloze:cloze-ability-to-remember-displaced-token"
+    for field, value in (
+        ("disposition", "ACCEPTED"),
+        ("evidence_pdf_page", 3),
+        ("evidence_source_sha256", "0" * 64),
+        ("reviewed_artifact_blob_sha1", "0" * 40),
+        ("reviewer_role", "AI_ASSISTANT"),
+    ):
+        package = list(_package())
+        decision = next(d for d in package[4]["decisions"] if d["task_id"] == anomaly)
+        decision[field] = value
+        result = _audit(package)
+        assert result.status == "BLOCKED_INVALID_INPUT"
+        assert result.errors
+        assert result.items == ()

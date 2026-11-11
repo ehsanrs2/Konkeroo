@@ -1,6 +1,6 @@
 # 1396 — Cloze independent human review (Q11–15)
 
-**Status: 8 tasks pending; no Cloze decisions yet.** This file is a handoff, **not** a set of approved corrections.
+**Status: 8 Cloze review decisions recorded (7 short edits ACCEPTED, 1 token-order anomaly RESOLVED by explicit owner report).** This file preserves the original handoff context; no corrected learner-facing dataset is published.
 
 - Original exam: `source/96.pdf`, SHA-256 `69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2`, booklet C.
 - Source-linked review JSON: `dataset/review/1396-cloze-text-review.json`, exact Git blob SHA-1 `5530e4484dbc274ee23fa37f5b24d34c25f8301c`.
@@ -27,7 +27,7 @@ On **PDF page 2, near the last lines of the Cloze passage**, the printed text co
 
 > laboratory tests of our ability **to remember** verbal and visual materials
 
-**Updated technical diagnosis:** the *plain pdfplumber text output* shows an isolated `10` near `approaches.`, but the glyph actually sits immediately before `remember` on the same visual PDF line. Konkeroo's baseline-aware stage extractor already groups these in order as `10 remember`. Thus the guarded candidate is a single **source-aligned glyph correction** (`10 remember` → `to remember`), **without moving or deleting a token**. See [source geometry and read-only preview](1396-cloze-token-order.md). This is **not a `RESOLVED` decision**: the real-source integration gate, full-field review and explicit disposition are still pending.
+**Updated technical diagnosis:** the *plain pdfplumber text output* shows an isolated `10` near `approaches.`, but the glyph actually sits immediately before `remember` on the same visual PDF line. Konkeroo's baseline-aware stage extractor already groups these in order as `10 remember`. Thus the guarded candidate is a single **source-aligned glyph correction** (`10 remember` → `to remember`), **without moving or deleting a token**. See [source geometry and read-only preview](1396-cloze-token-order.md). Owner-reported original-source tests and complete-word comparison followed; the owner explicitly marked this **single anomaly** PASS, recorded as ledger disposition `RESOLVED`. This does not certify the exact printed blank leaders, unresolved other tasks, or publication.
 
 ## Seven short proposed edits
 
@@ -35,19 +35,19 @@ Choose `ACCEPTED`, `REJECTED` or `NEEDS_FOLLOWUP` for **each**. Record the exact
 
 | Task ID | PDF page | Target field | Extracted raw fragment | Proposed printed fragment | Human result |
 | --- | ---: | --- | --- | --- | --- |
-| `edit:cloze:cloze-heading-passage` | 2 | `section_heading` | `Pnssnge` | `Passage` | pending |
-| `edit:cloze:cloze-human` | 2 | `passage_body` | `Imm an` | `human` | pending |
-| `edit:cloze:cloze-on` | 2 | `passage_body` | `en the` | `on the` | pending |
-| `edit:cloze:cloze-to-study` | 2 | `passage_body` | `lo study` | `to study` | pending |
-| `edit:cloze:cloze-14-marker` | 2 | `passage_body` | `{14)` | `(14)` | pending |
-| `edit:cloze:cloze-13-choice4` | 3 | `choice_text:4` | `rakes` | `takes` | pending |
-| `edit:cloze:cloze-15-marker` | 3 | `number_marker` | `t 5-` | `15-` | pending |
+| `edit:cloze:cloze-heading-passage` | 2 | `section_heading` | `Pnssnge` | `Passage` | ACCEPTED (owner-reported) |
+| `edit:cloze:cloze-human` | 2 | `passage_body` | `Imm an` | `human` | ACCEPTED (owner-reported) |
+| `edit:cloze:cloze-on` | 2 | `passage_body` | `en the` | `on the` | ACCEPTED (owner-reported) |
+| `edit:cloze:cloze-to-study` | 2 | `passage_body` | `lo study` | `to study` | ACCEPTED (owner-reported) |
+| `edit:cloze:cloze-14-marker` | 2 | `passage_body` | `{14)` | `(14)` | ACCEPTED (owner-reported) |
+| `edit:cloze:cloze-13-choice4` | 3 | `choice_text:4` | `rakes` | `takes` | ACCEPTED (owner-reported) |
+| `edit:cloze:cloze-15-marker` | 3 | `number_marker` | `t 5-` | `15-` | ACCEPTED (owner-reported) |
 
 ## One nonlocal ordering anomaly
 
 - Task ID: `anomaly:cloze:cloze-ability-to-remember-displaced-token`
 - Source PDF **page 2**: the owner confirmed the printed phrase `ability to remember verbal and visual materials` and no extra printed `10` near `approaches`. Only the **plain text extraction order** looks displaced; Konkeroo's stage groups `10 remember` correctly (see linked diagnostic).
-- **Do not mark `RESOLVED` yet**: even with the printed phrase confirmed, the proposed one-token staged preview has not completed the real-source/full-field acceptance gate. Retain the existing pending review entry and see the [technical diagnostic](1396-cloze-token-order.md).
+- **Recorded `RESOLVED` per explicit human PASS disposition:** the reviewer verified the original printed words, ran the source-present integration checks (owner reported `2 passed`), inspected the entire candidate passage and confirmed its words; the precise glyph-only remedy is `10 remember` → `to remember` in the existing stage order. The source-proposal JSON remains unchanged and historically labels the original anomaly as unresolved; the **ledger** carries the later disposition. See [technical diagnostic](1396-cloze-token-order.md).
 
 ## How to report results
 
@@ -55,6 +55,6 @@ Review both original PDF pages and send eight lines to [Issue #20](https://githu
 
 The assistant will then **transcribe the human reviewer's actual responses**, not generate approvals, into a **separate PR** updating only the ledger and matching tests. Each decision must include reviewer attribution `ehsanrs2`, `INDEPENDENT_HUMAN`, exact source SHA-256, 1-based source page and the pinned reviewed artifact revision `5530e4484dbc274ee23fa37f5b24d34c25f8301c`.
 
-Current overall docket after merged [PR #23](https://github.com/ehsanrs2/Konkeroo/pull/23): **18 reviewed, 76 pending**. The release remains `BLOCKED`. Even after all eight Cloze decisions have been recorded, the other 75 tasks will still have no decisions. A `NEEDS_FOLLOWUP` anomaly remains an unresolved release blocker.
+After the resolution ledger PR is merged: **19 reviewed, 75 pending** out of 94. The 7 Cloze text edits and this one anomaly are owner-attested; publication remains **`BLOCKED`** because Reading, initial-key and other tasks are still pending. The formatted `(N) ____` leaders are **presentation only**; no claim is made about exact PDF punctuation or a released corrected passage.
 
 Do not alter original PDFs, raw staged text, the curated proposals or final/official answer authority during review. See [review protocol](../REVIEW_PROTOCOL.md).

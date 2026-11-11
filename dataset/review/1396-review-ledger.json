@@ -186,6 +186,16 @@
       "evidence_source_sha256": "69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2",
       "evidence_pdf_page": 3,
       "reviewed_artifact_blob_sha1": "5530e4484dbc274ee23fa37f5b24d34c25f8301c"
+    },
+    {
+      "task_id": "anomaly:cloze:cloze-ability-to-remember-displaced-token",
+      "disposition": "RESOLVED",
+      "reviewer_role": "INDEPENDENT_HUMAN",
+      "reviewer_id": "ehsanrs2",
+      "evidence_note": "Owner explicitly declared the eighth Cloze anomaly PASS after inspecting the original printed PDF page 2 and the entire merged review preview: all words and order were correct. Printed source reads 'ability to remember verbal and visual materials' with no extra '10' beside 'approaches.' Owner reported successful original-source integration tests (2 passed). PDF coordinate diagnosis and baseline-aware staged extraction demonstrate the sole uniquely anchored text-layer glyph remedy '10 remember' -> 'to remember', without moving/deleting another token. Owner requested separate uniform blank-marker display; this resolution concerns only the to/10 anomaly and does not certify Q11-15 blank punctuation, source-layer glyphs, the remaining exam tasks or publication. The proposed corrected text remains read-only, not a published corrected field.",
+      "evidence_source_sha256": "69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba2",
+      "evidence_pdf_page": 2,
+      "reviewed_artifact_blob_sha1": "5530e4484dbc274ee23fa37f5b24d34c25f8301c"
     }
   ],
   "artifact_git_blob_sha1": {

@@ -52,7 +52,7 @@ def test_full_preview_applies_only_four_attested_body_edits_plus_one_candidate()
     report = preview_1396_reviewed_cloze_passage(staged, review, ledger)
     assert report.status == "PENDING_FULL_FIELD_HUMAN_REVIEW"
     assert not report.errors
-    assert report.unresolved_anomaly is True
+    assert report.unresolved_anomaly is False
     assert report.technical_candidate_anomaly_id == "cloze-ability-to-remember-displaced-token"
     assert len(report.accepted_passage_edit_ids) == 4
     assert report.proposed_full_text == (
@@ -81,6 +81,9 @@ def test_full_preview_applies_only_four_attested_body_edits_plus_one_candidate()
         "wrong_source",
         "already_corrected",
         "anomaly_resolved",
+        "invalid_anomaly_role",
+        "stale_anomaly_pin",
+        "unsupported_anomaly_disposition",
         "publish_verified",
     ],
 )
@@ -117,6 +120,18 @@ def test_full_preview_blocks_unsupported_release_or_review_claim(mode):
         ledger["decisions"].append(
             {"task_id": "anomaly:cloze:cloze-ability-to-remember-displaced-token"}
         )
+    elif mode == "invalid_anomaly_role":
+        next(d for d in ledger["decisions"] if d["task_id"].startswith("anomaly:cloze:"))[
+            "reviewer_role"
+        ] = "AI_ASSISTANT"
+    elif mode == "stale_anomaly_pin":
+        next(d for d in ledger["decisions"] if d["task_id"].startswith("anomaly:cloze:"))[
+            "reviewed_artifact_blob_sha1"
+        ] = "0" * 40
+    elif mode == "unsupported_anomaly_disposition":
+        next(d for d in ledger["decisions"] if d["task_id"].startswith("anomaly:cloze:"))[
+            "disposition"
+        ] = "ACCEPTED"
     elif mode == "publish_verified":
         ledger["publication_status"] = "VERIFIED"
 

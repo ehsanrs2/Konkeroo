@@ -50,7 +50,7 @@ Tests include source-independent negative cases (missing/duplicated/out-of-order
 
 The owner ran the original single-token preview and returned `PROPOSED_PENDING_TECHNICAL_REVIEW` with the expected `to remember` in place. The **same output still includes** `Imm an`, `en the`, `lo study`, and `{14)`, because that preview deliberately fixes **only** the eighth to/10 problem. Those four short corrections were separately attested by the owner in merged PR #23; Q13 option 4, Q15 numbering and the section heading are **outside** this passage-body field.
 
-A new read-only `preview_1396_reviewed_cloze_passage` composes the four **accepted passage-body** edits with the **still-pending** `to/10` technical candidate. It fails closed unless source SHA, the pinned curated review JSON, the actual owner-attested ledger decisions, unique raw fragments and the original staged passage are all consistent. It returns `PENDING_FULL_FIELD_HUMAN_REVIEW`; no raw text, `corrected_text`, reviewer ledger or answer key is changed.
+A new read-only `preview_1396_reviewed_cloze_passage` composes the four **accepted passage-body** edits with the `to/10` source-aligned candidate; its later owner-reported resolution is stored in the ledger. It fails closed unless source SHA, the pinned curated review JSON, the actual owner-attested ledger decisions, unique raw fragments and the original staged passage are all consistent. It returns `PENDING_FULL_FIELD_HUMAN_REVIEW`; no raw text, `corrected_text`, reviewer ledger or answer key is changed.
 
 From the repository root with original PDF present:
 
@@ -128,13 +128,21 @@ print(display.text)
 PY
 ```
 
-**Expected status:** `PENDING_BLANK_DISPLAY_REVIEW` and `Errors: ()`. The original candidate `proposed_full_text` remains unchanged. The anomaly `to/10` remains pending a separate task-specific decision, even if the display looks consistent.
+**Expected status:** `PENDING_BLANK_DISPLAY_REVIEW` and `Errors: ()`. The original candidate `proposed_full_text` remains unchanged. The owner explicitly marked the `to/10` anomaly PASS after source-present tests and full-word inspection; this is recorded as `RESOLVED` **only in the ledger**. The preview is still uncommitted text and blank markers are presentation-only.
 
-## Still required before closing Issue #20
+## Source-bound human disposition — the eighth anomaly
 
-1. Run the actual source-present integration check and preserve its logs, including the unchanged original PDF SHA.
-2. Review the entire in-memory suggested passage field with its source-aligned line provenance, not only the short word.
-3. Obtain an explicit human disposition for the **eighth** anomaly task. A printed-text confirmation by itself does **not** authorize an automatic `RESOLVED` entry; `NEEDS_FOLLOWUP` or no decision remain valid until the engineering review is complete.
-4. If accepted, design a **separate, versioned corrected-text artifact** and re-review the proposed field. Keep the original raw data, all key answers and final-verified status unchanged.
+The owner reported the source-present integration passed (`2 passed in 1.00s`), inspected the combined full Cloze word sequence and explicitly requested: **"مورد هشتم را pass در نظر بگیر"** (consider the eighth case PASS). The accepted *scope* is the single `to/10` anomaly; the intended whole-field remedy is the unique `10 remember` → `to remember` substitution, with no displacement or deletion. The separate Q11–15 blank leader normalizer remains a reviewer-facing formatting choice, not a source correction.
 
-Until then **Issue #20 stays open** and the 1396 review ledger remains release-blocked.
+The later ledger disposition for this one task is `RESOLVED` with source/page/pinned-artifact reference and owner's stated evidence. This does **not** modify the historical source-linked proposal, stage, candidate corrections or official answer key, and does **not** authorize dataset publication. The review pipeline now accepts the same in-memory preview for both pending and explicitly resolved anomaly states while continuing to reject stale, invalid or AI-attributed dispositions.
+
+## Post-resolution publication boundary
+
+
+
+1. The owner-provided source-present test results and explicit anomaly disposition are recorded. Maintain their attribution; CI without source media cannot substitute for them.
+2. Preserve the original staged `raw_text`, immutable original PDFs and the pinned source-linked proposal artifact. A later release step must design a **separate versioned corrected field**, not silently rewrite the source.
+3. Review exact printed blank glyphs and punctuation separately if required for publication; normalized underscores are **UI notation only**.
+4. Continue the other 75 pending 1396 review tasks (Reading and initial-key review). No answer is final verified.
+
+Issue #20 may close **after the resolution PR is merged and audited**; the dataset release remains `BLOCKED`.

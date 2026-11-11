@@ -83,7 +83,7 @@ def test_fails_closed_for_missing_duplicated_or_changed_source_context(changed):
     [
         {"status": "BLOCKED"},
         {"status": "PUBLISHED"},
-        {"unresolved_anomaly": False},
+        {"technical_candidate_anomaly_id": "wrong"},
         {"errors": ("bad source",)},
         {"proposed_full_text": None},
     ],
@@ -94,3 +94,11 @@ def test_blocks_invalid_preview_and_never_claims_review_or_release(change):
     assert result.status == "BLOCKED"
     assert result.text is None
     assert result.errors
+
+
+def test_resolved_anomaly_still_allows_presentation_only_blank_rendering():
+    resolved = replace(_preview(), unresolved_anomaly=False)
+    result = format_1396_cloze_blanks_for_review(resolved)
+    assert result.status == "PENDING_BLANK_DISPLAY_REVIEW"
+    assert result.text == EXPECTED
+    assert resolved.proposed_full_text == CANDIDATE
