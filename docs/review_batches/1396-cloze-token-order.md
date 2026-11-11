@@ -84,6 +84,52 @@ uv run --dev python -m pytest -q tests/integration/test_1396_cloze_order_source.
 
 The integration test verifies both the one-token candidate and the combined read-only preview against actual source. A passing test establishes *mechanical consistency*, **not** independent approval of the whole corrected passage or a right to publish the source.
 
+## Consistent question blanks — reviewer-facing rendering only
+
+After running the merged PR #25 unified preview on the original PDF, the owner reported that **the words looked correct** and identified a remaining readability issue: gaps Q11–15 used inconsistent artifacts such as `(11) -·-··-··` and `( 13) -·-·-·`. This is a **presentation concern**, not a new independent approval of the blank glyphs/punctuation or a request to overwrite the source.
+
+The follow-up `format_1396_cloze_blanks_for_review` function produces a **separate display-only field** for human inspection, with the consistent visual marker `(N) ____`. It requires a successfully source- and ledger-gated unified preview; verifies exactly five gaps in increasing Q11–15 order, with unique known preceding/following context; and refuses to display a guessed result if the raw gap leader, sequence or context differs. The function does **not** change the `FullClozePreview.proposed_full_text`, the original PDF, `raw_text`, the curated JSON, human decisions or `corrected_text`.
+
+Illustrative local formatting, **not a full transcription of the source**:
+
+| Gap | Source-layer appearance | Reviewer display |
+| --- | --- | --- |
+| Q11 | `(11) -·-··-··a book` | `(11) ____ a book` |
+| Q12 | `(12) ······---: Plato` | `(12) ____: Plato` |
+| Q13 | `( 13) -·-·-· on the` | `(13) ____ on the` |
+| Q14 | `(14) ···-···-·systematic` | `(14) ____ systematic` |
+| Q15 | `( 15) -····-·· more recent` | `(15) ____ more recent` |
+
+**Punctuation and whitespace:** The colon immediately following Q12's raw leader is *preserved as-is*, not silently removed or asserted to be correct in print. A single display space is inserted where the damaged gap leader runs directly into the next word. The literal underscores are **UI placeholders**, not a claim that the PDF contains underscores. For release, a separate review must address any genuine ambiguity in the printed punctuation and blanks.
+
+After merging this PR, run from the repository root:
+
+```bash
+uv run --dev python - <<'PY'
+import json
+from pathlib import Path
+
+from english_exam.cloze_blank_display import format_1396_cloze_blanks_for_review
+from english_exam.cloze_full_preview import preview_1396_reviewed_cloze_passage
+from english_exam.pipeline import extract_staged_1396
+
+directory = Path("dataset/review")
+review = json.loads((directory / "1396-cloze-text-review.json").read_text(encoding="utf-8"))
+ledger = json.loads((directory / "1396-review-ledger.json").read_text(encoding="utf-8"))
+staged = extract_staged_1396(Path("source/96.pdf"))
+preview = preview_1396_reviewed_cloze_passage(staged, review, ledger)
+display = format_1396_cloze_blanks_for_review(preview)
+
+print("Preview:", preview.status)
+print("Display:", display.status)
+print("Errors:", display.errors)
+assert display.text is not None, display.errors
+print(display.text)
+PY
+```
+
+**Expected status:** `PENDING_BLANK_DISPLAY_REVIEW` and `Errors: ()`. The original candidate `proposed_full_text` remains unchanged. The anomaly `to/10` remains pending a separate task-specific decision, even if the display looks consistent.
+
 ## Still required before closing Issue #20
 
 1. Run the actual source-present integration check and preserve its logs, including the unchanged original PDF SHA.
