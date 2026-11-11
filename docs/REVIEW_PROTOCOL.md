@@ -47,6 +47,19 @@ The validator reconstructs the checked-in JSON's UTF-8, two-space indentation, i
 
 The [1396 Vocabulary review batch](review_batches/1396-vocabulary.md) has 11 owner-reported decisions recorded in PR #19. The next review is [1396 Cloze on printed PDF pages 2–3](review_batches/1396-cloze.md) ([Issue #20](https://github.com/ehsanrs2/Konkeroo/issues/20)), with seven edits and one unresolved ordering anomaly.
 
+## Required context in all future human-review handoffs
+
+Every text correction or nonlocal anomaly presented for human review should include:
+
+1. **Source locator:** exam and booklet, exact original-file SHA-256, 1-based **PDF page**, section, and question/choice number or passage paragraph.
+2. **Raw fragment and proposed printed reading:** always separated, so the reviewer is not misled by text-layer damage.
+3. **Short printed context:** preferably **5–12 surrounding words** or the smallest meaningful sentence fragment, with the proposed target emphasized. Include both preceding and following words when they exist; a heading or isolated answer choice can use the complete short line.
+4. **Local position hint:** top/middle/bottom of PDF page, paragraph or question/option, and optionally “after/before [distinctive phrase].” For long or visually ambiguous documents, an exact source crop or page-coordinate reference may be added.
+5. **Distinct uncertainty:** label any ellipsis, inserted `[blank]` marker, inferred punctuation or nonlocal text-order issue explicitly; **do not silently fabricate a complete corrected sentence**.
+6. **Review authority:** context is only a navigation aid and does not itself constitute an independent human decision. Preserve existing source-linked JSON and revision pins unless opening a separate reviewed data-revision change.
+
+The [1396 Cloze review batch](review_batches/1396-cloze.md) implements this pattern for seven proposed edits and one displaced-token anomaly. Future Reading and answer-key handoffs should follow the same principle (for answer grids, specify booklet, key page, table group/row rather than surrounding words).
+
 ## Independent review procedure
 
 1. A **different human reviewer** obtains the original hash-matched PDF(s) and inspects the *printed source* at the referenced page, independently of the assistant's suggested correction.

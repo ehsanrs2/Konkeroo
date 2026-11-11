@@ -7,6 +7,28 @@
 - Printed PDF **page 2**: passage, heading, blanks. Printed PDF **page 3**: numbered answer choices Q11–15.
 - Compare with the **rendered printed PDF**, not with what seems grammatically preferable.
 
+## Printed-source context: locate each target
+
+The following short excerpts were checked against the **rendered pages of the original, SHA-matched `96.pdf`** (not reconstructed from the damaged text layer). **Bold** marks the target as it appears in print. These are *navigation hints and candidate readings*, **not independently accepted corrections**. The user/reviewer must still verify the original page. Ellipses and `[blank]` below indicate omitted surrounding text and are editorial notation, **not verbatim printed punctuation**.
+
+| Task ID suffix | PDF page | Position within page | Nearby text visible in the printed PDF |
+| --- | ---: | --- | --- |
+| `cloze-heading-passage` | 2 | Bottom of page, boxed **PART B** heading | PART B: Cloze **Passage** |
+| `cloze-human` | 2 | Cloze paragraph 1, first sentence | an integral part of **human** existence. Without a good memory |
+| `cloze-on` | 2 | Cloze paragraph 2, after blank (13) | blank at birth (13) [blank] **on the** impression of the events |
+| `cloze-to-study` | 2 | Cloze paragraph 2, after “objective techniques” | techniques that have enabled us **to study** our recollections |
+| `cloze-14-marker` | 2 | Cloze paragraph 2, after “though,” | in the past hundred years, though, **(14)** [blank] systematic |
+| `cloze-13-choice4` | 3 | Very top of page, **Q13 option 4** | 4) that slowly **takes** |
+| `cloze-15-marker` | 3 | Very top of page, immediately below Q14 options | **15-** 1) with 2) from 3) in 4) to |
+
+### Context for the nonlocal ordering anomaly
+
+On **PDF page 2, near the last lines of the Cloze passage**, the printed text contains:
+
+> laboratory tests of our ability **to remember** verbal and visual materials
+
+The text layer does **not** preserve that word order: `to` is absent at the expected place and a token resembling `10` occurs farther down, near `approaches.`. This printed context locates the anomaly; it **does not** establish how the displaced token must be removed or repositioned in a corrected structured field. If you cannot identify the complete correction, report `NEEDS_FOLLOWUP`.
+
 ## Seven short proposed edits
 
 Choose `ACCEPTED`, `REJECTED` or `NEEDS_FOLLOWUP` for **each**. Record the exact observed word/marker/punctuation and page.
