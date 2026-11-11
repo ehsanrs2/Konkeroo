@@ -17,11 +17,12 @@ This is a *direction and execution order*, not a delivery-date commitment. Mark 
 | M2i | Corpus completeness + 1405 no-key status | **Not started** | Explicit coverage/unsupported/absent matrix |
 | M3 | Exam-paper English-section import across remaining years | **Not started** | Verified year-specific section/range/passages; no global 25/30 assumption |
 | M4 | Human review, corrections, verified dataset and release gate | **In progress, editorial review only** | Auditable corrections, uncertainty resolution, schema/version governance |
-| M4a | 1396 Vocabulary Q1–10 source-backed editorial proposals | **Merged on main; independent approval pending** | Eleven source-linked edit proposals; raw stage unmodified |
+| M4a | 1396 Vocabulary Q1–10 source-backed editorial proposals | **11 human ACCEPTED decisions recorded (PR #19)** | Owner-reported findings; raw stage unmodified, no final dataset promotion |
 | M4b | 1396 Cloze passage and Q11–15 source editorial review | **Merged on main; independent approval pending** | Seven short correction proposals and one unresolved text-order defect |
 | M4c | 1396 Reading passages 1–3 and Q16–30 editorial review | **Merged on main; independent approval pending** | 36 text proposals, 5 anomalies, 4 source-printed oddities |
-| M4d | 1396 independent-review docket and educational release gate | **Merged on main; no review decisions recorded** | 94 source-linked tasks, explicit evidence requirements and blocked release |
-| M4e | Bind human review evidence to exact artifact revisions | **Under implementation in PR** | Git blob pins, invalidation of stale reviewer decisions; first Vocabulary review handoff |
+| M4d | 1396 independent-review docket and educational release gate | **Merged; 11 reviewed, 83 pending; release blocked** | 94 source-linked tasks and evidence-bearing decisions |
+| M4e | Bind human review evidence to exact artifact revisions | **Merged in PR #17** | Git blob revision pins, stale-approval rejection, Vocabulary handoff |
+| M4f | Independent Cloze human review (1396 Q11–15) | **Handoff prepared, 8 pending** | 7 edits + 1 token-order anomaly, original PDF pages 2–3 |
 | M5 | Independent AI answering, explanations, and conflict review | **Not started** | Separate official/AI/final; provenance and error analysis |
 | M6 | Vocabulary/skill enrichment, cloze/reading practice model | **Not started** | Context-aware word frequency/importance and reviewed skill tags |
 | M7 | Android MVP with offline verified dataset | **Not started** | Functional retrieval practice, accessibility, safe local persistence |
@@ -40,8 +41,8 @@ Dependencies may be interleaved: additional exam parsers (M3) are needed before 
 6. Review the first **M4a** 1396 Vocabulary Q1–10 text correction proposals against page 2; accept/reject each through an explicit later review step, without changing raw staging.
 7. Review **M4b Cloze** against printed pages 2–3: seven short proposed edits and the unresolved displaced `to` text-order issue. Do not apply automatic replacements or call this independent verification.
 8. Review **M4c Reading passages 1–3** as a source-linked, read-only editorial proposal set; independently verify anomalous layout/order and preserve printed peculiarities verbatim.
-9. M4d is merged: the **94-item independent-review docket** is live; all items remain pending. M4e pins source-linked artifact revisions before accepting any independent review decisions.
-10. Hand off the first **11 Vocabulary proposal tasks** (M4e), then a separate independent human reviewer should inspect the remaining Cloze, Reading and key batches, record evidence and resolve text-order defects. Do not auto-promote final answers.
+9. M4d/M4e are merged: 94 tasks are tracked with pinned source revisions. The owner reported 11 Vocabulary review decisions in merged PR #19; 83 tasks remain pending, with release blocked.
+10. Begin [M4f independent Cloze review](review_batches/1396-cloze.md) for seven edits and one nonlocal text-order anomaly, [Issue #20](https://github.com/ehsanrs2/Konkeroo/issues/20). Record only actual human observations; then progress to Reading and initial-key review. Do not auto-promote final answers.
 11. Expand exam/key data to additional years through small data-first review batches.
 
 ## Definition of Done for every parser milestone
