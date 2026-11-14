@@ -52,9 +52,7 @@ def test_curated_key_revision_is_pinned_and_every_claim_remains_pending():
     assert result.pending_count == 75
     key_tasks = [task for task in result.items if task.kind == "key"]
     assert len(key_tasks) == 30
-    assert [task.task_id for task in key_tasks] == [
-        f"key:q{number:02d}" for number in range(1, 31)
-    ]
+    assert [task.task_id for task in key_tasks] == [f"key:q{number:02d}" for number in range(1, 31)]
     assert all(task.disposition == "PENDING" for task in key_tasks)
     assert all(task.source_pdf_page == 1 for task in key_tasks)
     assert all(task.artifact_git_blob_sha1 == KEY_BLOB for task in key_tasks)
