@@ -99,7 +99,11 @@ def test_11_edits_two_technical_glyph_candidates_and_printed_oddity_preserved():
     assert result.applied_edit_ids == EXPECTED_EDIT_IDS
     assert result.errors == ()
     assert tuple(q.number for q in stage.exam.sections[0].passages[0].questions) == (
-        21, 22, 23, 24, 25
+        21,
+        22,
+        23,
+        24,
+        25,
     )
     assert len(result.fields) == 6
     assert len(result.technical_candidates) == 2
