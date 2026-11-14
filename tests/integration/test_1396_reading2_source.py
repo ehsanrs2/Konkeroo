@@ -39,11 +39,13 @@ def test_reading2_original_pages_4_5_edits_and_nonlocal_glyph_geometry():
     assert staged.validation.status == "PASSED"
     passage = staged.exam.sections[2].passages[1]
     assert passage.id == "reading-2"
+    assert tuple(q.number for q in passage.questions) == (21, 22, 23, 24, 25)
+    assert 20 in tuple(q.number for q in staged.exam.sections[2].passages[0].questions)
     original_heading = passage.heading.raw_text
     original_body = passage.body.raw_text
 
     preview = preview_1396_reading2(staged, reading, ledger)
-    assert preview.status == "ASSISTANT_PROVISIONAL"
+    assert preview.status == "ASSISTANT_PROVISIONAL", preview.errors
     assert preview.errors == ()
     assert preview.applied_edit_ids == EXPECTED_EDIT_IDS
     assert len(preview.technical_candidates) == 2

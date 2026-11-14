@@ -41,8 +41,8 @@ def _field(text, page=4):
 
 
 def _stage():
+    # Mirror the real 1396 importer: Q20 is in Reading 1, not Reading 2.
     questions = (
-        SimpleNamespace(number=20),
         SimpleNamespace(
             number=21,
             choices=(SimpleNamespace(position=4, text=_field("TI1e spread of viruses")),),
@@ -98,6 +98,13 @@ def test_11_edits_two_technical_glyph_candidates_and_printed_oddity_preserved():
     assert result.method == "ASSISTANT_PROVISIONAL"
     assert result.applied_edit_ids == EXPECTED_EDIT_IDS
     assert result.errors == ()
+    assert tuple(q.number for q in stage.exam.sections[0].passages[0].questions) == (
+        21,
+        22,
+        23,
+        24,
+        25,
+    )
     assert len(result.fields) == 6
     assert len(result.technical_candidates) == 2
     assert {candidate.anomaly_id for candidate in result.technical_candidates} == {
@@ -148,6 +155,8 @@ def test_11_edits_two_technical_glyph_candidates_and_printed_oddity_preserved():
         "missing_short_anchor",
         "duplicate_short_anchor",
         "wrong_pdf_page_5",
+        "reading2_includes_q20",
+        "reading2_missing_q21",
         "precorrected",
         "missing_11_anchor",
         "wrong_q22_glyph_order",
@@ -179,6 +188,10 @@ def test_fail_closed_for_bad_source_provenance_and_unjustified_repairs(mode):
         passage.body = _field(BODY + " whenever a. disk")
     elif mode == "wrong_pdf_page_5":
         qs[25].stem = _field(qs[25].stem.raw_text, page=4)
+    elif mode == "reading2_includes_q20":
+        passage.questions = (SimpleNamespace(number=20), *passage.questions)
+    elif mode == "reading2_missing_q21":
+        passage.questions = tuple(q for q in passage.questions if q.number != 21)
     elif mode == "precorrected":
         passage.body = ExtractedText(
             raw_text=BODY, corrected_text="untrusted", provenance=passage.body.provenance
