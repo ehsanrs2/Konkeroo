@@ -126,8 +126,7 @@ def preview_1396_reading3(
         errors.append("Reading source review identity or state differs")
     review_source = reading_review.get("exam_source")
     if not isinstance(review_source, Mapping) or (
-        review_source.get("filename") != "96.pdf"
-        or review_source.get("sha256") != EXAM_SHA
+        review_source.get("filename") != "96.pdf" or review_source.get("sha256") != EXAM_SHA
     ):
         errors.append("original PDF identity differs in curated Reading proposals")
 
@@ -160,11 +159,7 @@ def preview_1396_reading3(
         errors.append("source-linked Reading anomaly set changed")
     else:
         for anomaly_id, field_id, _before, _after in TECHNICAL_ANCHORS:
-            matches = [
-                a
-                for a in anomalies
-                if isinstance(a, Mapping) and a.get("id") == anomaly_id
-            ]
+            matches = [a for a in anomalies if isinstance(a, Mapping) and a.get("id") == anomaly_id]
             if len(matches) != 1 or (
                 matches[0].get("passage_id") != "reading-3"
                 or matches[0].get("target_entity_id") != "reading-3"
@@ -181,13 +176,16 @@ def preview_1396_reading3(
         errors.append("printed-source oddities set differs from pinned proposal")
     else:
         for fragment in ("walk thorough the rooms", "fight training"):
-            if sum(
-                isinstance(p, Mapping)
-                and p.get("passage_id") == "reading-3"
-                and p.get("source_pdf_page") == EXPECTED_PAGE
-                and p.get("printed_fragment") == fragment
-                for p in printed
-            ) != 1:
+            if (
+                sum(
+                    isinstance(p, Mapping)
+                    and p.get("passage_id") == "reading-3"
+                    and p.get("source_pdf_page") == EXPECTED_PAGE
+                    and p.get("printed_fragment") == fragment
+                    for p in printed
+                )
+                != 1
+            ):
                 errors.append(f"printed oddity {fragment!r} missing or duplicated")
 
     try:

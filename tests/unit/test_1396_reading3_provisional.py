@@ -95,12 +95,8 @@ def _stage():
 
 
 def _package():
-    reading = json.loads(
-        (REVIEW_DIR / "1396-reading-text-review.json").read_text(encoding="utf-8")
-    )
-    ledger = json.loads(
-        (REVIEW_DIR / "1396-review-ledger.json").read_text(encoding="utf-8")
-    )
+    reading = json.loads((REVIEW_DIR / "1396-reading-text-review.json").read_text(encoding="utf-8"))
+    ledger = json.loads((REVIEW_DIR / "1396-review-ledger.json").read_text(encoding="utf-8"))
     return reading, ledger
 
 
@@ -129,8 +125,7 @@ def test_13_edits_and_two_glyph_candidates_are_provisional_read_only():
         "r1396-order-p3-to",
     }
     assert all(
-        c.status == "GEOMETRY_ALIGNED_ASSISTANT_PROVISIONAL"
-        for c in result.technical_candidates
+        c.status == "GEOMETRY_ALIGNED_ASSISTANT_PROVISIONAL" for c in result.technical_candidates
     )
     fields = {f.field_id: f for f in result.fields}
     body = fields["reading-3:passage_body"].candidate_text
@@ -148,9 +143,7 @@ def test_13_edits_and_two_glyph_candidates_are_provisional_read_only():
         assert text in body
     assert "computer science. 11 is used routinely" not in body
     assert "CAD techniques 10 design" not in body
-    assert fields["q-26:question_stem"].candidate_text == (
-        "What does the passage mainly discuss?"
-    )
+    assert fields["q-26:question_stem"].candidate_text == ("What does the passage mainly discuss?")
     assert fields["q-26:choice_text:4"].candidate_text == "The rapidly growing field"
     assert fields["q-28:question_stem"].candidate_text == (
         "According to the passages, architects use CAD to --------."

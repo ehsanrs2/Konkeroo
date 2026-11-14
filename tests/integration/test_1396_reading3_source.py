@@ -77,9 +77,7 @@ def test_real_source_1396_reading3_edits_and_glyph_baselines():
     assert fields["q-30:choice_text:2"].candidate_text.count(PRINTED_ODDITIES[1]) == 1
 
     with pdfplumber.open(SOURCE) as pdf:
-        words = pdf.pages[4].extract_words(
-            x_tolerance=2, y_tolerance=2, use_text_flow=False
-        )
+        words = pdf.pages[4].extract_words(x_tolerance=2, y_tolerance=2, use_text_flow=False)
         # The text-layer '11' corresponds to the printed 'It' and is already
         # horizontally between 'science.' and 'is' on the same baseline.
         eleven = next(w for w in words if w["text"] == "11" and 220 < w["top"] < 243)
@@ -92,9 +90,7 @@ def test_real_source_1396_reading3_edits_and_glyph_baselines():
         # The passage '10' is the printed 'to' between 'techniques' and
         # 'design'. Q28 has a different '10' and is a separate editorial edit.
         ten = next(w for w in words if w["text"] == "10" and 320 < w["top"] < 340)
-        techniques = next(
-            w for w in words if w["text"] == "techniques" and 320 < w["top"] < 340
-        )
+        techniques = next(w for w in words if w["text"] == "techniques" and 320 < w["top"] < 340)
         design = next(w for w in words if w["text"] == "design" and 320 < w["top"] < 340)
         assert techniques["x1"] < ten["x0"] < ten["x1"] < design["x0"]
         assert abs(ten["bottom"] - techniques["bottom"]) < 3
