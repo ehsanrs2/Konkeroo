@@ -46,9 +46,7 @@ def test_actual_media_observed_without_claiming_verification(tmp_path):
     rows = _by_year(report)
 
     assert rows[1391].exam.status == "LOCAL_SOURCE_UNPINNED"
-    assert rows[1391].exam.actual_sha256 == sha256(
-        (tmp_path / "91.pdf").read_bytes()
-    ).hexdigest()
+    assert rows[1391].exam.actual_sha256 == sha256((tmp_path / "91.pdf").read_bytes()).hexdigest()
     assert rows[1391].can_attempt_exam
     assert rows[1391].key.status == "SOURCE_MISSING"
     assert not rows[1391].can_attempt_key
