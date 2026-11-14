@@ -86,8 +86,10 @@ def _get_fields(staged: StagedDataset) -> dict[str, ExtractedText]:
     section = next(s for s in staged.exam.sections if s.id == "reading")
     passage = next(p for p in section.passages if p.id == "reading-2")
     questions = {q.number: q for q in passage.questions}
-    if any(number not in questions for number in range(20, 26)):
-        raise ValueError("Reading-2 questions Q20–25 missing")
+    # The original importer attaches Q20 to Reading 1. Reading 2 owns Q21–25
+    # (Q25 continues onto original PDF page 5); never require Q20 here.
+    if tuple(sorted(questions)) != tuple(range(21, 26)):
+        raise ValueError("Reading-2 must contain exactly Q21–25 (not Q20)")
     choice4 = next(c for c in questions[21].choices if c.position == 4)
     if len(questions[23].choices) != 4:
         raise ValueError("Q23 must preserve its original four choices")
