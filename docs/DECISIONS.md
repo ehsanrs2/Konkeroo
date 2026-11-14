@@ -68,6 +68,17 @@ Decisions are recorded with **status**. `Accepted` means a project constraint; `
 
 **Why:** Prevent stale approvals being replayed against altered edits/answers. Changing a source-linked artifact requires repinning the ledger and explicit re-review of affected decisions. A Git blob digest identifies the JSON revision, not a human reviewer or legal permission. Source-independent CI validates the pins; genuine independent human approval remains a separate task.
 
+## D-013 — Batch-first assistant provisional development across years
+**Status: Accepted for provisional development (owner decision 2026-11-14).**
+
+The owner requests that 1391–1405 be processed **by reusable key/exam source families**, not by repeating the 1396 passage-by-passage, year-by-year manual review loop. Assistant-led source reading and automated checks may serve as the **project's operational evidence for provisional development**, without requiring independent human approval of each correction, suspicious glyph, year or individual question. Use one source-inventory batch and risk-based exception reports; isolate ambiguous entries without blocking unrelated fixtures.
+
+**Why:** Repeated human checkpoints for each year slow the learning-product milestone without establishing an experimentally measured AI error rate. Share mechanics across native paired grids, broken-font grids, rendered files, personalized report structures and legacy booklets, but do not conflate their source semantics.
+
+**Technical restrictions:** The source inventory is a metadata scanner, **not** an all-year parser. Match immutable files where known SHA pins exist, distinguish Git LFS pointers from real media, and keep source-specific English ranges, booklet variants, initial/final editions, multiple accepted choices, and candidate-vs-official response columns separate. Label outputs `ASSISTANT_PROVISIONAL`, record uncertainties, and never fabricate `INDEPENDENT_HUMAN` audit entries or source success from skipped tests.
+
+**Authority boundary:** This accepted workflow change **does not** grant independent answer correctness or public distribution rights. No false `final_verified`, invented 1405 official key, automatic initial-to-final key promotion, or dataset release. D-003, D-005 and the unresolved public Git LFS rights decision D-010 still govern learner/public release. See [batch workflow](BATCH_FIRST_MULTYEAR.md), [Issue #39](https://github.com/ehsanrs2/Konkeroo/issues/39).
+
 ## How to change a decision
 
 Propose a PR that updates this file, explains new evidence and alternatives, cites affected modules/tests, and links a targeted issue. Do not silently relabel `Open` decisions as `Accepted`.
