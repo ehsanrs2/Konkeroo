@@ -11,6 +11,7 @@ import argparse
 import json
 from dataclasses import asdict, dataclass
 from pathlib import Path
+
 import pdfplumber
 from pdfminer.pdfexceptions import PDFException
 
