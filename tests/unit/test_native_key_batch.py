@@ -68,9 +68,7 @@ def test_right_to_left_group_order_and_optional_header():
 def test_short_trailing_last_group_without_guessing_missing_cells():
     full = _rows(group_starts=(1, 21), header=False)
     rows = tuple(
-        (row[0], row[1], row[2], row[3])
-        if index < 4
-        else (row[0], row[1], None, None)
+        (row[0], row[1], row[2], row[3]) if index < 4 else (row[0], row[1], None, None)
         for index, row in enumerate(full)
     )
     result = parse_native_paired_rows(rows)
@@ -246,10 +244,7 @@ def test_locked_1395_dispatch_reuses_existing_importer_without_new_1395_parser(
     )
     rows = [
         YearInventory(1395, dummy_exam, key, False, True),
-        *(
-            YearInventory(y, dummy_exam, unavailable, False, False)
-            for y in (1401, 1402, 1404)
-        ),
+        *(YearInventory(y, dummy_exam, unavailable, False, False) for y in (1401, 1402, 1404)),
     ]
     monkeypatch.setattr(
         batch,
