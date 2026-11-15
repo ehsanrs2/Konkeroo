@@ -2,20 +2,20 @@
 
 This is a *direction and execution order*, not a delivery-date commitment. Mark an item done only when its code, tests, review, and artifacts have been checked. For current code, GitHub `main` is the baseline; test-pass claims require test evidence.
 
-| ID | Workstream | Status as of 2026-11-10 | Exit gate |
+| ID | Workstream | Status as of 2026-11-14 | Exit gate |
 | --- | --- | --- | --- |
 | M0 | Repo/bootstrap, safety rules, source preservation | **Implemented** | Versioned project and documented invariants |
 | M1 | 1396 English paper import | **Implemented on main** | 30 validated questions; page provenance and non-text manifest |
 | M2a | Answer-key foundation + 1395 native paired-grid import | **Implemented on main** | Separate staged key, 121 booklet-A entries, deterministic manifest |
 | M2b | 1396 direct-visual English key curation | **Curated on main; independent review pending** | Source-linked Q1–30 official claims, explicit uncertainty, testable data file |
-| M2c | Provisional 1396 key-to-exam alignment | **Implemented on main; stronger real-PDF + source-revision gate pending local run** | Strict source/booklet/edition/section/passage/choice joins plus pinned key revision; no final-answer promotion |
-| M2d | Other native paired grids (1401, 1402, 1404) | **Not started** | Fixture-safe import and regression checks |
-| M2e | Broken-font paired grids (1397–1399) | **Not started** | Validated glyph map or cell OCR, no silent guessing |
-| M2f | Rendered paired keys (1392–1394; includes JPG) | **Not started** | Reviewed structural/visual goldens and confidence thresholds |
+| M2c | Provisional 1396 key-to-exam alignment | **Source-present original exam+key integration owner-reported PASS; PR #38 merged** | 30 initial-key structural joins with pinned revision, no answer promotion |
+| M2d | Other native paired grids (1401, 1402, 1404) | **Family-batch processing pending** | Reuse native grid representation, fixture-specific dimensions, exception-only review |
+| M2e | Broken-font paired grids (1397–1399) | **Family-batch processing pending** | Source-aligned glyph evidence and isolated ambiguous-row exceptions |
+| M2f | Rendered paired keys (1392–1394; includes JPG) | **Family-batch processing pending** | Visual table/row mapping, source-specific media identity and confidence flags |
 | M2g | 1391 four-booklet legacy grid | **Not started** | Variant-safe cross-page join; multiple accepted positions |
 | M2h | Personalized report keys (1403 native, 1400 raster) | **Not started** | Key vs candidate columns separated; deletion/positive-effect preserved |
 | M2i | Corpus completeness + 1405 no-key status | **Not started** | Explicit coverage/unsupported/absent matrix |
-| M3 | Exam-paper English-section import across remaining years | **Not started** | Verified year-specific section/range/passages; no global 25/30 assumption |
+| M3 | Exam-paper English-section import across remaining years | **Batch triage started; full multi-year import not implemented** | Shared processing per source family with per-item exception log, not annual human signoff |
 | M4 | Provisional assistant corrections, optional independent review and release gate | **In progress; owner opted out of routine per-item human checks (2026-11-11)** | Source-anchored provisional text, explicit uncertainty, separate release gate |
 | M4a | 1396 Vocabulary Q1–10 source-backed editorial proposals | **11 human ACCEPTED decisions recorded (PR #19)** | Owner-reported findings; raw stage unmodified, no final dataset promotion |
 | M4b | 1396 Cloze passage and Q11–15 source editorial review | **Merged on main; independent approval pending** | Seven short correction proposals and one unresolved text-order defect |
@@ -31,19 +31,14 @@ This is a *direction and execution order*, not a delivery-date commitment. Mark 
 
 Dependencies may be interleaved: additional exam parsers (M3) are needed before matching keys of those years to English sections. M2b does not require solving all other years first. M4–M9 are product targets, not claims about present functionality.
 
-## Recommended immediate sequence
+## Recommended immediate sequence — batch-first (owner decision 2026-11-14)
 
-1. Review `main` status and the latest M2a implementation; verify tests in a reproducible environment, including clean CI without proprietary/local fixtures.
-2. Close the open **source distribution / public Git LFS** decision before treating the repository as publication-ready.
-3. Complete **M2b** by independent review of the 1396 English source-linked visual transcription and its exact 30 question/choice matches; no OCR or generic key parser required for one-time data acquisition.
-4. Review M2b's curated data, independent cross-checks, source provenance, unit tests, and legal exposure. Merge only through a small PR.
-5. M2c audit-only alignment already exists. Harden its exact initial-key revision/ledger gate in [Issue #37](https://github.com/ehsanrs2/Konkeroo/issues/37) and run the **two-PDF source-present test** locally. Structural alignment does not verify the visual key answers or promote the initial edition to FINAL.
-6. Review the first **M4a** 1396 Vocabulary Q1–10 text correction proposals against page 2; accept/reject each through an explicit later review step, without changing raw staging.
-7. Review **M4b Cloze** against printed pages 2–3: seven short proposed edits and the unresolved displaced `to` text-order issue. Do not apply automatic replacements or call this independent verification.
-8. Review **M4c Reading passages 1–3** as a source-linked, read-only editorial proposal set; independently verify anomalous layout/order and preserve printed peculiarities verbatim.
-9. M4d/M4e and Cloze decision PR #27 are merged: 94 tasks have pinned source revisions, 19 owner-reported decisions are recorded (11 Vocabulary + 8 Cloze) and 75 tasks remain pending; publication stays blocked.
-10. The owner opted out of mandatory per-item human review **for provisional development** (2026-11-11). Reading-1, -2 and -3 source-bound in-memory previews are merged (PR #31, #33 with #34 fix, and #36). The maintainer reported source-present **1 passed** for Reading-2 (Issue #32) and Reading-3 (Issue #35); the Reading-1 source-present test still requires its own explicitly reported outcome. Keep all generated fields `ASSISTANT_PROVISIONAL`, all five historical Reading anomalies and independent ledger records unchanged, and public release blocked.
-11. Exercise the existing 1396 initial-key `review_reconciliation` against both original PDFs with the ledger-pinned curated revision ([Issue #37](https://github.com/ehsanrs2/Konkeroo/issues/37)). Confirm 30 structural links, Q20/Q25 cross-page membership and answer immutability; do not interpret this as an independent confirmation of the initial key or a new final key. Then design a **local-only provisional artifact/manifest** with no publicly redistributed full exam/answer text, and continue other years through data-first batches.
+1. **Start with a single corpus-wide inventory.** Use `uv run --dev python -m english_exam.batch_inventory --source-dir source` and keep its `SOURCES_INCOMPLETE` / pointer / missing / mismatch statuses explicit. This operation is read-only; it is **not** full-year import or semantic answer checking.
+2. **Implement representative technical source families in batches**, reusing 1395 native paired grids and 1396 provisional exam/key examples where suitable. Group 1391 legacy, 1392–94 rendered, 1397–99 broken-font, 1400/1403 personalized, 1401/02/04 native. Source-specific question ranges, booklets and editions remain required; do not build an unsafe one-size-fits-all key importer.
+3. **Let assistant-led provisional quality checks carry development forward** without annual owner signoff queues. Record source hashes, structure checks, method attribution and localized exception classifications. Keep question text and answers private/local; publish at most non-content manifests until rights and answer authority are settled.
+4. **Advance app-learning architecture and independent AI solving after source-family coverage**, while maintaining separate `INITIAL` source claims, optional audit and `final_verified` authority. The 1396 initial-key test passed locally after PR #38. Source redistribution decision D-010 and final release remain explicitly open, and cannot be cleared by model confidence alone.
+
+Batch workflow details: [BATCH_FIRST_MULTYEAR.md](BATCH_FIRST_MULTYEAR.md), tracking [Issue #39](https://github.com/ehsanrs2/Konkeroo/issues/39). No further requirement to request the owner's approval for each year merely to proceed with *provisional* extraction or corrections.
 
 ## Definition of Done for every parser milestone
 
