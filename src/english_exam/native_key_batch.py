@@ -11,7 +11,7 @@ import argparse
 import json
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from typing import Any
+from pdfminer.pdfexceptions import PDFException
 
 import pdfplumber
 
@@ -154,7 +154,7 @@ def _source_unavailable(observation: SourceObservation) -> NativeFamilyYearResul
 def _locked_1395(path: Path, observed: SourceObservation) -> NativeFamilyYearResult:
     try:
         staged = extract_staged_key("iran-ce-msc-1395", path)
-    except (OSError, RuntimeError, ValueError, TypeError):
+    except (OSError, PDFException, RuntimeError, ValueError, TypeError):
         return NativeFamilyYearResult(
             observed.year,
             observed.filename,
@@ -218,7 +218,7 @@ def _probe_pdf(path: Path, observed: SourceObservation) -> NativeFamilyYearResul
                     )
                     if candidate is not None:
                         candidates.append(candidate)
-    except (OSError, ValueError, TypeError, KeyError, IndexError):
+    except (OSError, PDFException, ValueError, TypeError, KeyError, IndexError):
         return NativeFamilyYearResult(
             observed.year,
             observed.filename,
