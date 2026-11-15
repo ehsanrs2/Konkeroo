@@ -255,7 +255,9 @@ def test_one_failed_year_does_not_prevent_other_ready_year(monkeypatch, tmp_path
         )
         for year in BROKEN_FONT_YEARS
     }
-    inventory = SimpleNamespace(years=tuple(SimpleNamespace(year=y, key=obs) for y, obs in observed.items()))
+    inventory = SimpleNamespace(
+        years=tuple(SimpleNamespace(year=y, key=obs) for y, obs in observed.items())
+    )
     monkeypatch.setattr(batch, "inventory_sources", lambda _root: inventory)
 
     def fake_probe(_path, obs):
@@ -290,10 +292,7 @@ def test_font_collision_or_multi_character_ligature_is_not_guessed():
     original = _rows(header=False)
     # Two distinct source digits decode to one glyph: not bijective.
     collision = tuple(
-        tuple(
-            cell.replace(ENCODE["2"], ENCODE["1"]) if cell is not None else None
-            for cell in row
-        )
+        tuple(cell.replace(ENCODE["2"], ENCODE["1"]) if cell is not None else None for cell in row)
         for row in original
     )
     assert recover_glyph_grid(collision) == ()

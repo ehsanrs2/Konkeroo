@@ -74,12 +74,7 @@ def _learn_bijective_digit_map(q_cells: tuple[str | None, ...]) -> dict[str, str
     backward: dict[str, str] = {}
     for number, raw in enumerate(q_cells, start=1):
         expected = str(number)
-        if (
-            not isinstance(raw, str)
-            or not raw
-            or raw != raw.strip()
-            or len(raw) != len(expected)
-        ):
+        if not isinstance(raw, str) or not raw or raw != raw.strip() or len(raw) != len(expected):
             return None
         for glyph, digit in zip(raw, expected, strict=True):
             if (glyph in forward and forward[glyph] != digit) or (
@@ -205,9 +200,7 @@ def _probe_pdf(path: Path, observed: SourceObservation) -> BrokenFontYearResult:
                 for table_index, table in enumerate(tables):
                     rows = tuple(tuple(row) if row is not None else () for row in table.extract())
                     candidates.extend(
-                        recover_glyph_grid(
-                            rows, page_number=page_number, table_index=table_index
-                        )
+                        recover_glyph_grid(rows, page_number=page_number, table_index=table_index)
                     )
     except (OSError, PDFException, RuntimeError, ValueError, TypeError, IndexError, KeyError):
         return BrokenFontYearResult(
