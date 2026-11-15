@@ -11,9 +11,8 @@ import argparse
 import json
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from pdfminer.pdfexceptions import PDFException
-
 import pdfplumber
+from pdfminer.pdfexceptions import PDFException
 
 from english_exam.answer_keys.digits import parse_unsigned_integer
 from english_exam.answer_keys.pipeline import extract_staged_key
