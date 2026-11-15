@@ -35,6 +35,12 @@ The command exits successfully when it has completed the inventory, **even if `s
 
 These families are **routing hints**, not claims that the relevant source was successfully parsed. The exact filenames and 1391–1405 coverage are from the observed repository tree; they are intentionally **explicit** in `english_exam.batch_inventory.YEAR_SOURCES`, not invented by a naming rule. A file being observed does not establish a copyright license or a final official key.
 
+## Second implemented slice — native paired-grid family probe
+
+The [native-grid family module](NATIVE_PAIRED_FAMILY.md) covers **1395 / 1401 / 1402 / 1404** in one run: `python -m english_exam.native_key_batch --source-dir source`. For 1395, it reuses the existing, SHA-pinned production staging parser. For 1401/02/04, the strict shared probe attempts native tables without applying 1395's exact page or row assumptions. Successful geometry/table candidates remain `ASSISTANT_PROVISIONAL_GRID` **with unresolved booklet and edition** and no answer positions in command output.
+
+Real-source success for 1401/02/04 has **not** yet been established simply by adding this code; a failed/ambiguous table stays a visible exception. This step expands processing mechanics, not public verified key coverage. Follow-on families still require implementation.
+
 ## Follow-on batch processing (not yet implemented)
 
 1. Register one **representative and source-dependent fixture** per family; derive the actual English question range and booklet for that fixture, not from a universal 30-question assumption.
