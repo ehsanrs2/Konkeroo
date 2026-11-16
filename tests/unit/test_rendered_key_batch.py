@@ -31,9 +31,7 @@ def test_jpeg_frame_metadata_only(tmp_path: Path) -> None:
     path = tmp_path / "sample.jpg"
     # Minimal segment structure for SOF header testing; not a decodable JPEG.
     path.write_bytes(
-        b"\xff\xd8\xff\xe0\x00\x04ab"
-        b"\xff\xc0\x00\x0b\x08\x00\x30\x00\x40\x01\x01\x11\x00"
-        b"\xff\xd9"
+        b"\xff\xd8\xff\xe0\x00\x04ab\xff\xc0\x00\x0b\x08\x00\x30\x00\x40\x01\x01\x11\x00\xff\xd9"
     )
     assert module.jpeg_frame_dimensions(path) == (64, 48)
     result = module._inspect(path, observation(1394))
