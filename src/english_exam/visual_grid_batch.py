@@ -66,11 +66,7 @@ def _line_centers(counts: list[int], threshold: int) -> tuple[int, ...]:
             groups.append([position])
         else:
             groups[-1].append(position)
-    return tuple(
-        group[len(group) // 2]
-        for group in groups
-        if len(group) <= 12
-    )
+    return tuple(group[len(group) // 2] for group in groups if len(group) <= 12)
 
 
 def _ink_projection(mask: Image.Image) -> list[int]:
@@ -100,14 +96,24 @@ def detect_line_grid(image: Image.Image, *, page_number: int = 1) -> PageGeometr
         or not 4 <= len(col_rules) <= MAX_LINE_CANDIDATES
     ):
         return PageGeometry(
-            page_number, width, height, len(row_rules), len(col_rules), None,
+            page_number,
+            width,
+            height,
+            len(row_rules),
+            len(col_rules),
+            None,
             "NO_STRICT_INTERSECTING_RULE_GRID",
         )
     left, right = col_rules[0], col_rules[-1]
     top, bottom = row_rules[0], row_rules[-1]
     if right - left < width * 0.15 or bottom - top < height * 0.10:
         return PageGeometry(
-            page_number, width, height, len(row_rules), len(col_rules), None,
+            page_number,
+            width,
+            height,
+            len(row_rules),
+            len(col_rules),
+            None,
             "NO_STRICT_INTERSECTING_RULE_GRID",
         )
     # Require most candidate ruled intersections to be present, tolerating
@@ -124,12 +130,22 @@ def detect_line_grid(image: Image.Image, *, page_number: int = 1) -> PageGeometr
     )
     if hits * 5 < len(row_rules) * len(col_rules) * 4:
         return PageGeometry(
-            page_number, width, height, len(row_rules), len(col_rules), None,
+            page_number,
+            width,
+            height,
+            len(row_rules),
+            len(col_rules),
+            None,
             "NO_STRICT_INTERSECTING_RULE_GRID",
         )
     return PageGeometry(
-        page_number, width, height, len(row_rules), len(col_rules),
-        (left, top, right, bottom), "UNVERIFIED_LINE_GRID_CANDIDATE",
+        page_number,
+        width,
+        height,
+        len(row_rules),
+        len(col_rules),
+        (left, top, right, bottom),
+        "UNVERIFIED_LINE_GRID_CANDIDATE",
     )
 
 
@@ -141,8 +157,13 @@ def _inspect_source(path: Path, observed: SourceObservation) -> YearGeometry:
     try:
         if path.stat().st_size > MAX_FILE_BYTES:
             return YearGeometry(
-                observed.year, observed.filename, observed.status, observed.actual_sha256,
-                "SOURCE_BOUNDS_UNSUPPORTED", (), tuple(flags + ["FILE_SIZE_LIMIT"]),
+                observed.year,
+                observed.filename,
+                observed.status,
+                observed.actual_sha256,
+                "SOURCE_BOUNDS_UNSUPPORTED",
+                (),
+                tuple(flags + ["FILE_SIZE_LIMIT"]),
             )
         if observed.media_kind == "JPEG":
             with Image.open(path) as raster:
@@ -154,8 +175,12 @@ def _inspect_source(path: Path, observed: SourceObservation) -> YearGeometry:
             with pdfplumber.open(path) as pdf:
                 if not 1 <= len(pdf.pages) <= MAX_PDF_PAGES:
                     return YearGeometry(
-                        observed.year, observed.filename, observed.status,
-                        observed.actual_sha256, "SOURCE_BOUNDS_UNSUPPORTED", (),
+                        observed.year,
+                        observed.filename,
+                        observed.status,
+                        observed.actual_sha256,
+                        "SOURCE_BOUNDS_UNSUPPORTED",
+                        (),
                         tuple(flags + ["PAGE_COUNT_LIMIT"]),
                     )
                 for page_number, page in enumerate(pdf.pages, start=1):
@@ -164,21 +189,42 @@ def _inspect_source(path: Path, observed: SourceObservation) -> YearGeometry:
                     )
                     if predicted > MAX_PIXELS or predicted < 1:
                         return YearGeometry(
-                            observed.year, observed.filename, observed.status,
-                            observed.actual_sha256, "SOURCE_BOUNDS_UNSUPPORTED", (),
+                            observed.year,
+                            observed.filename,
+                            observed.status,
+                            observed.actual_sha256,
+                            "SOURCE_BOUNDS_UNSUPPORTED",
+                            (),
                             tuple(flags + ["PDF_RENDER_PIXEL_LIMIT"]),
                         )
                     raster = page.to_image(resolution=RENDER_DPI, antialias=False).original
                     pages.append(detect_line_grid(raster, page_number=page_number))
         else:
             return YearGeometry(
-                observed.year, observed.filename, observed.status, observed.actual_sha256,
-                "MEDIA_UNSUPPORTED", (), tuple(flags + ["UNEXPECTED_MEDIA_KIND"]),
+                observed.year,
+                observed.filename,
+                observed.status,
+                observed.actual_sha256,
+                "MEDIA_UNSUPPORTED",
+                (),
+                tuple(flags + ["UNEXPECTED_MEDIA_KIND"]),
             )
-    except (OSError, ValueError, PDFException, TypeError, RuntimeError, Image.DecompressionBombError):
+    except (
+        OSError,
+        ValueError,
+        PDFException,
+        TypeError,
+        RuntimeError,
+        Image.DecompressionBombError,
+    ):
         return YearGeometry(
-            observed.year, observed.filename, observed.status, observed.actual_sha256,
-            "RENDER_OR_DECODE_FAILED", (), tuple(flags + ["SOURCE_RASTERIZATION_FAILED"]),
+            observed.year,
+            observed.filename,
+            observed.status,
+            observed.actual_sha256,
+            "RENDER_OR_DECODE_FAILED",
+            (),
+            tuple(flags + ["SOURCE_RASTERIZATION_FAILED"]),
         )
 
     if len(pages) > 1:
@@ -192,8 +238,13 @@ def _inspect_source(path: Path, observed: SourceObservation) -> YearGeometry:
     else:
         status = "NO_STRICT_LINE_GRID"
     return YearGeometry(
-        observed.year, observed.filename, observed.status, observed.actual_sha256,
-        status, tuple(pages), tuple(flags),
+        observed.year,
+        observed.filename,
+        observed.status,
+        observed.actual_sha256,
+        status,
+        tuple(pages),
+        tuple(flags),
     )
 
 
@@ -205,8 +256,13 @@ def process_visual_grid_family(source_dir: Path) -> GeometryBatch:
         if not source.status.startswith("LOCAL_SOURCE_") or not source.filename:
             results.append(
                 YearGeometry(
-                    year, source.filename, source.status, source.actual_sha256,
-                    "SOURCE_NOT_READY", (), (source.exception or source.status,),
+                    year,
+                    source.filename,
+                    source.status,
+                    source.actual_sha256,
+                    "SOURCE_NOT_READY",
+                    (),
+                    (source.exception or source.status,),
                 )
             )
         else:
@@ -216,8 +272,12 @@ def process_visual_grid_family(source_dir: Path) -> GeometryBatch:
         for row in results
     )
     return GeometryBatch(
-        "1.0", "RENDERED_GRID_LINE_GEOMETRY", "BATCH_DIAGNOSTICS_ONLY",
-        tuple(results), candidates, len(results) - candidates,
+        "1.0",
+        "RENDERED_GRID_LINE_GEOMETRY",
+        "BATCH_DIAGNOSTICS_ONLY",
+        tuple(results),
+        candidates,
+        len(results) - candidates,
     )
 
 
