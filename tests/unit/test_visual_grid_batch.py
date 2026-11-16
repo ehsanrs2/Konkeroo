@@ -80,7 +80,7 @@ def test_jpeg_actual_pixels_and_provisional_metadata(tmp_path: Path) -> None:
 
 def test_corrupted_jpeg_is_not_a_candidate(tmp_path: Path) -> None:
     path = tmp_path / "94-key.jpg"
-    path.write_bytes(b"\\xff\\xd8\\xff\\xc0\\x00")
+    path.write_bytes(b"\xff\xd8\xff\xc0\x00")
     result = module._inspect_source(path, _source(1394))
     assert result.status == "RENDER_OR_DECODE_FAILED"
     assert result.pages == ()
