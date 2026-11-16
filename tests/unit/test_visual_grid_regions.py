@@ -71,9 +71,7 @@ def test_single_region_and_blank_and_horizontal_only() -> None:
 
 
 def test_small_images_and_rule_budget_fail_closed(monkeypatch: pytest.MonkeyPatch) -> None:
-    assert module.detect_regions(Image.new("RGB", (50, 50))).status == (
-        "RASTER_BOUNDS_UNSUPPORTED"
-    )
+    assert module.detect_regions(Image.new("RGB", (50, 50))).status == ("RASTER_BOUNDS_UNSUPPORTED")
     monkeypatch.setattr(module, "MAX_RULE_SEGMENTS", 5)
     report = module.detect_regions(two_grids())
     assert report.status == "RULE_COMPLEXITY_LIMIT"
