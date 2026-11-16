@@ -111,7 +111,9 @@ def test_lfs_pointer_and_per_year_exception_isolation(
 
 def test_hash_mismatch_is_not_inspected(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     observations = {
-        year: replace(observation(year), status="SOURCE_HASH_MISMATCH", exception="SOURCE_HASH_MISMATCH")
+        year: replace(
+            observation(year), status="SOURCE_HASH_MISMATCH", exception="SOURCE_HASH_MISMATCH"
+        )
         for year in module.RENDERED_YEARS
     }
     monkeypatch.setattr(
