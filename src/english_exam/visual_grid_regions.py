@@ -65,9 +65,7 @@ class RegionBatch:
     exceptions: int
 
 
-def _runs(
-    data: bytes, width: int, height: int, *, rows: bool
-) -> list[tuple[int, int, int]] | None:
+def _runs(data: bytes, width: int, height: int, *, rows: bool) -> list[tuple[int, int, int]] | None:
     """Long orthogonal dark runs or None on complexity overflow.
 
     Each triple is (fixed coordinate, first pixel, last pixel), inclusive.
@@ -199,9 +197,7 @@ def detect_regions(image: Image.Image, *, page_number: int = 1) -> PageRegions:
     return PageRegions(page_number, width, height, status, tuple(candidates), rejected)
 
 
-def _source_error(
-    source: SourceObservation, status: str, flags: tuple[str, ...]
-) -> YearRegions:
+def _source_error(source: SourceObservation, status: str, flags: tuple[str, ...]) -> YearRegions:
     return YearRegions(
         source.year, source.filename, source.status, source.actual_sha256, status, (), flags
     )
@@ -255,7 +251,8 @@ def _inspect_source(path: Path, source: SourceObservation) -> YearRegions:
     if len(pages) > 1:
         flags.append("MULTIPAGE_CONTINUATION_UNRESOLVED")
     if any(
-        page.status in (
+        page.status
+        in (
             "RULE_COMPLEXITY_LIMIT",
             "REGION_COUNT_AMBIGUOUS",
             "REGION_OVERLAP_AMBIGUOUS",
@@ -297,8 +294,7 @@ def process_region_family(source_dir: Path) -> RegionBatch:
         else:
             years.append(_inspect_source(source_dir / source.filename, source))
     candidate_years = sum(
-        row.status in ("UNVERIFIED_REGIONS_PER_PAGE", "PARTIAL_UNVERIFIED_REGIONS")
-        for row in years
+        row.status in ("UNVERIFIED_REGIONS_PER_PAGE", "PARTIAL_UNVERIFIED_REGIONS") for row in years
     )
     return RegionBatch(
         "1.0",
