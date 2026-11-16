@@ -57,10 +57,11 @@ def test_bad_jpeg_is_not_promoted(tmp_path: Path, payload: bytes) -> None:
 
 def test_pdf_page_image_and_text_counts(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     class FakePdf:
-        pages = [
-            SimpleNamespace(images=[object(), object()], chars=[]),
-            SimpleNamespace(images=[], chars=[object()]),
-        ]
+        def __init__(self) -> None:
+            self.pages = [
+                SimpleNamespace(images=[object(), object()], chars=[]),
+                SimpleNamespace(images=[], chars=[object()]),
+            ]
 
         def __enter__(self):
             return self
