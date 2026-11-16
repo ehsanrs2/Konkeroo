@@ -131,7 +131,8 @@ def _inspect(path: Path, observed: SourceObservation) -> RenderedYearResult:
             page_count=1,
             image_width=width,
             image_height=height,
-            flags=identity_flags + ("JPEG_HEADER_ONLY", "VISUAL_GRID_UNLOCATED", "BOOKLET_UNASSIGNED"),
+            flags=identity_flags
+            + ("JPEG_HEADER_ONLY", "VISUAL_GRID_UNLOCATED", "BOOKLET_UNASSIGNED"),
         )
     if observed.media_kind != "PDF":
         return _result(observed, "MEDIA_UNSUPPORTED", flags=("UNEXPECTED_MEDIA_KIND",))
@@ -167,7 +168,9 @@ def process_rendered_family(source_dir: Path) -> RenderedFamilyBatch:
         observed = keys[year]
         if not observed.status.startswith("LOCAL_SOURCE_") or not observed.filename:
             results.append(
-                _result(observed, "SOURCE_NOT_READY", flags=(observed.exception or observed.status,))
+                _result(
+                    observed, "SOURCE_NOT_READY", flags=(observed.exception or observed.status,)
+                )
             )
         else:
             results.append(_inspect(source_dir / observed.filename, observed))
