@@ -58,7 +58,7 @@ def jpeg_frame_dimensions(path: Path) -> tuple[int, int]:
     """
     with path.open("rb") as handle:
         data = handle.read(MAX_JPEG_HEADER_BYTES)
-    if not data.startswith(b"\\xff\\xd8"):
+    if not data.startswith(b"\xff\xd8"):
         raise ValueError("invalid JPEG SOI")
     offset = 2
     while offset < len(data):
