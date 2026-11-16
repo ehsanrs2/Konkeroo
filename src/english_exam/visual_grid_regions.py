@@ -17,7 +17,7 @@ from pdfminer.pdfexceptions import PDFException
 from PIL import Image
 
 from english_exam.batch_inventory import SourceObservation, inventory_sources
-from english_exam.visual_grid_batch import MAX_FILE_BYTES, MAX_PIXELS, MAX_PDF_PAGES, RENDER_DPI
+from english_exam.visual_grid_batch import MAX_FILE_BYTES, MAX_PDF_PAGES, MAX_PIXELS, RENDER_DPI
 
 YEARS = (1392, 1393, 1394)
 MAX_RULE_SEGMENTS = 600
