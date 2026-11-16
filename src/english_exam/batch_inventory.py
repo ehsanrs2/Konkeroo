@@ -17,6 +17,15 @@ EXAM_1396_SHA = "69bc3434ae61c05c85bc9fabffd0b2ce13e5b39bc71b1dfd71c16709c9638ba
 KEY_1396_SHA = "5d421dcddc780120b13a08753fd2559e7ec02a60200c7c88f4211d70429cba61"
 KEY_1395_SHA = "298efdeb70dc84b3bf92872f96bf2f15394f617e8c9e8d6cb9364e50789b3d9b"
 
+# Exact Git LFS object OIDs committed in this repository. These pin
+# repository media identity, NOT an independent publisher checksum or
+# official answer correctness.
+KEY_BROKEN_FONT_SHA = {
+    1397: "c00ddaeba1bb640ec095d7823f31e80d2e548ee26a16eeab9f8e95f11784263f",
+    1398: "baa697ee3592b1a5d89896938e5d96e93ba445d86c2cb85c41876cd44fb0326c",
+    1399: "2cd70e03fb11bad443ea365dae082478fd893e42d598ef2e4b09d4abbda960c7",
+}
+
 SourceRole = Literal["EXAM", "OFFICIAL_KEY"]
 MediaKind = Literal["PDF", "JPEG"]
 
@@ -103,7 +112,13 @@ def _specs() -> tuple[tuple[SourceSpec, SourceSpec | None], ...]:
                 key_name,
                 "JPEG" if key_name.lower().endswith(".jpg") else "PDF",
                 family,
-                KEY_1395_SHA if year == 1395 else KEY_1396_SHA if year == 1396 else None,
+                (
+                    KEY_1395_SHA
+                    if year == 1395
+                    else KEY_1396_SHA
+                    if year == 1396
+                    else KEY_BROKEN_FONT_SHA.get(year)
+                ),
             )
             if key_name is not None
             else None

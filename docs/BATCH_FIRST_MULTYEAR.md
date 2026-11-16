@@ -41,6 +41,12 @@ The [native-grid family module](NATIVE_PAIRED_FAMILY.md) covers **1395 / 1401 / 
 
 Real-source success for 1401/02/04 has **not** yet been established simply by adding this code; a failed/ambiguous table stays a visible exception. This step expands processing mechanics, not public verified key coverage. Follow-on families still require implementation.
 
+## Third implementation slice — broken-font glyph family (1397–1399)
+
+The [broken-font family probe](BROKEN_FONT_FAMILY.md) adds a single-run source-bound attempt for **1397, 1398 and 1399**: `python -m english_exam.broken_font_batch --source-dir source`. A character-to-digit substitution is inferred only when a source table contains a uniquely constrained, bijective Q1–Q20+ question-number sequence. This is explicitly a **Q1-start assumption** and a `ASSISTANT_PROVISIONAL` technical candidate; a failed or ambiguous map becomes an exception, not a guessed answer. The 1397/1398 two-page keys cannot be labeled complete until continuation pages are reconciled. Repository LFS object hashes are used for local media identity; these are not publisher attestations.
+
+Real-source decoding success for these years is **not established merely by the synthetic CI suite**, and no official key edition or booklet is assigned by the scanner. There is still no public answer export or source redistribution.
+
 ## Follow-on batch processing (not yet implemented)
 
 1. Register one **representative and source-dependent fixture** per family; derive the actual English question range and booklet for that fixture, not from a universal 30-question assumption.
