@@ -43,7 +43,7 @@ def test_jpeg_frame_metadata_only(tmp_path: Path) -> None:
     assert not hasattr(result, "answer_positions")
 
 
-@pytest.mark.parametrize("payload", [b"not a jpeg", b"\\xff\\xd8\\xff\\xc0\\x00", b"\\xff\\xd8\\xff\\xd9"])
+@pytest.mark.parametrize(\n    "payload",\n    [b"not a jpeg", b"\\xff\\xd8\\xff\\xc0\\x00", b"\\xff\\xd8\\xff\\xd9"],\n)
 def test_bad_jpeg_is_not_promoted(tmp_path: Path, payload: bytes) -> None:
     path = tmp_path / "bad.jpg"
     path.write_bytes(payload)
