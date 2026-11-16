@@ -119,9 +119,7 @@ def test_pdf_pages_remain_independent_and_unjoined(
     assert result.pages[1].grid_bbox_px is None
 
 
-def test_pdf_render_limit_skips_rendering(
-    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
-) -> None:
+def test_pdf_render_limit_skips_rendering(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     class HugePage:
         width = 100_000
         height = 100_000
@@ -147,9 +145,7 @@ def test_pdf_render_limit_skips_rendering(
     assert "PDF_RENDER_PIXEL_LIMIT" in result.flags
 
 
-def test_pointer_and_per_year_isolation(
-    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
-) -> None:
+def test_pointer_and_per_year_isolation(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     sources = {
         1392: _source(1392, "LFS_POINTER_ONLY"),
         1393: _source(1393),
@@ -166,13 +162,20 @@ def test_pointer_and_per_year_isolation(
         module,
         "_inspect_source",
         lambda _path, source: module.YearGeometry(
-            source.year, source.filename, source.status, source.actual_sha256,
-            "NO_STRICT_LINE_GRID", (), ("NO_ANSWER_DECODING",),
+            source.year,
+            source.filename,
+            source.status,
+            source.actual_sha256,
+            "NO_STRICT_LINE_GRID",
+            (),
+            ("NO_ANSWER_DECODING",),
         ),
     )
     result = module.process_visual_grid_family(tmp_path)
     assert [row.status for row in result.years] == [
-        "SOURCE_NOT_READY", "NO_STRICT_LINE_GRID", "NO_STRICT_LINE_GRID"
+        "SOURCE_NOT_READY",
+        "NO_STRICT_LINE_GRID",
+        "NO_STRICT_LINE_GRID",
     ]
     assert result.years[0].flags == ("LFS_POINTER_ONLY",)
     assert result.candidate_years == 0
