@@ -31,8 +31,13 @@ def _source(year: int, status: str = "LOCAL_SOURCE_UNPINNED") -> SourceObservati
 
 
 def _draw_grid(
-    image: Image.Image, left: int, top: int, right: int, bottom: int,
-    *, missing_vertical: int | None = None,
+    image: Image.Image,
+    left: int,
+    top: int,
+    right: int,
+    bottom: int,
+    *,
+    missing_vertical: int | None = None,
 ) -> None:
     draw = ImageDraw.Draw(image)
     for col in range(7):
@@ -63,7 +68,13 @@ def test_two_disjoint_cell_lattices_and_ordered_in_memory_cells() -> None:
     assert len(first.column_boundaries_px) == 7
     assert len(first.cells) == len(second.cells) == 48
     assert [(c.row_index, c.column_index) for c in first.cells[:7]] == [
-        (0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (1, 0),
+        (0, 0),
+        (0, 1),
+        (0, 2),
+        (0, 3),
+        (0, 4),
+        (0, 5),
+        (1, 0),
     ]
     assert first.cells[0].bbox_px[2] < first.cells[1].bbox_px[0]
     assert first.cells[0].bbox_px[3] < first.cells[6].bbox_px[1]
@@ -72,7 +83,8 @@ def test_two_disjoint_cell_lattices_and_ordered_in_memory_cells() -> None:
     assert summary.region_status == "MULTIPLE_UNVERIFIED_REGIONS"
     assert summary.status == "UNVERIFIED_CELL_LATTICES_PER_REGION"
     assert [(item.row_count, item.column_count, item.cell_count) for item in summary.regions] == [
-        (8, 6, 48), (8, 6, 48),
+        (8, 6, 48),
+        (8, 6, 48),
     ]
     public = json.dumps(asdict(summary), sort_keys=True)
     for forbidden in ("cells", "row_boundaries_px", "column_boundaries_px", "answer"):
@@ -84,7 +96,8 @@ def test_missing_interior_separator_fails_closed() -> None:
     report = module.inspect_page_cells(image)
     assert report.status == "PARTIAL_CELL_LATTICES"
     assert [r.status for r in report.regions] == [
-        "INCOMPLETE_CELL_LATTICE", "UNVERIFIED_CELL_LATTICE",
+        "INCOMPLETE_CELL_LATTICE",
+        "UNVERIFIED_CELL_LATTICE",
     ]
     assert report.regions[0].cell_count == 0
 
@@ -157,7 +170,9 @@ def test_multipage_source_remains_separate(monkeypatch: pytest.MonkeyPatch, tmp_
     assert "MULTIPAGE_CONTINUATION_UNRESOLVED" in result.flags
 
 
-def test_pdf_pixel_limit_blocks_unbounded_render(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+def test_pdf_pixel_limit_blocks_unbounded_render(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
     class HugePage:
         width = 60_000
         height = 60_000
@@ -192,7 +207,8 @@ def test_pointer_and_hash_failure_are_not_opened(
         1394: _source(1394),
     }
     monkeypatch.setattr(
-        module, "inventory_sources",
+        module,
+        "inventory_sources",
         lambda _root: SimpleNamespace(
             years=[SimpleNamespace(year=year, key=key) for year, key in items.items()]
         ),
@@ -209,7 +225,9 @@ def test_pointer_and_hash_failure_are_not_opened(
     batch = module.process_cell_family(tmp_path)
     assert inspected == [1394]
     assert [item.status for item in batch.years] == [
-        "SOURCE_NOT_READY", "SOURCE_NOT_READY", "NO_COMPLETE_CELL_LATTICE",
+        "SOURCE_NOT_READY",
+        "SOURCE_NOT_READY",
+        "NO_COMPLETE_CELL_LATTICE",
     ]
     assert batch.exceptions == 3
     assert batch.years[0].flags == ("LFS_POINTER_ONLY",)
