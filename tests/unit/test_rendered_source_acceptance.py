@@ -10,8 +10,8 @@ from pathlib import Path
 import pytest
 from PIL import Image, ImageDraw
 
-from english_exam.batch_inventory import KEY_RENDERED_LFS_SHA
 from english_exam import rendered_source_acceptance as module
+from english_exam.batch_inventory import KEY_RENDERED_LFS_SHA
 from english_exam.rendered_source_acceptance import (
     RENDERED_YEARS,
     audit_rendered_sources,
