@@ -20,8 +20,7 @@ pytestmark = pytest.mark.source_pdf
 def test_original_rendered_key_family_source_diagnostic():
     sources = {item.year: item.key for item in inventory_sources(SOURCE).years}
     available = [
-        year for year in (1392, 1393, 1394)
-        if sources[year].status == "LOCAL_SOURCE_PINNED"
+        year for year in (1392, 1393, 1394) if sources[year].status == "LOCAL_SOURCE_PINNED"
     ]
     if not available:
         pytest.skip("No actual SHA-matched rendered key media; pointers are not PDFs/JPEGs")
@@ -51,7 +50,11 @@ def test_original_rendered_key_family_source_diagnostic():
 
     serialized = json.dumps(asdict(report))
     for forbidden in (
-        "answer_positions", "official_answer", "raw_text",
-        "row_boundaries_px", "column_boundaries_px", "final_verified",
+        "answer_positions",
+        "official_answer",
+        "raw_text",
+        "row_boundaries_px",
+        "column_boundaries_px",
+        "final_verified",
     ):
         assert forbidden not in serialized
