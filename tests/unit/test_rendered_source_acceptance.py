@@ -36,10 +36,10 @@ def test_pointer_missing_and_mismatch_have_no_false_source_success(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
     (tmp_path / "92_key.pdf").write_text(
-        "version https://git-lfs.github.com/spec/v1\\n"
-        f"oid sha256:{KEY_RENDERED_LFS_SHA[1392]}\\nsize 260186\\n"
+        "version https://git-lfs.github.com/spec/v1\n"
+        f"oid sha256:{KEY_RENDERED_LFS_SHA[1392]}\nsize 260186\n"
     )
-    (tmp_path / "93_key.pdf").write_bytes(b"%PDF-1.7\\nwrong original bytes\\n")
+    (tmp_path / "93_key.pdf").write_bytes(b"%PDF-1.7\nwrong original bytes\n")
     report = audit_rendered_sources(tmp_path)
     rows = {item.year: item for item in report.years}
     assert rows[1392].source_status == "LFS_POINTER_ONLY"
