@@ -101,9 +101,12 @@ def _matches_outer_edges(
 
 
 def _valid_spacing(bounds: tuple[int, ...]) -> bool:
-    return 4 <= len(bounds) <= MAX_BOUNDARIES and all(
-        right - left >= MIN_CELL_SIDE + 2 for left, right in zip(bounds, bounds[1:])
-    )
+    if not 4 <= len(bounds) <= MAX_BOUNDARIES:
+        return False
+    gaps = [right - left for left, right in zip(bounds, bounds[1:])]
+    # Conservative test-only assumption: a doubled gap may be a missing
+    # separator. Genuine asymmetric tables are left unresolved, not guessed.
+    return min(gaps) >= MIN_CELL_SIDE + 2 and max(gaps) * 5 <= min(gaps) * 9
 
 
 def propose_cell_lattice(image: Image.Image, region: RegionCandidate) -> CellLattice | None:
