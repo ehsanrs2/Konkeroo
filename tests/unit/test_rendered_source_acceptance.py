@@ -125,9 +125,7 @@ def test_cross_stage_page_metadata_conflict_fails_closed(
         years = list(batch.years)
         source = years[-1]
         first_page = source.pages[0]
-        years[-1] = replace(
-            source, pages=(replace(first_page, width_px=first_page.width_px + 1),)
-        )
+        years[-1] = replace(source, pages=(replace(first_page, width_px=first_page.width_px + 1),))
         return replace(batch, years=tuple(years))
 
     monkeypatch.setattr(module, "process_cell_family", mismatch)
