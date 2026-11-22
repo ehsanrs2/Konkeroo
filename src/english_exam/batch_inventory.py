@@ -125,8 +125,7 @@ def _specs() -> tuple[tuple[SourceSpec, SourceSpec | None], ...]:
                     if year == 1395
                     else KEY_1396_SHA
                     if year == 1396
-                    else KEY_RENDERED_LFS_SHA.get(year)
-                    or KEY_BROKEN_FONT_SHA.get(year)
+                    else KEY_RENDERED_LFS_SHA.get(year) or KEY_BROKEN_FONT_SHA.get(year)
                 ),
             )
             if key_name is not None
