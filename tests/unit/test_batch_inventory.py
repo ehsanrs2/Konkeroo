@@ -137,8 +137,7 @@ def test_rendered_key_repo_lfs_pins_are_identity_checks_not_real_media(tmp_path)
 
     (tmp_path / "92_key.pdf").write_bytes(b"%PDF-1.7\nsynthetic source mismatch\n")
     (tmp_path / "93_key.pdf").write_text(
-        "version https://git-lfs.github.com/spec/v1\n"
-        f"oid sha256:{'0' * 64}\nsize 123\n"
+        f"version https://git-lfs.github.com/spec/v1\noid sha256:{'0' * 64}\nsize 123\n"
     )
     refreshed = _by_year(inventory_sources(tmp_path))
     assert refreshed[1392].key.status == "SOURCE_HASH_MISMATCH"
