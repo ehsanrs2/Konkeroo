@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from dataclasses import asdict
+from dataclasses import asdict, replace
 from hashlib import sha256
 from pathlib import Path
 
@@ -11,6 +11,7 @@ import pytest
 from PIL import Image, ImageDraw
 
 from english_exam.batch_inventory import KEY_RENDERED_LFS_SHA
+from english_exam import rendered_source_acceptance as module
 from english_exam.rendered_source_acceptance import (
     RENDERED_YEARS,
     audit_rendered_sources,
@@ -108,3 +109,31 @@ def test_expected_source_contract_is_three_distinct_lfs_objects() -> None:
     assert RENDERED_YEARS == (1392, 1393, 1394)
     assert len(set(KEY_RENDERED_LFS_SHA.values())) == len(RENDERED_YEARS)
     assert all(len(sha) == 64 for sha in KEY_RENDERED_LFS_SHA.values())
+
+
+def test_cross_stage_page_metadata_conflict_fails_closed(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    path = tmp_path / "94-key.jpg"
+    _make_two_grids().save(path, "JPEG", quality=95, subsampling=0)
+    monkeypatch.setitem(KEY_RENDERED_LFS_SHA, 1394, sha256(path.read_bytes()).hexdigest())
+
+    original = module.process_cell_family
+
+    def mismatch(directory: Path):
+        batch = original(directory)
+        years = list(batch.years)
+        source = years[-1]
+        first_page = source.pages[0]
+        years[-1] = replace(
+            source, pages=(replace(first_page, width_px=first_page.width_px + 1),)
+        )
+        return replace(batch, years=tuple(years))
+
+    monkeypatch.setattr(module, "process_cell_family", mismatch)
+    report = audit_rendered_sources(tmp_path)
+    row = report.years[-1]
+    assert row.status == "STAGE_EVIDENCE_CONFLICT"
+    assert "STAGE_PAGE_METADATA_CONFLICT" in row.flags
+    assert report.status == "STAGE_EVIDENCE_CONFLICT"
+    assert report.provisional_geometry_years == 0
