@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import json
 from dataclasses import asdict, dataclass
+from itertools import pairwise
 from pathlib import Path
 
 import pdfplumber
@@ -103,7 +104,7 @@ def _matches_outer_edges(
 def _valid_spacing(bounds: tuple[int, ...]) -> bool:
     if not 4 <= len(bounds) <= MAX_BOUNDARIES:
         return False
-    gaps = [right - left for left, right in zip(bounds, bounds[1:])]
+    gaps = [right - left for left, right in pairwise(bounds)]
     # Conservative test-only assumption: a doubled gap may be a missing
     # separator. Genuine asymmetric tables are left unresolved, not guessed.
     return min(gaps) >= MIN_CELL_SIDE + 2 and max(gaps) * 5 <= min(gaps) * 9
@@ -163,8 +164,8 @@ def propose_cell_lattice(image: Image.Image, region: RegionCandidate) -> CellLat
             col,
             (x0 + 1, y0 + 1, x1 - 1, y1 - 1),
         )
-        for row, (y0, y1) in enumerate(zip(ys, ys[1:]))
-        for col, (x0, x1) in enumerate(zip(xs, xs[1:]))
+        for row, (y0, y1) in enumerate(pairwise(ys))
+        for col, (x0, x1) in enumerate(pairwise(xs))
     )
     return CellLattice(region.bbox_px, ys, xs, cells)
 
