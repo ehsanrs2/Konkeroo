@@ -121,8 +121,8 @@ def test_custom_source_pin_recognizes_valid_bytes_without_publishing_them(tmp_pa
 def test_rendered_key_repo_lfs_pins_are_identity_checks_not_real_media(tmp_path):
     for year, filename in ((1392, "92_key.pdf"), (1393, "93_key.pdf"), (1394, "94-key.jpg")):
         (tmp_path / filename).write_text(
-            "version https://git-lfs.github.com/spec/v1\\n"
-            f"oid sha256:{KEY_RENDERED_LFS_SHA[year]}\\nsize 123\\n"
+            "version https://git-lfs.github.com/spec/v1\n"
+            f"oid sha256:{KEY_RENDERED_LFS_SHA[year]}\nsize 123\n"
         )
 
     report = inventory_sources(tmp_path)
@@ -135,10 +135,10 @@ def test_rendered_key_repo_lfs_pins_are_identity_checks_not_real_media(tmp_path)
         assert observed.actual_sha256 is None
         assert not by_year[year].can_attempt_key
 
-    (tmp_path / "92_key.pdf").write_bytes(b"%PDF-1.7\\nsynthetic source mismatch\\n")
+    (tmp_path / "92_key.pdf").write_bytes(b"%PDF-1.7\nsynthetic source mismatch\n")
     (tmp_path / "93_key.pdf").write_text(
-        "version https://git-lfs.github.com/spec/v1\\n"
-        f"oid sha256:{'0' * 64}\\nsize 123\\n"
+        "version https://git-lfs.github.com/spec/v1\n"
+        f"oid sha256:{'0' * 64}\nsize 123\n"
     )
     refreshed = _by_year(inventory_sources(tmp_path))
     assert refreshed[1392].key.status == "SOURCE_HASH_MISMATCH"
