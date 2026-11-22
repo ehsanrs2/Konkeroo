@@ -20,6 +20,14 @@ KEY_1395_SHA = "298efdeb70dc84b3bf92872f96bf2f15394f617e8c9e8d6cb9364e50789b3d9b
 # Exact Git LFS object OIDs committed in this repository. These pin
 # repository media identity, NOT an independent publisher checksum or
 # official answer correctness.
+# Identity of the three rendered keys as stored in THIS repository's LFS
+# pointers. These are NOT independent publisher signatures or answer authority.
+KEY_RENDERED_LFS_SHA = {
+    1392: "d48c332dfa189adde10b2dfbd0ef03ccad6586e4222da9c3159077200edb51c6",
+    1393: "264e1ba0f4b970977b9da13a2125606d44502563308db9e5fbe972786e5f7e46",
+    1394: "6bb88afff457a2c9fad1d34af8c77871b0670432f1218902307c46eef3bedaa6",
+}
+
 KEY_BROKEN_FONT_SHA = {
     1397: "c00ddaeba1bb640ec095d7823f31e80d2e548ee26a16eeab9f8e95f11784263f",
     1398: "baa697ee3592b1a5d89896938e5d96e93ba445d86c2cb85c41876cd44fb0326c",
@@ -117,7 +125,8 @@ def _specs() -> tuple[tuple[SourceSpec, SourceSpec | None], ...]:
                     if year == 1395
                     else KEY_1396_SHA
                     if year == 1396
-                    else KEY_BROKEN_FONT_SHA.get(year)
+                    else KEY_RENDERED_LFS_SHA.get(year)
+                    or KEY_BROKEN_FONT_SHA.get(year)
                 ),
             )
             if key_name is not None
