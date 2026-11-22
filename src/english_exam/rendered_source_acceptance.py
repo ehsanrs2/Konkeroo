@@ -113,9 +113,7 @@ def assemble_acceptance(
                     or len(rpage.regions) != len(cpage.regions)
                 ):
                     flags.append("STAGE_PAGE_METADATA_CONFLICT")
-                complete = sum(
-                    item.status == "UNVERIFIED_CELL_LATTICE" for item in cpage.regions
-                )
+                complete = sum(item.status == "UNVERIFIED_CELL_LATTICE" for item in cpage.regions)
                 pages.append(
                     PageAcceptance(
                         page_number=index,
@@ -202,7 +200,9 @@ def audit_rendered_sources(source_dir: Path) -> RenderedAcceptance:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Rendered-key original-media acceptance diagnostics")
+    parser = argparse.ArgumentParser(
+        description="Rendered-key original-media acceptance diagnostics"
+    )
     parser.add_argument("--source-dir", type=Path, default=Path("source"))
     parser.add_argument(
         "--require-sources",
