@@ -93,12 +93,12 @@ class CellBatch:
     exceptions: int
 
 
-def _matches_outer_edges(
-    bounds: tuple[int, ...], first: int, last: int
-) -> bool:
-    return bool(bounds) and abs(bounds[0] - first) <= BOUNDARY_TOLERANCE and abs(
-        bounds[-1] - last
-    ) <= BOUNDARY_TOLERANCE
+def _matches_outer_edges(bounds: tuple[int, ...], first: int, last: int) -> bool:
+    return (
+        bool(bounds)
+        and abs(bounds[0] - first) <= BOUNDARY_TOLERANCE
+        and abs(bounds[-1] - last) <= BOUNDARY_TOLERANCE
+    )
 
 
 def _valid_spacing(bounds: tuple[int, ...]) -> bool:
@@ -147,9 +147,7 @@ def propose_cell_lattice(image: Image.Image, region: RegionCandidate) -> CellLat
     )
     if ys is None or xs is None or not _valid_spacing(ys) or not _valid_spacing(xs):
         return None
-    if not _matches_outer_edges(xs, left, right) or not _matches_outer_edges(
-        ys, top, bottom
-    ):
+    if not _matches_outer_edges(xs, left, right) or not _matches_outer_edges(ys, top, bottom):
         return None
     if len(ys) != region.horizontal_rules or len(xs) != region.vertical_rules:
         return None
@@ -180,8 +178,12 @@ def inspect_page_cells(image: Image.Image, *, page_number: int = 1) -> PageCellS
         "REGION_OVERLAP_AMBIGUOUS",
     ):
         return PageCellSummary(
-            page_number, regions.width_px, regions.height_px,
-            "REGION_GEOMETRY_UNRESOLVED", regions.status, (),
+            page_number,
+            regions.width_px,
+            regions.height_px,
+            "REGION_GEOMETRY_UNRESOLVED",
+            regions.status,
+            (),
         )
     summaries = []
     for index, region in enumerate(regions.regions):
@@ -204,8 +206,12 @@ def inspect_page_cells(image: Image.Image, *, page_number: int = 1) -> PageCellS
     else:
         status = "NO_COMPLETE_CELL_LATTICE"
     return PageCellSummary(
-        page_number, regions.width_px, regions.height_px, status,
-        regions.status, tuple(summaries),
+        page_number,
+        regions.width_px,
+        regions.height_px,
+        status,
+        regions.status,
+        tuple(summaries),
     )
 
 
@@ -213,8 +219,13 @@ def _source_error(
     source: SourceObservation, status: str, flags: tuple[str, ...]
 ) -> YearCellSummary:
     return YearCellSummary(
-        source.year, source.filename, source.status, source.actual_sha256,
-        status, (), flags,
+        source.year,
+        source.filename,
+        source.status,
+        source.actual_sha256,
+        status,
+        (),
+        flags,
     )
 
 
@@ -282,8 +293,13 @@ def _inspect_source(path: Path, source: SourceObservation) -> YearCellSummary:
         else:
             status = "NO_COMPLETE_CELL_LATTICE"
     return YearCellSummary(
-        source.year, source.filename, source.status, source.actual_sha256,
-        status, tuple(pages), tuple(flags),
+        source.year,
+        source.filename,
+        source.status,
+        source.actual_sha256,
+        status,
+        tuple(pages),
+        tuple(flags),
     )
 
 
@@ -306,8 +322,12 @@ def process_cell_family(source_dir: Path) -> CellBatch:
         for row in years
     )
     return CellBatch(
-        "1.0", "RENDERED_KEY_CELL_LATTICE", "BATCH_DIAGNOSTICS_ONLY",
-        tuple(years), accepted, len(years) - accepted,
+        "1.0",
+        "RENDERED_KEY_CELL_LATTICE",
+        "BATCH_DIAGNOSTICS_ONLY",
+        tuple(years),
+        accepted,
+        len(years) - accepted,
     )
 
 
