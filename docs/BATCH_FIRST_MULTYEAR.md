@@ -13,7 +13,7 @@ uv run --dev python -m english_exam.batch_inventory --source-dir source
 
 The command prints deterministic JSON containing a `schema_version`, 15 per-year records, per-file media-readiness status, file hashes when accessible, one row for the intentionally absent 1405 official key, total source availability and exception counts. It does **not** extract or reproduce full question text, key sequences or original media.
 
-- `LOCAL_SOURCE_PINNED`: real PDF/JPEG header and SHA-256 equal an **already recorded** expected hash (only particular 1395/1396 sources have those pins). This indicates source identity **only**, not a correct interpretation.
+- `LOCAL_SOURCE_PINNED`: real PDF/JPEG header and SHA-256 equal an **already recorded** expected hash (1392–1394 repository-LFS-rendered keys, 1395/1396 and 1397–1399 broken-font key pins are recorded; scope of provenance differs). This indicates source identity **only**, not a correct interpretation.
 - `LOCAL_SOURCE_UNPINNED`: real PDF/JPEG header, observed SHA, but **no trusted expected hash yet**; suitable for exploratory provisional work, not identity attestation.
 - `LFS_POINTER_ONLY`: the local file is an LFS metadata pointer, **not a usable PDF**. `SOURCE_IDENTITY_CONFLICT` additionally flags pointer OIDs inconsistent with an existing pin.
 - `SOURCE_MISSING`, `MALFORMED_LFS_POINTER`, `MEDIA_SIGNATURE_MISMATCH`, `SOURCE_HASH_MISMATCH`: independent per-source exceptions; never silently convert a pointer/invalid file to validated media.
@@ -62,3 +62,14 @@ The existing 1396 vocabulary/Cloze/Reading sample correction modules and 1395 so
 This plan **removes routine owner involvement for provisional development**, not scientific uncertainty. AI-only validation can be the project's provisional quality criterion and still have an explicit error rate that is unknown until measured. No unverified official answer can be labeled `final_verified`; an INITIAL key is not automatically FINAL; 1405 stays no-key; public dataset release stays **BLOCKED** until a separate authority and source redistribution-rights decision (D-010). No history rewrite, LFS deletion or rights decision is implied here.
 
 Implementation tracker: [Issue #39](https://github.com/ehsanrs2/Konkeroo/issues/39).
+
+
+## Rendered-key original-media diagnostic (1392–1394)
+
+After the geometric region and cell-lattice probes, [the source-bound
+acceptance command](RENDERED_SOURCE_ACCEPTANCE.md) compares the repo LFS
+identities, media readiness, page geometries and cell-lattice statuses
+in one metadata-only run. These OIDs are **repository identities, not
+publisher attestations**. CI skips genuine-original checks without
+matching LFS bytes. This work does not produce a complete key, OCR
+sequence, official answer attribution or public dataset release.

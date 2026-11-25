@@ -18,3 +18,8 @@ For a candidate region, an **in-memory** typed `CellLattice` holds ordered 0-bas
 Next substantial gate: obtain real media in a private/authorized environment, collect page-level detector statuses and source-identity evidence, then evaluate limited visually anchored cell readings and special entries (1393/Q100 has multiple accepted answers). Keep uncertain rows unresolved. No complete answer key can be promoted to `final_verified` from this module.
 
 Tracking: [Issue #51](https://github.com/ehsanrs2/Konkeroo/issues/51), [Issue #49](https://github.com/ehsanrs2/Konkeroo/issues/49), and umbrella [Issue #39](https://github.com/ehsanrs2/Konkeroo/issues/39). Source redistribution decision D-010 and public release status `BLOCKED` remain unchanged.
+
+
+The next source-bound check is [rendered original-media acceptance](RENDERED_SOURCE_ACCEPTANCE.md),
+which pins the repository LFS object identities, compares stage counts and
+separates source-present evidence from synthetic CI. It does not decode answers.

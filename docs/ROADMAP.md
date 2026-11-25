@@ -11,7 +11,7 @@ This is a *direction and execution order*, not a delivery-date commitment. Mark 
 | M2c | Provisional 1396 key-to-exam alignment | **Source-present original exam+key integration owner-reported PASS; PR #38 merged** | 30 initial-key structural joins with pinned revision, no answer promotion |
 | M2d | Other native paired grids (1401, 1402, 1404) | **Generic family-wide strict table probe in PR #42; variant/edition attribution and real-media acceptance pending** | Reuse 1395 validated importer, safely inspect three other native grids together, retain exceptions |
 | M2e | Broken-font paired grids (1397–1399) | **Family-wide Q1-anchored glyph candidate probe in PR #44; source-page reconciliation pending** | Repo-LFS pinned sources, collision/ambiguity rejection, no unverified final key |
-| M2f | Rendered paired keys (1392–1394; includes JPG) | **Media/region geometry merged (#46/#48/#50); fail-closed cell lattice proposals in PR; original-media acceptance and visual decoding pending** | Real-source anchored cell mapping, variant/edition evidence and confidence flags |
+| M2f | Rendered paired keys (1392–1394; includes JPG) | **Geometry and cell proposals merged (#46/#48/#50/#52); repository-LFS source-bound acceptance harness in development; no actual-source execution confirmed** | Real-source anchored cell mapping, variant/edition evidence and confidence flags |
 | M2g | 1391 four-booklet legacy grid | **Not started** | Variant-safe cross-page join; multiple accepted positions |
 | M2h | Personalized report keys (1403 native, 1400 raster) | **Not started** | Key vs candidate columns separated; deletion/positive-effect preserved |
 | M2i | Corpus completeness + 1405 no-key status | **Not started** | Explicit coverage/unsupported/absent matrix |
