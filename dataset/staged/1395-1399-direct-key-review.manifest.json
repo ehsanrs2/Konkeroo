@@ -1,0 +1,96 @@
+{
+  "schema_version": "1.0",
+  "artifact_type": "LOCAL_DIRECT_KEY_TRANSCRIPTION_REVIEW_MANIFEST",
+  "review_date": "2026-11-25",
+  "review_method": "OWNER_REPORTED_ALL_OPTIONS_CHECKED",
+  "review_status": "OWNER_CONFIRMED_TRANSCRIPTION",
+  "reviewed_artifact_sha256": "e7688ccdd31110fd7843cca45a04f8f869f26e940caf3b94499ffbe64d32358e",
+  "confirmed_artifact_sha256": "a315abd3546283092808afa468ed5bbb567ca9573545b1cacba81abb501c4f1f",
+  "reviewed_entries": 150,
+  "corrections": 0,
+  "publication_status": "BLOCKED",
+  "verified_final_answer": false,
+  "exam_alignment_status": "PENDING_NEW_BATCH_ALIGNMENT",
+  "sources": [
+    {
+      "year": 1395,
+      "filename": "95_Key.pdf",
+      "sha256": "298efdeb70dc84b3bf92872f96bf2f15394f617e8c9e8d6cb9364e50789b3d9b",
+      "repository_lfs_identity": "MATCH",
+      "page": 1,
+      "booklet": "A",
+      "exam_code": 1277,
+      "edition": "INITIAL",
+      "reviewed_entries": 30
+    },
+    {
+      "year": 1396,
+      "filename": "96_Key.pdf",
+      "sha256": "5d421dcddc780120b13a08753fd2559e7ec02a60200c7c88f4211d70429cba61",
+      "repository_lfs_identity": "MATCH",
+      "page": 1,
+      "booklet": "C",
+      "exam_code": 1277,
+      "edition": "INITIAL",
+      "reviewed_entries": 30
+    },
+    {
+      "year": 1397,
+      "filename": "97_Key.pdf",
+      "sha256": "c00ddaeba1bb640ec095d7823f31e80d2e548ee26a16eeab9f8e95f11784263f",
+      "repository_lfs_identity": "MATCH",
+      "page": 1,
+      "booklet": "E",
+      "exam_code": 1277,
+      "edition": "INITIAL",
+      "reviewed_entries": 30
+    },
+    {
+      "year": 1398,
+      "filename": "98_Key.pdf",
+      "sha256": "baa697ee3592b1a5d89896938e5d96e93ba445d86c2cb85c41876cd44fb0326c",
+      "repository_lfs_identity": "MATCH",
+      "page": 1,
+      "booklet": "C",
+      "exam_code": 1277,
+      "edition": "INITIAL",
+      "reviewed_entries": 30
+    },
+    {
+      "year": 1399,
+      "filename": "99_Key.pdf",
+      "sha256": "2cd70e03fb11bad443ea365dae082478fd893e42d598ef2e4b09d4abbda960c7",
+      "repository_lfs_identity": "MATCH",
+      "page": 1,
+      "booklet": "B",
+      "exam_code": null,
+      "edition": "INITIAL",
+      "reviewed_entries": 30
+    }
+  ],
+  "cumulative_local_staging": {
+    "years": [
+      1392,
+      1393,
+      1394,
+      1395,
+      1396,
+      1397,
+      1398,
+      1399
+    ],
+    "reviewed_entries": 240,
+    "review_batches": 2,
+    "combined_json_sha256": "0bf623f6b1a5af4d9b4052283bdcebe6ddd52c0e0a7d80fd2b9be2985f238efa",
+    "sqlite_sha256": "f85e89d5fdce79798d3d743661ad1a7873585500a73487e4b600589876f37522",
+    "sqlite_integrity_check": "ok",
+    "foreign_key_violations": 0
+  },
+  "notes": [
+    "Owner confirmed all 150 printed Q1–30 positions, no corrections, on 2026-11-25. Only transcription is approved.",
+    "All five uploaded PDFs match repository pins. 1396 positions match existing curated key; prior exam alignment evidence is separate and no historical ledger changed.",
+    "1399 has one uploaded PDF page despite printed 1/2 footer; Q1–30 complete, exam code unprinted.",
+    "The cumulative local files retain the first batch and its review digest; 1394 WebP repository-JPG identity remains unverified.",
+    "No answer values or local database published; no final authority, new exam alignment or production integration claimed."
+  ]
+}
