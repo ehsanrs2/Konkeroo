@@ -6,11 +6,11 @@ This is a *direction and execution order*, not a delivery-date commitment. Mark 
 | --- | --- | --- | --- |
 | M0 | Repo/bootstrap, safety rules, source preservation | **Implemented** | Versioned project and documented invariants |
 | M1 | 1396 English paper import | **Implemented on main** | 30 validated questions; page provenance and non-text manifest |
-| M2a | Answer-key foundation + 1395 native paired-grid import | **Implemented on main** | Separate staged key, 121 booklet-A entries, deterministic manifest |
-| M2b | 1396 direct-visual English key curation | **Curated on main; independent review pending** | Source-linked Q1–30 official claims, explicit uncertainty, testable data file |
+| M2a | Answer-key foundation + 1395 native paired-grid import | **Importer on main; direct Q1–30 reading owner-confirmed (2026-11-25)** | Keep full staged key and match exam booklet/English section |
+| M2b | 1396 direct-visual English key curation | **Existing curated key matches all 30 new owner-confirmed positions (2026-11-25); historical ledger unchanged** | Retain exact review evidence and initial-key authority |
 | M2c | Provisional 1396 key-to-exam alignment | **Source-present original exam+key integration owner-reported PASS; PR #38 merged** | 30 initial-key structural joins with pinned revision, no answer promotion |
 | M2d | Other native paired grids (1401, 1402, 1404) | **Generic family-wide strict table probe in PR #42; variant/edition attribution and real-media acceptance pending** | Reuse 1395 validated importer, safely inspect three other native grids together, retain exceptions |
-| M2e | Broken-font paired grids (1397–1399) | **Family-wide Q1-anchored glyph candidate probe in PR #44; source-page reconciliation pending** | Repo-LFS pinned sources, collision/ambiguity rejection, no unverified final key |
+| M2e | Broken-font paired grids (1397–1399) | **Direct visual Q1–30 readings: 90/90 owner-confirmed (2026-11-25); technical glyph probe optional** | Match exam section/booklet; no final authority promotion |
 | M2f | Rendered paired keys (1392–1394; includes JPG) | **Direct visual Q1–30 transcription: 90/90 owner-confirmed, no corrections (2026-11-25); local JSON/SQLite staging prepared** | Confirm question-paper English ranges/booklet alignment, 1394 original identity and edition; no final key promotion |
 | M2g | 1391 four-booklet legacy grid | **Not started** | Variant-safe cross-page join; multiple accepted positions |
 | M2h | Personalized report keys (1403 native, 1400 raster) | **Not started** | Key vs candidate columns separated; deletion/positive-effect preserved |
@@ -39,6 +39,8 @@ Dependencies may be interleaved: additional exam parsers (M3) are needed before 
 4. Proceed toward the core learning application as the curated corpus becomes usable. Existing family probes are optional diagnostics, not the critical path. See D-014 and [Issue #57](https://github.com/ehsanrs2/Konkeroo/issues/57).
 
 The 1392–1394 batch records confirmed readings, not aligned or final verified keys. Original PDFs for 1392 and 1393 match repository LFS pins; the 1394 upload is a WebP derivative with unknown booklet/edition and unverified repository identity. The old ruled-grid detector found zero candidates on four actual pages, so the optional profiler PR #56 is not a dependency.
+
+The second owner-confirmed batch (1395–1399) adds 150 printed positions with zero corrections. All five PDFs match repository SHA pins; 1399 exam code is unprinted and the single uploaded page has a 1/2 footer, but Q1–30 are present. Cumulative local staging: 240 positions, eight years, two review batches. See [second manifest](../dataset/staged/1395-1399-direct-key-review.manifest.json). Remaining key years: 1391 and 1400–1404. 1405 still has no official key in the audited corpus. New exam alignment and final verification remain separate.
 
 ## Historical sequence — batch-first (owner decision 2026-11-14; superseded for acquisition priority)
 
