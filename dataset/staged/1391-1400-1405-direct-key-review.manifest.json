@@ -1,0 +1,172 @@
+{
+  "schema_version": "1.1",
+  "artifact_type": "LOCAL_DIRECT_KEY_TRANSCRIPTION_REVIEW_MANIFEST",
+  "review_date": "2026-11-25",
+  "review_method": "OWNER_CONFIRMED_SELECTED_TRANSCRIPTION",
+  "review_status": "OWNER_CONFIRMED_TRANSCRIPTION",
+  "reviewed_artifact_sha256": "ff651c03b3ddc4d8c5fca37407c45d5b379420ab5d8e9abd9d49032cfc8dfe35",
+  "confirmed_artifact_sha256": "9a699de8bbaf16451106148b6dc94cb7feacbdf223f18f919bb356824ee1207e",
+  "reviewed_entries": 210,
+  "corrections": 0,
+  "excluded_entries": 90,
+  "excluded_booklets": {
+    "1391": [
+      "B",
+      "C",
+      "D"
+    ]
+  },
+  "publication_status": "BLOCKED",
+  "verified_final_answer": false,
+  "sources": [
+    {
+      "year": 1391,
+      "booklet": "A",
+      "source_filename": "91_Key.pdf",
+      "source_sha256": "1ac3270562909ba58b67dfbe802a718e0b72b844bdd3eda28debc9bf3c1fae32",
+      "repository_lfs_identity": "MATCH",
+      "source_pages": [
+        1
+      ],
+      "key_edition": "UNSPECIFIED",
+      "source_authority": "SOURCE_AS_PRINTED_NOT_FINAL_VERIFIED",
+      "exam_alignment_status": "BOOKLET_AND_ENGLISH_RANGE_MATCHED",
+      "reviewed_entries": 30
+    },
+    {
+      "year": 1400,
+      "booklet": "830A",
+      "source_filename": "1400_Key.pdf",
+      "source_sha256": "538f3dd691ba66b4dfa01fb9197220dda8040803e272d08f5e3b620320ba5d57",
+      "repository_lfs_identity": "MATCH",
+      "source_pages": [
+        1
+      ],
+      "key_edition": "WORKBOOK_KEY_EDITION_UNSPECIFIED",
+      "source_authority": "SOURCE_AS_PRINTED_NOT_FINAL_VERIFIED",
+      "exam_alignment_status": "PENDING",
+      "reviewed_entries": 30
+    },
+    {
+      "year": 1401,
+      "booklet": "B",
+      "source_filename": "1401_Key.pdf",
+      "source_sha256": "f1cf00247ff9e78c0de9173f13c3811c480f8186c4d12b6bcf2a4e7495b984bc",
+      "repository_lfs_identity": "MATCH",
+      "source_pages": [
+        1
+      ],
+      "key_edition": "INITIAL",
+      "source_authority": "SOURCE_AS_PRINTED_NOT_FINAL_VERIFIED",
+      "exam_alignment_status": "PENDING",
+      "reviewed_entries": 30
+    },
+    {
+      "year": 1402,
+      "booklet": "C",
+      "source_filename": "1402_Key.pdf",
+      "source_sha256": "8913b812479a1497d5a0ef57ba5d2db83c3dbd1aa6029123334fd755806fc433",
+      "repository_lfs_identity": "MATCH",
+      "source_pages": [
+        1,
+        2
+      ],
+      "key_edition": "INITIAL",
+      "source_authority": "SOURCE_AS_PRINTED_NOT_FINAL_VERIFIED",
+      "exam_alignment_status": "PENDING",
+      "reviewed_entries": 30
+    },
+    {
+      "year": 1403,
+      "booklet": "164C",
+      "source_filename": "1403_Key.pdf",
+      "source_sha256": "ec6dfd6e9cfd42b4d14823b86e317249f1822e2294ae5dbd55df48eed25aa922",
+      "repository_lfs_identity": "MATCH",
+      "source_pages": [
+        1
+      ],
+      "key_edition": "WORKBOOK_KEY_EDITION_UNSPECIFIED",
+      "source_authority": "SOURCE_AS_PRINTED_NOT_FINAL_VERIFIED",
+      "exam_alignment_status": "PENDING",
+      "reviewed_entries": 30
+    },
+    {
+      "year": 1404,
+      "booklet": "335C",
+      "source_filename": "1404-key.pdf",
+      "source_sha256": "ffbc3c26d560c72079dcf63072d192cd2f05f051f4974941448fd9dfa05778eb",
+      "repository_lfs_identity": "MATCH",
+      "source_pages": [
+        1
+      ],
+      "key_edition": "UNSPECIFIED",
+      "source_authority": "SOURCE_AS_PRINTED_NOT_FINAL_VERIFIED",
+      "exam_alignment_status": "PENDING",
+      "reviewed_entries": 30
+    },
+    {
+      "year": 1405,
+      "booklet": null,
+      "source_filename": "1405-key.webp",
+      "source_sha256": "64a027c55f9e88610b5b659e44d8d2d89ea87e9709f75397ddfa3f4c8549a403",
+      "repository_lfs_identity": "NOT_IN_REPOSITORY",
+      "source_pages": [
+        1
+      ],
+      "key_edition": "THIRD_PARTY_UNVERIFIED",
+      "source_authority": "THIRD_PARTY_MASTERTEST_UNVERIFIED",
+      "exam_alignment_status": "PENDING",
+      "reviewed_entries": 30
+    }
+  ],
+  "exam_alignment_1391": {
+    "status": "BOOKLET_AND_ENGLISH_RANGE_MATCHED",
+    "exam_filename": "91.pdf",
+    "exam_sha256": "dd2e6c3f25bc7492516a8aae7f4d9e79693e25598f2eb5a073e390074f1397bf",
+    "exam_booklet_code": "510A",
+    "exam_code": 1277,
+    "cover_pdf_page": 1,
+    "english_pdf_pages": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "printed_question_range": [
+      1,
+      30
+    ],
+    "key_booklet": "A",
+    "scope": "Booklet letter, exam code and printed English question range matched; no independent answer correctness assertion."
+  },
+  "cumulative_local_staging": {
+    "years": [
+      1391,
+      1392,
+      1393,
+      1394,
+      1395,
+      1396,
+      1397,
+      1398,
+      1399,
+      1400,
+      1401,
+      1402,
+      1403,
+      1404,
+      1405
+    ],
+    "reviewed_entries": 450,
+    "review_batches": 3,
+    "combined_json_sha256": "f0982ee23f47282d295876032b882f80a0d15abcaf8efc214df89902f9e8d900",
+    "sqlite_sha256": "31ff318f7ebcca05e0bc8a895ce11d7328171af5fad179b18d6a26d1a794a4c6",
+    "sqlite_integrity_check": "ok",
+    "foreign_key_violations": 0
+  },
+  "notes": [
+    "Only 1391 booklet A is active; B/C/D excluded per owner. 1405 MasterTest remains third-party unverified authority. Other exam alignments pending in this staging artifact; no final key or publication approval."
+  ]
+}
