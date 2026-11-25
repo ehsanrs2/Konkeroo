@@ -78,9 +78,14 @@ def profile_page(
     width, height = image.size
     if width < 96 or height < 96 or width * height > MAX_PIXELS:
         return PageMorphology(
-            page_number, width, height, pdf_text_layer_char_count,
-            pdf_vector_line_count, pdf_embedded_image_count,
-            "RASTER_BOUNDS_UNSUPPORTED", (),
+            page_number,
+            width,
+            height,
+            pdf_text_layer_char_count,
+            pdf_vector_line_count,
+            pdf_embedded_image_count,
+            "RASTER_BOUNDS_UNSUPPORTED",
+            (),
         )
     grayscale = image.convert("L")
     hist = grayscale.histogram()
@@ -112,19 +117,26 @@ def profile_page(
             )
         )
     return PageMorphology(
-        page_number, width, height, pdf_text_layer_char_count,
-        pdf_vector_line_count, pdf_embedded_image_count,
+        page_number,
+        width,
+        height,
+        pdf_text_layer_char_count,
+        pdf_vector_line_count,
+        pdf_embedded_image_count,
         "RUN_COMPLEXITY_LIMIT" if saturated else "PAGE_STATISTICS_OBSERVED",
         tuple(metrics),
     )
 
 
-def _error(
-    observed: SourceObservation, status: str, flags: tuple[str, ...]
-) -> YearMorphology:
+def _error(observed: SourceObservation, status: str, flags: tuple[str, ...]) -> YearMorphology:
     return YearMorphology(
-        observed.year, observed.filename, observed.status,
-        observed.actual_sha256, status, (), flags,
+        observed.year,
+        observed.filename,
+        observed.status,
+        observed.actual_sha256,
+        status,
+        (),
+        flags,
     )
 
 
@@ -154,13 +166,15 @@ def _profile_source(path: Path, observed: SourceObservation) -> YearMorphology:
                     )
                     if pixel_count < 1 or pixel_count > MAX_PIXELS:
                         return _error(
-                            observed, "MEDIA_BOUNDS_UNSUPPORTED",
+                            observed,
+                            "MEDIA_BOUNDS_UNSUPPORTED",
                             tuple(flags + ["PDF_PIXEL_LIMIT"]),
                         )
                     image = page.to_image(resolution=RENDER_DPI, antialias=False).original
                     pages.append(
                         profile_page(
-                            image, page_number=page_number,
+                            image,
+                            page_number=page_number,
                             pdf_text_layer_char_count=len(page.chars),
                             pdf_vector_line_count=len(page.lines),
                             pdf_embedded_image_count=len(page.images),
@@ -169,21 +183,27 @@ def _profile_source(path: Path, observed: SourceObservation) -> YearMorphology:
         else:
             return _error(observed, "MEDIA_UNSUPPORTED", tuple(flags + ["MEDIA_KIND"]))
     except (
-        OSError, ValueError, RuntimeError, TypeError, PDFException,
+        OSError,
+        ValueError,
+        RuntimeError,
+        TypeError,
+        PDFException,
         Image.DecompressionBombError,
     ):
-        return _error(
-            observed, "SOURCE_PROFILE_FAILED", tuple(flags + ["MEDIA_READ_FAILED"])
-        )
+        return _error(observed, "SOURCE_PROFILE_FAILED", tuple(flags + ["MEDIA_READ_FAILED"]))
 
     if len(pages) > 1:
         flags.append("MULTIPAGE_CONTINUATION_UNRESOLVED")
     return YearMorphology(
-        observed.year, observed.filename, observed.status, observed.actual_sha256,
+        observed.year,
+        observed.filename,
+        observed.status,
+        observed.actual_sha256,
         "PAGE_STATISTICS_OBSERVED"
         if all(page.status == "PAGE_STATISTICS_OBSERVED" for page in pages)
         else "PAGE_STATISTICS_PARTIAL",
-        tuple(pages), tuple(flags),
+        tuple(pages),
+        tuple(flags),
     )
 
 
@@ -212,7 +232,8 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Source-bound, metadata-only image morphology")
     parser.add_argument("--source-dir", type=Path, default=Path("source"))
     parser.add_argument(
-        "--require-sources", action="store_true",
+        "--require-sources",
+        action="store_true",
         help="Exit 2 if any of the three repository-SHA-matched originals is missing",
     )
     args = parser.parse_args(argv)
