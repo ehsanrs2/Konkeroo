@@ -88,7 +88,7 @@ def profile_page(
     metrics: list[ThresholdProfile] = []
     saturated = False
     for threshold in THRESHOLDS:
-        mask = grayscale.point(lambda pixel: 1 if pixel <= threshold else 0)
+        mask = grayscale.point(lambda pixel, limit=threshold: 1 if pixel <= limit else 0)
         pixels = mask.tobytes()
         horizontal = _runs(pixels, width, height, rows=True)
         vertical = _runs(pixels, width, height, rows=False)
