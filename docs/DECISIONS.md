@@ -79,6 +79,11 @@ The owner requests that 1391–1405 be processed **by reusable key/exam source f
 
 **Authority boundary:** This accepted workflow change **does not** grant independent answer correctness or public distribution rights. No false `final_verified`, invented 1405 official key, automatic initial-to-final key promotion, or dataset release. D-003, D-005 and the unresolved public Git LFS rights decision D-010 still govern learner/public release. See [batch workflow](BATCH_FIRST_MULTYEAR.md), [Issue #39](https://github.com/ehsanrs2/Konkeroo/issues/39).
 
+## D-014 — Finite corpus direct reading and batch confirmation
+**Status: Accepted direction (owner decision 2026-11-25; recorded in this PR).** For historical keys and exam questions, prioritize direct assistant reading of uploaded originals, structured local curation and owner batch confirmation instead of expanding OCR or geometric parser development. This supersedes D-013's family-parser-first execution priority, not its provisional authority or publication restrictions. Existing technical probes are optional tools, not prerequisites to data acquisition.
+
+Record actual confirmation against the reviewed artifact digest, preserve source claims and source metadata, and do not infer question-paper alignment, booklet, final edition or answers absent from the source. Local reviewed JSON may feed a staging database; the public repository receives metadata-only manifests pending D-010. The owner confirmed all 90 printed Q1–30 positions from 1392–1394 on 2026-11-25 with no corrections. See [manifest](../dataset/staged/1392-1394-direct-key-review.manifest.json) and [Issue #57](https://github.com/ehsanrs2/Konkeroo/issues/57). No production database integration, independent key-blind solution, final verification or public release is asserted.
+
 ## How to change a decision
 
 Propose a PR that updates this file, explains new evidence and alternatives, cites affected modules/tests, and links a targeted issue. Do not silently relabel `Open` decisions as `Accepted`.
