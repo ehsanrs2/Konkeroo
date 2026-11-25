@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "artifact_type": "LOCAL_DIRECT_KEY_TRANSCRIPTION_REVIEW_MANIFEST",
+  "review_date": "2026-11-25",
+  "review_method": "OWNER_REPORTED_ALL_OPTIONS_CHECKED",
+  "review_status": "OWNER_CONFIRMED_TRANSCRIPTION",
+  "reviewed_artifact_sha256": "243f74d3e1bc7fe29b49ab85d0c895380547cdfbe74bdb341b0cd6678a5f6b4a",
+  "confirmed_artifact_sha256": "befffcaf0c3f15917a1ca46f94f2c3fe547e85808f6a02b43e9907e3f21af2f7",
+  "local_staging_sqlite_sha256": "597ca4dd3e94d43b3871878c52755655581b88e7a1f0d3a0a8a286ade200e411",
+  "reviewed_entries": 90,
+  "corrections": 0,
+  "publication_status": "BLOCKED",
+  "verified_final_answer": false,
+  "exam_alignment_status": "PENDING",
+  "sources": [
+    {
+      "year": 1392,
+      "filename": "92_key.pdf",
+      "sha256": "d48c332dfa189adde10b2dfbd0ef03ccad6586e4222da9c3159077200edb51c6",
+      "repository_lfs_identity": "MATCH",
+      "page": 1,
+      "booklet": "B",
+      "edition": "INITIAL",
+      "reviewed_entries": 30
+    },
+    {
+      "year": 1393,
+      "filename": "93_key.pdf",
+      "sha256": "264e1ba0f4b970977b9da13a2125606d44502563308db9e5fbe972786e5f7e46",
+      "repository_lfs_identity": "MATCH",
+      "page": 1,
+      "booklet": "A",
+      "edition": "INITIAL",
+      "reviewed_entries": 30
+    },
+    {
+      "year": 1394,
+      "filename": "94-key.webp",
+      "sha256": "9f86f1e0f9549ead56c6ec7e6f4a36720104c892d2c480f8a2e5c994f6863342",
+      "repository_lfs_identity": "UNVERIFIED",
+      "page": null,
+      "booklet": null,
+      "edition": "UNKNOWN",
+      "reviewed_entries": 30
+    }
+  ],
+  "notes": [
+    "Only printed Q1–30 answer positions were reviewed; English-section and booklet alignment to exam papers are pending.",
+    "User reported checking all 90 options with no corrections. SHA-256 pins identify the exact review and confirmed local artifacts; neither digest is a publisher attestation.",
+    "Local JSON and SQLite are not tracked in the public repository. Local structural checks: counts, unique question numbers, option range, source hashes, SQLite integrity and foreign keys. No production importer or final verified answers claimed."
+  ]
+}
