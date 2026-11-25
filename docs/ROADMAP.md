@@ -2,7 +2,7 @@
 
 This is a *direction and execution order*, not a delivery-date commitment. Mark an item done only when its code, tests, review, and artifacts have been checked. For current code, GitHub `main` is the baseline; test-pass claims require test evidence.
 
-| ID | Workstream | Status as of 2026-11-22 | Exit gate |
+| ID | Workstream | Status as of 2026-11-25 | Exit gate |
 | --- | --- | --- | --- |
 | M0 | Repo/bootstrap, safety rules, source preservation | **Implemented** | Versioned project and documented invariants |
 | M1 | 1396 English paper import | **Implemented on main** | 30 validated questions; page provenance and non-text manifest |
@@ -11,7 +11,7 @@ This is a *direction and execution order*, not a delivery-date commitment. Mark 
 | M2c | Provisional 1396 key-to-exam alignment | **Source-present original exam+key integration owner-reported PASS; PR #38 merged** | 30 initial-key structural joins with pinned revision, no answer promotion |
 | M2d | Other native paired grids (1401, 1402, 1404) | **Generic family-wide strict table probe in PR #42; variant/edition attribution and real-media acceptance pending** | Reuse 1395 validated importer, safely inspect three other native grids together, retain exceptions |
 | M2e | Broken-font paired grids (1397–1399) | **Family-wide Q1-anchored glyph candidate probe in PR #44; source-page reconciliation pending** | Repo-LFS pinned sources, collision/ambiguity rejection, no unverified final key |
-| M2f | Rendered paired keys (1392–1394; includes JPG) | **Geometry and cell proposals merged (#46/#48/#50/#52); repository-LFS source-bound acceptance harness in development; no actual-source execution confirmed** | Real-source anchored cell mapping, variant/edition evidence and confidence flags |
+| M2f | Rendered paired keys (1392–1394; includes JPG) | **Direct visual Q1–30 transcription: 90/90 owner-confirmed, no corrections (2026-11-25); local JSON/SQLite staging prepared** | Confirm question-paper English ranges/booklet alignment, 1394 original identity and edition; no final key promotion |
 | M2g | 1391 four-booklet legacy grid | **Not started** | Variant-safe cross-page join; multiple accepted positions |
 | M2h | Personalized report keys (1403 native, 1400 raster) | **Not started** | Key vs candidate columns separated; deletion/positive-effect preserved |
 | M2i | Corpus completeness + 1405 no-key status | **Not started** | Explicit coverage/unsupported/absent matrix |
@@ -31,7 +31,16 @@ This is a *direction and execution order*, not a delivery-date commitment. Mark 
 
 Dependencies may be interleaved: additional exam parsers (M3) are needed before matching keys of those years to English sections. M2b does not require solving all other years first. M4–M9 are product targets, not claims about present functionality.
 
-## Recommended immediate sequence — batch-first (owner decision 2026-11-14)
+## Active immediate sequence — direct curation (owner decision 2026-11-25)
+
+1. Obtain remaining original keys and exam papers by upload, directly read their source claims and preserve unknown/ambiguous entries. Do not expand OCR or geometry tooling merely to acquire this finite corpus.
+2. Review answer positions in compact batches, record explicit owner confirmation bound to the exact artifact digest, and preserve local JSON/SQLite staging. Only metadata manifests enter public GitHub pending D-010.
+3. Match source booklet/edition and printed question numbers against actual exam questions before attaching answers; do not infer English ranges. Keep independent AI solutions and final answer authority distinct.
+4. Proceed toward the core learning application as the curated corpus becomes usable. Existing family probes are optional diagnostics, not the critical path. See D-014 and [Issue #57](https://github.com/ehsanrs2/Konkeroo/issues/57).
+
+The 1392–1394 batch records confirmed readings, not aligned or final verified keys. Original PDFs for 1392 and 1393 match repository LFS pins; the 1394 upload is a WebP derivative with unknown booklet/edition and unverified repository identity. The old ruled-grid detector found zero candidates on four actual pages, so the optional profiler PR #56 is not a dependency.
+
+## Historical sequence — batch-first (owner decision 2026-11-14; superseded for acquisition priority)
 
 1. **Start with a single corpus-wide inventory.** Use `uv run --dev python -m english_exam.batch_inventory --source-dir source` and keep its `SOURCES_INCOMPLETE` / pointer / missing / mismatch statuses explicit. This operation is read-only; it is **not** full-year import or semantic answer checking.
 2. **Implement representative technical source families in batches.** First, [native paired family probe](NATIVE_PAIRED_FAMILY.md) (PR #42) reuses the 1395 validated importer and scans 1401/02/04 in a single run, without inventing variant/edition attribution. Then use the [broken-font glyph family probe](BROKEN_FONT_FAMILY.md) (PR #44) for 1397–99 (unique source glyphs only, multi-page still partial), followed by 1392–94 rendered-media triage (not visual key decoding), 1391 legacy, and 1400/1403 personalized families. Source-specific question ranges, booklets, editions and candidate/official columns remain required; do not build an unsafe one-size-fits-all key importer.
