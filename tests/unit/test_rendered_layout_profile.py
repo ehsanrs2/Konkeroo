@@ -80,8 +80,14 @@ def test_jpeg_is_read_and_serializes_only_statistics(tmp_path: Path) -> None:
     assert row.pages[0].thresholds[0].horizontal_long_runs > 0
     payload = json.dumps(asdict(row))
     for forbidden in (
-        "ocr", "answers", "answer_positions", "raw_text", "row_boundaries_px",
-        "column_boundaries_px", "cell_crop", "final_verified",
+        "ocr",
+        "answers",
+        "answer_positions",
+        "raw_text",
+        "row_boundaries_px",
+        "column_boundaries_px",
+        "cell_crop",
+        "final_verified",
     ):
         assert forbidden not in payload
 
@@ -137,9 +143,7 @@ def test_pdf_page_counts_without_text_value_leakage(
     assert "secret" not in json.dumps(asdict(year))
 
 
-def test_pdf_bounds_block_rasterization(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
+def test_pdf_bounds_block_rasterization(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     class TooLargePage:
         width = 120_000
         height = 120_000
@@ -181,10 +185,14 @@ def test_only_exact_lfs_matched_source_is_profiled(
     assert result.sources_pinned == 1
     assert result.profiled_pages == 1
     assert [item.status for item in result.years] == [
-        "SOURCE_NOT_READY", "SOURCE_NOT_READY", "PAGE_STATISTICS_OBSERVED"
+        "SOURCE_NOT_READY",
+        "SOURCE_NOT_READY",
+        "PAGE_STATISTICS_OBSERVED",
     ]
     assert [item.source_status for item in result.years] == [
-        "LFS_POINTER_ONLY", "SOURCE_HASH_MISMATCH", "LOCAL_SOURCE_PINNED"
+        "LFS_POINTER_ONLY",
+        "SOURCE_HASH_MISMATCH",
+        "LOCAL_SOURCE_PINNED",
     ]
 
 
