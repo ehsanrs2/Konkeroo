@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass
 
-from english_exam.m4_events import LearnerEventStore
+from english_exam.m4_events import LearnerEvent, LearnerEventStore
 from english_exam.m4_practice import Rating
 
 SCHEDULER_VERSION = "pilot-v1"
@@ -47,14 +47,28 @@ def next_interval(previous: int | None, rating: Rating) -> int:
 
 def replay_state(store: LearnerEventStore, learner_id: str) -> tuple[ReviewState, ...]:
     """Project committed events for one learner and the pinned snapshot."""
-    eligible = set(store.eligible_unit_revisions())
+    return project_history(
+        store.history(learner_id),
+        set(store.eligible_unit_revisions()),
+        learner_id,
+        store.snapshot_sha256,
+    )
+
+
+def project_history(
+    events: tuple[LearnerEvent, ...],
+    eligible: set[tuple[str, str]],
+    learner_id: str,
+    snapshot_sha256: str,
+) -> tuple[ReviewState, ...]:
+    """Project a single captured history for consistent read-only consumers."""
     states: dict[tuple[str, str], ReviewState] = {}
     last_sequence = 0
-    for event in store.history(learner_id):
+    for event in events:
         key = (event.artifact_sha256, event.unit_id)
         if (
             event.learner_id != learner_id
-            or event.snapshot_sha256 != store.snapshot_sha256
+            or event.snapshot_sha256 != snapshot_sha256
             or key not in eligible
         ):
             raise ValueError("Event outside eligible snapshot history")
