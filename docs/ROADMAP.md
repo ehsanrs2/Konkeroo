@@ -40,8 +40,8 @@ The latest [M3/M4 handoff](M3_M4_HANDOFF.md) supersedes the older acquisition st
 | M3 | Content owner-confirmed locally: 430 questions, 1720 options, 62 passages, 15 attestations | Key alignment exceptions remain separate (260 candidates, 170 blocked); public release blocked |
 | M4.1 | 1391/510A local pilot frozen (30 proposed solutions); packet exporter under review | Reproducible key-excluded packets, frozen independent-pass hypotheses |
 | M4.2 | 30 candidate comparisons recorded locally; provisional only | Retain uncertainty, key provenance and conflicts; no automatic final answer |
-| M4.3 | Next: Persian explanatory learning records | Evidence, distractor analysis, explicit caveats |
-| M4.4 | Pending | Vocabulary, grammar, skills |
+| M4.3 | Private 1391/510A pilot: 30 provisional Persian explanations, 90 distractor analyses, 30 evidence quotes and learning tips; contract under review | Preserve evidence and caveats; no verified release |
+| M4.4 | Next: extract vocabulary, grammar and skills from pilot | Source-linked, deduplicated educational concepts |
 | M4.5 | Pending | Learning units, then adaptive retrieval practice and Android |
 
 See [M4 pilot protocol](M4_PILOT_PROTOCOL.md) and [Issue #59](https://github.com/ehsanrs2/Konkeroo/issues/59). Public release remains blocked by D-010. No final verified answers or production database integration are claimed. Acquisition details below are historical.
