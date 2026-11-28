@@ -42,9 +42,11 @@ The latest [M3/M4 handoff](M3_M4_HANDOFF.md) supersedes the older acquisition st
 | M4.2 | 30 candidate comparisons recorded locally; provisional only | Retain uncertainty, key provenance and conflicts; no automatic final answer |
 | M4.3 | Private 1391/510A pilot: 30 provisional Persian explanations, 90 distractor analyses, 30 evidence quotes and learning tips; contract under review | Preserve evidence and caveats; no verified release |
 | M4.4 | Private pilot: 119 provisional concepts, 130 question links, all 30 questions covered; contract under review | Source-linked, deduplicated educational concepts |
-| M4.5 | Next: convert pilot concepts into active-recall learning units | Independent retrieval prompts, feedback, provenance and review readiness; then adaptive scheduling and Android |
+| M4.5 | Private pilot: 119 learning units and feedback records; 113 eligible for private scripted practice, 6 review-required; practice-cycle code under review | Separate prompts and feedback, revision gates and self-assessment; no release or mastery claim |
 
-See [M4 pilot protocol](M4_PILOT_PROTOCOL.md) and [Issue #59](https://github.com/ehsanrs2/Konkeroo/issues/59). Public release remains blocked by D-010. No final verified answers or production database integration are claimed. Acquisition details below are historical.
+Next: validate and expand the content workflow, then build persistent learner events and spaced-repetition scheduling with synthetic tests. Android remains downstream of the data and release gates.
+
+See [M4.5 learning units](M4_5_LEARNING_UNITS.md). See [M4 pilot protocol](M4_PILOT_PROTOCOL.md) and [Issue #59](https://github.com/ehsanrs2/Konkeroo/issues/59). Public release remains blocked by D-010. No final verified answers or production database integration are claimed. Acquisition details below are historical.
 
 ## Historical direct-curation sequence (owner decision 2026-11-25)
 
