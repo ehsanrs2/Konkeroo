@@ -95,7 +95,17 @@ def test_lifecycle_and_retry(store):
     assert store.history("local-1") == (event,)
 
 
-@pytest.mark.parametrize("value", [True, -1, 1.5, "100", datetime(2026, 1, 1), 253402300800])
+@pytest.mark.parametrize(
+    "value",
+    [
+        True,
+        -1,
+        1.5,
+        "100",
+        datetime(2026, 1, 1),  # noqa: DTZ001 - intentionally naive timestamp
+        253402300800,
+    ],
+)
 def test_invalid_timestamp(store, value):
     session = _ready(store, "event-1")
     with pytest.raises(ValueError, match="UTC integer epoch"):
