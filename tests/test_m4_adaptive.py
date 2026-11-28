@@ -5,6 +5,7 @@ import pytest
 
 from english_exam.m4_adaptive import ADAPTIVE_VERSION, build_adaptive_queue
 from english_exam.m4_events import LearnerEventStore
+from english_exam.m4_pilot import SessionConfig, main, run_session
 from english_exam.m4_scheduler import DAY_SECONDS, replay_state
 
 A = "a" * 64
@@ -235,3 +236,116 @@ def test_future_or_gated_event_fails_closed(store):
         store._db.execute("UPDATE learner_event SET unit_id='blocked'")
     with pytest.raises(ValueError, match="outside eligible snapshot history"):
         _queue(store)
+
+
+def _pilot(store, answers, *, now=100, due_limit=2, new_limit=2):
+    outputs = []
+    inputs = iter(answers)
+
+    def read(_prompt):
+        return next(inputs, "q")
+
+    config = SessionConfig("local-1", R, C, due_limit, new_limit)
+    completed = run_session(store, config, read=read, write=outputs.append, clock=lambda: now)
+    return completed, outputs
+
+
+def test_pilot_quit_before_reveal(store):
+    completed, outputs = _pilot(store, ["wrong", "q"])
+    assert completed == 0
+    assert any("Invalid choice" in line for line in outputs)
+    assert not any("Expected answer:" in line for line in outputs)
+    assert store.history("local-1") == ()
+
+
+def test_pilot_quit_after_reveal(store):
+    completed, outputs = _pilot(store, ["r", "q"])
+    assert completed == 0
+    assert "Expected answer: answer" in outputs
+    assert store.history("local-1") == ()
+
+
+def test_pilot_rating_and_resume(files):
+    store = LearnerEventStore(*files)
+    try:
+        completed, outputs = _pilot(store, ["r", "wrong", "again", "q"])
+        assert completed == 1
+        assert any("Saved. Next review (UTC):" in line for line in outputs)
+        assert "Session completed ratings: 1/2" in outputs
+        assert len(store.history("local-1")) == 1
+    finally:
+        store.close()
+    reopened = LearnerEventStore(*files)
+    try:
+        completed, outputs = _pilot(reopened, ["r", "good"], now=700, new_limit=0)
+        assert completed == 1
+        assert any("[1/1] Due" in line for line in outputs)
+        history = reopened.history("local-1")
+        assert len(history) == 2
+        assert history[0].unit_id == history[1].unit_id
+        assert replay_state(reopened, "local-1")[0].interval_seconds == 2 * DAY_SECONDS
+    finally:
+        reopened.close()
+
+
+@pytest.mark.parametrize("interrupt", [EOFError, KeyboardInterrupt])
+def test_pilot_interrupted_after_attempt(store, interrupt):
+    outputs = []
+    answers = iter(["r"])
+
+    def read(_prompt):
+        choice = next(answers, None)
+        if choice is None:
+            raise interrupt
+        return choice
+
+    completed = run_session(
+        store,
+        SessionConfig("local-1", R, C),
+        read=read,
+        write=outputs.append,
+        clock=lambda: 100,
+    )
+    assert completed == 0
+    assert any("Session interrupted" in line for line in outputs)
+    assert store.history("local-1") == ()
+
+
+def test_pilot_zero_limits(store):
+    completed, outputs = _pilot(store, [], due_limit=0, new_limit=0)
+    assert completed == 0
+    assert "Session completed ratings: 0/0" in outputs
+    assert store.history("local-1") == ()
+
+
+def _cli_args(files, digest):
+    return [
+        "--content",
+        str(files[0]),
+        "--content-sha256",
+        digest,
+        "--learner-db",
+        str(files[2]),
+        "--learner-id",
+        "local-1",
+        "--review-sha256",
+        R,
+        "--audit-sha256",
+        C,
+        "--due-limit",
+        "0",
+        "--new-limit",
+        "0",
+    ]
+
+
+def test_pilot_cli_summary(files, capsys):
+    assert main(_cli_args(files, files[1])) == 0
+    assert "Reviewed: 0/6" in capsys.readouterr().out
+    assert files[2].exists()
+
+
+def test_pilot_cli_bad_digest(files, capsys):
+    assert main(_cli_args(files, "f" * 64)) == 1
+    assert "digest mismatch" in capsys.readouterr().err
+    assert not files[2].exists()
