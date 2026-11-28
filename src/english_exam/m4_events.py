@@ -142,6 +142,19 @@ class LearnerEventStore:
         practice = PracticeSession(self._content, artifact_sha256, unit_id)
         return _RecordedPracticeSession(self, practice, learner_id, event_id)
 
+    def eligible_unit_revisions(self) -> tuple[tuple[str, str], ...]:
+        """Stable identities only; never expose answers or gated units."""
+        rows = self._content.execute(
+            "SELECT artifact_sha256, unit_id FROM learning_unit_prompt "
+            "WHERE review_eligibility='PRIVATE_PILOT_ONLY' ORDER BY artifact_sha256, unit_id"
+        ).fetchall()
+        for artifact, unit in rows:
+            _digest(artifact)
+            _identifier(unit)
+        if len(set(rows)) != len(rows):
+            raise ValueError("Duplicate eligible unit revision")
+        return tuple(rows)
+
     def history(self, learner_id: str) -> tuple[LearnerEvent, ...]:
         """Replay order for this learner and exact content snapshot only."""
         _identifier(learner_id)
