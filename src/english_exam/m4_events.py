@@ -10,17 +10,9 @@ from english_exam.m4_practice import Assessment, Feedback, PracticeSession, Prom
 _APPLICATION_ID = 0x4B455654
 _SCHEMA_VERSION = 1
 _MAX_EPOCH = 253402300799  # 9999-12-31T23:59:59Z
-_COLUMNS = ", ".join(
-    (
-        "sequence",
-        "event_id",
-        "learner_id",
-        "snapshot_sha256",
-        "artifact_sha256",
-        "unit_id",
-        "occurred_at",
-        "rating",
-    )
+_COLUMNS = (
+    "sequence, event_id, learner_id, snapshot_sha256, "
+    "artifact_sha256, unit_id, occurred_at, rating"
 )
 
 
