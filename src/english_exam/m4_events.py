@@ -27,6 +27,21 @@ class LearnerEvent:
     rating: Rating
 
 
+@dataclass(frozen=True)
+class UnitMetadata:
+    artifact_sha256: str
+    unit_id: str
+    cluster_id: str
+    kind: str
+    source_count: int
+    unit_type: str
+    prompt_sha256: str
+
+    @property
+    def key(self) -> tuple[str, str]:
+        return self.artifact_sha256, self.unit_id
+
+
 def _identifier(value: str) -> None:
     if not isinstance(value, str) or not value or len(value) > 128 or value.strip() != value:
         raise ValueError("Invalid identifier")
@@ -154,6 +169,60 @@ class LearnerEventStore:
         if len(set(rows)) != len(rows):
             raise ValueError("Duplicate eligible unit revision")
         return tuple(rows)
+
+    def adaptive_catalog(self, review_sha256: str, audit_sha256: str) -> tuple[UnitMetadata, ...]:
+        """Resolve exact cluster revisions for every eligible unit; fail closed."""
+        _digest(review_sha256)
+        _digest(audit_sha256)
+        mapping = self._content.execute(
+            "SELECT 1 FROM sense_review_mapping WHERE review_sha256=? AND prior_audit_sha256=? "
+            "LIMIT 1",
+            (review_sha256, audit_sha256),
+        ).fetchone()
+        if mapping is None:
+            raise ValueError("Unknown cluster mapping revision")
+        rows = self._content.execute(
+            """
+            SELECT u.artifact_sha256, u.unit_id, c.cluster_id, c.kind,
+                   c.source_anchored_question_count, p.unit_type, p.prompt
+            FROM learning_unit u
+            JOIN learning_unit_prompt p USING (artifact_sha256, unit_id)
+            JOIN concept_cluster_member m
+              ON m.knowledge_sha256=u.knowledge_sha256 AND m.concept_id=u.concept_id
+            JOIN sense_review_mapping s
+              ON s.prior_audit_sha256=m.audit_sha256 AND s.prior_cluster_id=m.cluster_id
+            JOIN sense_review_cluster c
+              ON c.review_sha256=s.review_sha256 AND c.cluster_id=s.cluster_id
+            WHERE p.review_eligibility='PRIVATE_PILOT_ONLY'
+              AND u.review_eligibility='PRIVATE_PILOT_ONLY'
+              AND s.review_sha256=? AND m.audit_sha256=?
+            ORDER BY u.artifact_sha256, u.unit_id
+            """,
+            (review_sha256, audit_sha256),
+        ).fetchall()
+        result = []
+        for artifact, unit, cluster, kind, count, unit_type, prompt in rows:
+            _identifier(cluster)
+            if kind not in ("vocabulary", "collocation", "grammar", "skill", "semantic_relation"):
+                raise ValueError("Invalid concept kind")
+            if type(count) is not int or count < 0:
+                raise ValueError("Invalid source count")
+            if not isinstance(prompt, str) or not prompt.strip():
+                raise ValueError("Invalid prompt")
+            result.append(
+                UnitMetadata(
+                    artifact,
+                    unit,
+                    cluster,
+                    kind,
+                    count,
+                    unit_type,
+                    hashlib.sha256(prompt.encode("utf-8")).hexdigest(),
+                )
+            )
+        if tuple(item.key for item in result) != self.eligible_unit_revisions():
+            raise ValueError("Incomplete or duplicate cluster mapping")
+        return tuple(result)
 
     def history(self, learner_id: str) -> tuple[LearnerEvent, ...]:
         """Replay order for this learner and exact content snapshot only."""
