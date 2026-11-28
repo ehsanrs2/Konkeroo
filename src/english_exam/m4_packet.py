@@ -33,9 +33,7 @@ def export_packet(database: Path, year: int, booklet: str) -> dict:
         ).fetchone()
         if identity is None or identity[0] != booklet:
             raise ValueError("Exam identity mismatch")
-        review = con.execute(
-            "SELECT status FROM content_review WHERE year = ?", (year,)
-        ).fetchone()
+        review = con.execute("SELECT status FROM content_review WHERE year = ?", (year,)).fetchone()
         if review is None or review[0] != CONFIRMED:
             raise ValueError("Content not confirmed")
         pending = con.execute(
@@ -75,9 +73,7 @@ def export_packet(database: Path, year: int, booklet: str) -> dict:
             elif section in {"reading", "cloze"}:
                 if passages.get(passage) != section:
                     raise ValueError("Invalid passage association")
-                if section == "reading" and (
-                    not q["stem"] or q["cloze_blank_number"] is not None
-                ):
+                if section == "reading" and (not q["stem"] or q["cloze_blank_number"] is not None):
                     raise ValueError("Invalid reading question")
                 if section == "cloze" and (
                     q["stem"] is not None or q["cloze_blank_number"] != q["question_number"]
