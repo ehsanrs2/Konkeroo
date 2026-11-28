@@ -22,6 +22,6 @@ class EducationalEdit:
         if not self.original or self.original == self.replacement:
             raise ValueError("Empty or unchanged edit")
         end = self.start + len(self.original)
-        if self.start < 0 or end > len(source) or source[self.start:end] != self.original:
+        if self.start < 0 or end > len(source) or source[self.start : end] != self.original:
             raise ValueError("Source span mismatch")
         return source[: self.start] + self.replacement + source[end:]
