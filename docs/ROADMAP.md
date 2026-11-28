@@ -31,7 +31,22 @@ This is a *direction and execution order*, not a delivery-date commitment. Mark 
 
 Dependencies may be interleaved: additional exam parsers (M3) are needed before matching keys of those years to English sections. M2b does not require solving all other years first. M4–M9 are product targets, not claims about present functionality.
 
-## Active immediate sequence — direct curation (owner decision 2026-11-25)
+## Active learning-knowledge sequence — M3/M4 checkpoint (2026-11-28)
+
+The latest [M3/M4 handoff](M3_M4_HANDOFF.md) supersedes the older acquisition status and milestone numbering below. The historical M4a–M4f editorial tasks and M5–M9 product targets are retained for traceability, not treated as prerequisites to this pilot.
+
+| ID | Status | Exit gate |
+| --- | --- | --- |
+| M3 | Content owner-confirmed locally: 430 questions, 1720 options, 62 passages, 15 attestations | Key alignment exceptions remain separate (260 candidates, 170 blocked); public release blocked |
+| M4.1 | 1391/510A local pilot frozen (30 proposed solutions); packet exporter under review | Reproducible key-excluded packets, frozen independent-pass hypotheses |
+| M4.2 | 30 candidate comparisons recorded locally; provisional only | Retain uncertainty, key provenance and conflicts; no automatic final answer |
+| M4.3 | Next: Persian explanatory learning records | Evidence, distractor analysis, explicit caveats |
+| M4.4 | Pending | Vocabulary, grammar, skills |
+| M4.5 | Pending | Learning units, then adaptive retrieval practice and Android |
+
+See [M4 pilot protocol](M4_PILOT_PROTOCOL.md) and [Issue #59](https://github.com/ehsanrs2/Konkeroo/issues/59). Public release remains blocked by D-010. No final verified answers or production database integration are claimed. Acquisition details below are historical.
+
+## Historical direct-curation sequence (owner decision 2026-11-25)
 
 1. Obtain remaining original keys and exam papers by upload, directly read their source claims and preserve unknown/ambiguous entries. Do not expand OCR or geometry tooling merely to acquire this finite corpus.
 2. Review answer positions in compact batches, record explicit owner confirmation bound to the exact artifact digest, and preserve local JSON/SQLite staging. Only metadata manifests enter public GitHub pending D-010.
