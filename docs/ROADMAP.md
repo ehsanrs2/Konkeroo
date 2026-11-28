@@ -38,13 +38,13 @@ The latest [M3/M4 handoff](M3_M4_HANDOFF.md) supersedes the older acquisition st
 | ID | Status | Exit gate |
 | --- | --- | --- |
 | M3 | Content owner-confirmed locally: 430 questions, 1720 options, 62 passages, 15 attestations | Key alignment exceptions remain separate (260 candidates, 170 blocked); public release blocked |
-| M4.1 | 1391/510A local pilot frozen (30 proposed solutions); packet exporter under review | Reproducible key-excluded packets, frozen independent-pass hypotheses |
-| M4.2 | 30 candidate comparisons recorded locally; provisional only | Retain uncertainty, key provenance and conflicts; no automatic final answer |
+| M4.1 | 60 local frozen hypotheses across 1391–1392 (59 selected, one abstention); all remaining-year packets prepared | Reproducible key-excluded packets, frozen independent-pass hypotheses |
+| M4.2 | 60 candidate comparisons recorded locally: 59 agreements, one abstention; provisional only | Retain uncertainty, key provenance and conflicts; no automatic final answer |
 | M4.3 | Private 1391/510A pilot: 30 provisional Persian explanations, 90 distractor analyses, 30 evidence quotes and learning tips; contract under review | Preserve evidence and caveats; no verified release |
 | M4.4 | Private pilot: 119 provisional concepts, 130 question links, all 30 questions covered; contract under review | Source-linked, deduplicated educational concepts |
 | M4.5 | Private pilot: 119 learning units and feedback records; 113 eligible for private scripted practice, 6 review-required; practice-cycle code under review | Separate prompts and feedback, revision gates and self-assessment; no release or mastery claim |
 
-Next: validate and expand the content workflow, then build persistent learner events and spaced-repetition scheduling with synthetic tests. Android remains downstream of the data and release gates.
+Batch expansion (#67): 14 key-excluded packets covering all 400 non-pilot questions prepared from the pinned private M4.5 database. The 1392 pass is frozen and compared; one printed defect was confirmed by the owner after inspecting the booklet; a separate educational correction and provisional resolution are staged (D-015), preserving the original abstention. M4.3–M4.5 remain pending for 1392, and 370 questions still require solving. See [batch expansion](M4_BATCH_EXPANSION.md). Next: continue grouped content processing with explicit exceptions; then build persistent learner events and spaced-repetition scheduling with synthetic tests. Android remains downstream of the data and release gates.
 
 See [M4.5 learning units](M4_5_LEARNING_UNITS.md). See [M4 pilot protocol](M4_PILOT_PROTOCOL.md) and [Issue #59](https://github.com/ehsanrs2/Konkeroo/issues/59). Public release remains blocked by D-010. No final verified answers or production database integration are claimed. Acquisition details below are historical.
 

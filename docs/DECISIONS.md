@@ -84,6 +84,12 @@ The owner requests that 1391–1405 be processed **by reusable key/exam source f
 
 Record actual confirmation against the reviewed artifact digest, preserve source claims and source metadata, and do not infer question-paper alignment, booklet, final edition or answers absent from the source. Local reviewed JSON may feed a staging database; the public repository receives metadata-only manifests pending D-010. The owner confirmed all 90 printed Q1–30 positions from 1392–1394 on 2026-11-25 with no corrections. See [manifest](../dataset/staged/1392-1394-direct-key-review.manifest.json) and [Issue #57](https://github.com/ehsanrs2/Konkeroo/issues/57). No production database integration, independent key-blind solution, final verification or public release is asserted.
 
+## D-015 — Preserve printed defects and separate educational corrections
+
+**Status: Accepted owner direction (2026-11-28).** Learning correct English takes precedence over reproducing known defective exam wording in learning mode. Record printed-source defects separately from transcription errors, key disputes, and ordinary uncertainty. Preserve the immutable source reading, attestations, source key, frozen AI hypotheses and original reconciliation. Record the evidence and its actual reviewer (owner-reported direct booklet inspection is not assistant inspection).
+
+Educational corrections are additive, revision-bound overlays with exact source SHA-256, field, location, original span, replacement, rationale and status. Use minimal edits that preserve the intended skill and option ordering; shared-passage edits require checking affected questions and preserving original provenance. Do not silently rewrite text or infer official errata. For ambiguous or defective items, document defensible alternatives and distinguish a provisional educational resolution from official/final authority. In the future learning UI, label corrected items, retain access to original wording, and explain defects in feedback without giving away the answer prematurely. Exclude defective original items from mastery evidence; corrected items are self-assessed until semantic and scoring review establishes eligibility. These are policy requirements, not implemented mastery analytics. D-001, D-003, D-005, D-010 and D-014 remain in force; private content only.
+
 ## How to change a decision
 
 Propose a PR that updates this file, explains new evidence and alternatives, cites affected modules/tests, and links a targeted issue. Do not silently relabel `Open` decisions as `Accepted`.
